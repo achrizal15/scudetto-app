@@ -67,7 +67,7 @@
         @if ($item->group_key==null)
         <li class="menu-item {{$linkActive==$item->link?'active':''}}">
             <a href="{{$item->link}}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <i class="menu-icon tf-icons bx {{$item->icon}}"></i>
                 <div data-i18n="{{$item->key}}">{{$item->name}}</div>
             </a>
         </li>
