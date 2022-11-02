@@ -1,0 +1,30 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\Menu;
+use Illuminate\Database\Seeder;
+
+class MenuSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        // https://boxicons.com/
+        $menu=[
+            ["name"=>"Dashboard","key"=>"dashboard","icon"=>"bx-home-circle","link"=>"/"],
+            ["name"=>"Access Control","key"=>"access_control","icon"=>"bx-cog","link"=>"/access-control","group_name"=>"Settings"],
+            ["name"=>"User","key"=>"user","icon"=>"bx-cog","link"=>"/user","group_name"=>"Settings"],
+        ];
+        foreach($menu as $item){
+            if(isset($item["group_name"])){                
+            $item["group_key"]=strtolower(implode("_",explode(" ",$item["group_name"])));
+            }
+            Menu::create($item);
+        }
+    }
+}

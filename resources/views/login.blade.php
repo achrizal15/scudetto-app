@@ -95,7 +95,7 @@
                     id="email"
                     name="email"
                     placeholder="Enter your email"
-                    value="it.support@gmail.com"
+                    value="admin@gmail.com"
                     autofocus
                   />
                 </div>
