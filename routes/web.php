@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DasPelangganController;
+use App\Http\Controllers\DasLapanganController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,4 +25,20 @@ Route::group(["middleware" => "auth"], function () {
     Route::get('/', function () {
         return view('welcome');
     });
+
+    // MANAGE PELANGGAN
+    Route::get("/pelanggan", [DasPelangganControler::class, "index"]);
+    Route::delete("/pelanggan/{pelanggan}", [DasPelangganControler::class, "destroy"]);
+    Route::get("/pelanggan/add", [DasPelangganControler::class, "add"]);
+    Route::post("/pelanggan", [DasPelangganControler::class, "store"]);
+    Route::get("/pelanggan/{pelanggan}/edit", [DasPelangganControler::class, "edit"]);
+    Route::put("/pelanggan/{pelanggan}", [DasPelangganControler::class, "update"]);
+
+    // MANAGE DATA LAPANGAN
+    Route::get("/lapangan", [DasLapanganController::class, "index"]);
+    Route::delete("/lapangan/{lapangan}", [DasLapanganController::class, "destroy"]);
+    Route::get("/lapangan/add", [DasLapanganController::class, "add"]);
+    Route::post("/lapangan", [DasLapanganController::class, "store"]);
+    Route::get("/lapangan/{lapangan}/edit", [DasLapanganController::class, "edit"]);
+    Route::put("/lapangan/{lapangan}", [DasLapanganController::class, "update"]);
 });

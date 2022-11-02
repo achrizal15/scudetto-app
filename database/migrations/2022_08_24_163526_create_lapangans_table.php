@@ -15,6 +15,11 @@ class CreateLapangansTable extends Migration
     {
         Schema::create('lapangans', function (Blueprint $table) {
             $table->id();
+            $table->string("name");
+            $table->string("ukuran");
+            $table->string("jenis");
+            $table->string("warna");
+            $table->decimal("harga");
             $table->timestamps();
         });
     }

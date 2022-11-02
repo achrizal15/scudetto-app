@@ -17,6 +17,8 @@ class MenuSeeder extends Seeder
         // https://boxicons.com/
         $menu=[
             ["name"=>"Dashboard","key"=>"dashboard","icon"=>"bx-home-circle","link"=>"/"],
+            ["name"=>"Akun Pelanggan","key"=>"akun_pelanggan","icon"=>"bx-user-circle","link"=>"/pengguna"],
+            ["name"=>"Data Lapangan","key"=>"data_lapangan","icon"=>"bx-maps-circle","link"=>"/lapangan"],
             ["name"=>"Access Control","key"=>"access_control","icon"=>"bx-cog","link"=>"/access-control","group_name"=>"Settings"],
             ["name"=>"User","key"=>"user","icon"=>"bx-cog","link"=>"/user","group_name"=>"Settings"],
         ];
