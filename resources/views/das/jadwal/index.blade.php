@@ -29,19 +29,18 @@ $page=request()->segment(1);
                
                 @for ($i = 0; $i <= 14; $i++)
                 <?php
-                $jam=8+$i;
+                $jam=date("H:i",strtotime(8+$i.".00"));
                 ?>
                 <tr>
-                    <td>{{$jam.":00"}}</td>
+                    <td>{{$jam}}</td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td>
                         <?php
-                        $kamis=App\Models\DasTransaksi::where("jam_pesan_awal",">=",date("Y-m-d H:i:s",strtotime("2022-11-03 08:00:00")))->first();
-                        
+                        $kamis=App\Models\DasTransaksi::where("jam_pesan_awal",">=",date("Y-m-d H:i:s",strtotime("2022-11-03 $jam")))->first();
                         ?>
-                        {{$kamis->id}}
+                        {{$kamis!=null?$kamis->user->name:""}}
                     </td>
                     <td></td>
                     <td></td>
