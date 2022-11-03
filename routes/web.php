@@ -3,6 +3,7 @@
 use App\Http\Controllers\DasPelangganController;
 use App\Http\Controllers\DasLapanganController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DasTransaksiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,4 +42,12 @@ Route::group(["middleware" => "auth"], function () {
     Route::post("/lapangan", [DasLapanganController::class, "store"]);
     Route::get("/lapangan/{lapangan}/edit", [DasLapanganController::class, "edit"]);
     Route::put("/lapangan/{lapangan}", [DasLapanganController::class, "update"]);
+
+    // MANAGE DATA TRANSAKSI
+    Route::get("/jadwal", [DasTransaksiController::class, "index"]);
+    Route::delete("/jadwal/{jadwal}", [DasTransaksiController::class, "destroy"]);
+    Route::get("/jadwal/add", [DasTransaksiController::class, "add"]);
+    Route::post("/jadwal", [DasTransaksiController::class, "store"]);
+    Route::get("/jadwal/{jadwal}/edit", [DasTransaksiController::class, "edit"]);
+    Route::put("/jadwal/{jadwal}", [DasTransaksiController::class, "update"]);
 });
