@@ -12,14 +12,19 @@ class DasTransaksiController extends Controller
         $jadwal = DasTransaksi::all();
         return view("das.jadwal.index", ["jadwal" => $jadwal]);
     }
-    public function destroy(DasTransaksi $transaski)
+    public function destroy(DasTransaksi $transaksi)
     {
-        $transaski->delete();
-        return redirect("/transaski")->with("message", "Data has been deleted.");
+        $transaksi->delete();
+        return redirect("/transaksi")->with("message", "Data has been deleted.");
     }
     public function add()
     {
-        return view("das.transaski.form");
+        return view("das.transaksi.form");
+
+    }
+    public function upload_bukti()
+    {
+        return view("das.transaksi.form");
 
     }
     public function store(Request $request)
@@ -32,15 +37,15 @@ class DasTransaksiController extends Controller
             "harga" => "required",
         ]);
         DasTransaksi::create($validate);
-        return redirect("transaski")->with("message", "Data has been added.");
+        return redirect("transaksi")->with("message", "Data has been added.");
     }
-    public function edit(DasTransaksi $transaski)
+    public function edit(DasTransaksi $transaksi)
     {
-        return view("das.transaski.form",["param"=>$transaski]);
+        return view("das.transaksi.form",["param"=>$transaksi]);
     }
-    public function update(Request $request, DasTransaksi $transaski)
+    public function update(Request $request, DasTransaksi $transaksi)
     {
-        
+
 
         $rules = [
             "name" => "required",

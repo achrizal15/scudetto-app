@@ -100,3 +100,5 @@ $(document).ready(function () {
     DatatableHandler()
     Select2Handler()
 })
+
+$('.file-upload').file_upload();
