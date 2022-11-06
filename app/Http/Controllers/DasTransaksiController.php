@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DasTransaksi;
+use App\Models\Lapangan;
 
 class DasTransaksiController extends Controller
 {
@@ -12,14 +13,19 @@ class DasTransaksiController extends Controller
         $jadwal = DasTransaksi::all();
         return view("das.jadwal.index", ["jadwal" => $jadwal]);
     }
-    public function destroy(DasTransaksi $transaski)
+    public function destroy(DasTransaksi $transaksi)
     {
-        $transaski->delete();
-        return redirect("/transaski")->with("message", "Data has been deleted.");
+        $transaksi->delete();
+        return redirect("/transaksi")->with("message", "Data has been deleted.");
     }
     public function add()
     {
-        return view("das.transaski.form");
+        
+        $lapangan = Lapangan::get()->sortBy([
+            fn ($a, $b) => intval($a["name"]) <=> intval($b["name"]),
+            fn ($a, $b) => $a["id"] <=> $b["id"],
+        ]);
+        return view("das.transaksi.form",["lapangan" => $lapangan]);
 
     }
     public function store(Request $request)
@@ -32,13 +38,13 @@ class DasTransaksiController extends Controller
             "harga" => "required",
         ]);
         DasTransaksi::create($validate);
-        return redirect("transaski")->with("message", "Data has been added.");
+        return redirect("transaksi")->with("message", "Data has been added.");
     }
-    public function edit(DasTransaksi $transaski)
+    public function edit(DasTransaksi $transaksi)
     {
-        return view("das.transaski.form",["param"=>$transaski]);
+        return view("das.transaksi.form",["param"=>$transaksi]);
     }
-    public function update(Request $request, DasTransaksi $transaski)
+    public function update(Request $request, DasTransaksi $transaksi)
     {
         
 
