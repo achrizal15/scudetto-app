@@ -13,6 +13,7 @@ $action=request()->segment(2);
             @csrf
             @method($action=="add"?'POST':'PUT')
 
+            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
             <div class="row mb-3">
                 <label for="id_lapangan" class="col-sm-2 col-form-label">Lapangan</label>
                 <div class="col-sm-10">
@@ -33,7 +34,7 @@ $action=request()->segment(2);
             <div class="row mb-3">
                 <label for="jam_pesan_awal" class="col-sm-2 col-form-label">Waktu Awal</label>
                 <div class="col-sm-6">
-                    <input type="time" required class="form-control" name="jam_pesan_awal"
+                    <input type="text" id="datetimepicker1" value="Pilih Waktu" required class="form-control" name="jam_pesan_awal"
                         value="<?= isset($transaksi) ? $transaksi->jam_pesan_awal : "" ?>">
                     <div class="valid-feedback">
                         Looks good!
@@ -43,7 +44,7 @@ $action=request()->segment(2);
             <div class="row mb-3">
                 <label for="jam_pesan_akhir" class="col-sm-2 col-form-label">Waktu Akhir</label>
                 <div class="col-sm-6">
-                    <input type="time" required class="form-control" name="jam_pesan_akhir"
+                    <input type="text" id="datetimepicker2" value="Pilih Waktu" required class="form-control" name="jam_pesan_akhir"
                         value="<?= isset($transaksi) ? $transaksi->jam_pesan_akhir : "" ?>">
                     <div class="valid-feedback">
                         Looks good!

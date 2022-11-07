@@ -101,4 +101,4 @@ $(document).ready(function () {
     Select2Handler()
 })
 
-$('.file-upload').file_upload();
+

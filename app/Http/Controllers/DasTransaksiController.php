@@ -35,14 +35,13 @@ class DasTransaksiController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            "name" => "required",
-            "jenis" => "required",
-            "ukuran" => "required",
-            "warna" => "required",
-            "harga" => "required",
+            "lapangan_id" => "required",
+            "jam_pesan_awal" => "required",
+            "jam_pesan_akhir" => "required",
         ]);
         DasTransaksi::create($validate);
-        return redirect("transaksi")->with("message", "Data has been added.");
+        dd($validate);
+        return redirect("upload_bukti")->with("message", "Data has been added.");
     }
     public function edit(DasTransaksi $transaksi)
     {
