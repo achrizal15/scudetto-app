@@ -13,6 +13,11 @@ class DasTransaksiController extends Controller
         $jadwal = DasTransaksi::all();
         return view("das.jadwal.index", ["jadwal" => $jadwal]);
     }
+    public function upload_bukti()
+    {
+        return view("das.transaksi.upload");
+
+    }
     public function destroy(DasTransaksi $transaksi)
     {
         $transaksi->delete();
