@@ -9,7 +9,7 @@ const DatatableHandler = () => {
     const addUrl = $(".datatable").data("url")
     const datatable = $(".datatable").DataTable({
         lengthChange: false,
-        ordering:false,
+        ordering: false,
         dom: "<'row'<'col-sm-12 col-md-6'B><'col-sm-12 col-md-6'>>" +
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
@@ -35,10 +35,10 @@ const DatatableHandler = () => {
     })
     datatable.search()
 }
-const FormFilters=()=>{
-    if($("#form-filters").length==0)return false;
-    if($("#value-from-search").val())$("#filter-search").val($("#value-from-search").val());
-    $(document).on("keyup","#filter-search",function(){
+const FormFilters = () => {
+    if ($("#form-filters").length == 0) return false;
+    if ($("#value-from-search").val()) $("#filter-search").val($("#value-from-search").val());
+    $(document).on("keyup", "#filter-search", function () {
         $("#value-from-search").val($(this).val())
     })
 }
@@ -49,17 +49,17 @@ const AccessControl = () => {
             $("#landing_page").html('<option value="Select one" disabled>Select one</option>')
             if (activeMenu.filter((e) => {
                 return $(activeMenu).eq(e).val() != "NA"
-            }).length==0){
+            }).length == 0) {
                 $("#landing_page").html('<option value="" >Select access menu first</option>')
             }
-                for (let i = 0; i < activeMenu.length; i++) {
-                    const element = $(activeMenu[i]);
-                    if (element.val() == "NA") continue;
-                    const menu = menus.filter((e) => {
-                        return e.id == element.attr("id")
-                    })[0]
-                    $("#landing_page").append(`<option value="${menu.link}">${menu.name}</option>`)
-                }
+            for (let i = 0; i < activeMenu.length; i++) {
+                const element = $(activeMenu[i]);
+                if (element.val() == "NA") continue;
+                const menu = menus.filter((e) => {
+                    return e.id == element.attr("id")
+                })[0]
+                $("#landing_page").append(`<option value="${menu.link}">${menu.name}</option>`)
+            }
 
         }
 
@@ -83,8 +83,8 @@ const AccessControl = () => {
         })
 
     }
-    $(document).on("click","#view-access-menu",function(){
-        const roleAccess=$(this).data("role")
+    $(document).on("click", "#view-access-menu", function () {
+        const roleAccess = $(this).data("role")
         $("#modalAccessMenuTitle").text(roleAccess.name)
         $("#modalAccessMenu .modal-body tbody").html("");
         roleAccess.menus.forEach(element => {
@@ -94,7 +94,16 @@ const AccessControl = () => {
         });
     })
 }
+const InitialDateTimePicker = () => {
+    // if( $(".datetimepicker").length==0)
+ $(".datetimepicker").each(function(i){
+    new DateTime($(this), {
+        format: 'D MMM YYYY HH:mm'
+    })
+ })
+}
 $(document).ready(function () {
+    InitialDateTimePicker()
     FormFilters()
     AccessControl()
     DatatableHandler()

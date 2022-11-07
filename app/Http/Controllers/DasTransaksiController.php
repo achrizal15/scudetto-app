@@ -13,10 +13,9 @@ class DasTransaksiController extends Controller
         $jadwal = DasTransaksi::all();
         return view("das.jadwal.index", ["jadwal" => $jadwal]);
     }
-    public function upload_bukti()
+    public function upload_bukti(DasTransaksi $transaksi)
     {
         return view("das.transaksi.upload");
-
     }
     public function destroy(DasTransaksi $transaksi)
     {
@@ -25,12 +24,12 @@ class DasTransaksiController extends Controller
         return redirect("/transaksi")->with("message", "Data has been deleted.");
     }
     public function add()
-    {  
+    {
         $lapangan = Lapangan::get()->sortBy([
             fn ($a, $b) => intval($a["name"]) <=> intval($b["name"]),
             fn ($a, $b) => $a["id"] <=> $b["id"],
         ]);
-        return view("das.transaksi.form",["lapangan" => $lapangan]);
+        return view("das.transaksi.form", ["lapangan" => $lapangan]);
     }
     public function store(Request $request)
     {
@@ -39,13 +38,16 @@ class DasTransaksiController extends Controller
             "jam_pesan_awal" => "required",
             "jam_pesan_akhir" => "required",
         ]);
+        $validate["jam_pesan_awal"] = date("Y-m-d H", strtotime($validate["jam_pesan_awal"]));
+        $validate["jam_pesan_akhir"] = date("Y-m-d H", strtotime($validate["jam_pesan_akhir"]));
+        $validate["user_id"] =auth()->user()->id;
+
         DasTransaksi::create($validate);
-        dd($validate);
         return redirect("upload_bukti")->with("message", "Data has been added.");
     }
     public function edit(DasTransaksi $transaksi)
     {
-        return view("das.transaksi.form",["param"=>$transaksi]);
+        return view("das.transaksi.form", ["param" => $transaksi]);
     }
     public function update(Request $request, DasTransaksi $transaksi)
     {
@@ -58,7 +60,7 @@ class DasTransaksiController extends Controller
             "warna" => "required",
             "harga" => "required",
         ];
-        $validate=$request->validate($rules);
+        $validate = $request->validate($rules);
         $transaksi->update($validate);
         return redirect("transaksi")->with("message", "Data has been updated.");
     }

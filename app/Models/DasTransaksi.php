@@ -11,17 +11,6 @@ class DasTransaksi extends Model
     use HasFactory,AutoNumberTrait;
     protected $guarded = ["id"];
     protected $table = 'das_transaksis';
-    protected $fillable = [
-        'user_id',
-        'lapangan_id',
-        'kode',
-        'jam_pesan_awal',
-        'jam_pesan_akhir',
-        'bukti_bayar',
-        'status',
-        'created_at',
-        'updated_at',
-    ];
 
     public function getAutoNumberOptions()
 {

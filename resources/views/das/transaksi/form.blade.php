@@ -13,20 +13,20 @@ $action=request()->segment(2);
             @csrf
             @method($action=="add"?'POST':'PUT')
 
-            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+            <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
             <div class="row mb-3">
-                <label for="id_lapangan" class="col-sm-2 col-form-label">Lapangan</label>
+                <label for="lapangan_id" class="col-sm-2 col-form-label">Lapangan</label>
                 <div class="col-sm-10">
-                    <select class="select2 form-control @error('id_lapangan') is-invalid @enderror" id="id_lapangan"
-                        style="width: 100%" name="id_lapangan">
+                    <select class="select2 form-control @error('lapangan_id') is-invalid @enderror" id="lapangan_id"
+                        style="width: 100%" name="lapangan_id">
                         <option value="" selected>Pilih Lapangan</option>
                         @foreach($lapangan as $item)
                         <option value="{{$item->id}}" @isset($param) {{$param->lapangan_id==$item->id?'selected':''}}
                             @endisset>{{$item->name." | Ukuran ".$item->ukuran." Meter | Jenis ".$item->jenis}}</option>
                         @endforeach
                     </select>
-                    <div id="id_lapanganFeedback" class="invalid-feedback">
-                        @error('id_lapangan') {{$message}} @enderror
+                    <div id="lapangan_idFeedback" class="invalid-feedback">
+                        @error('lapangan_id') {{$message}} @enderror
 
                     </div>
                 </div>
@@ -34,7 +34,7 @@ $action=request()->segment(2);
             <div class="row mb-3">
                 <label for="jam_pesan_awal" class="col-sm-2 col-form-label">Waktu Awal</label>
                 <div class="col-sm-6">
-                    <input type="text" id="datetimepicker1" value="Pilih Waktu" required class="form-control" name="jam_pesan_awal"
+                    <input type="text"  value="Pilih Waktu" required class="form-control datetimepicker" name="jam_pesan_awal"
                         value="<?= isset($transaksi) ? $transaksi->jam_pesan_awal : "" ?>">
                     <div class="valid-feedback">
                         Looks good!
@@ -44,7 +44,7 @@ $action=request()->segment(2);
             <div class="row mb-3">
                 <label for="jam_pesan_akhir" class="col-sm-2 col-form-label">Waktu Akhir</label>
                 <div class="col-sm-6">
-                    <input type="text" id="datetimepicker2" value="Pilih Waktu" required class="form-control" name="jam_pesan_akhir"
+                    <input type="text" value="Pilih Waktu" required class="datetimepicker form-control" name="jam_pesan_akhir"
                         value="<?= isset($transaksi) ? $transaksi->jam_pesan_akhir : "" ?>">
                     <div class="valid-feedback">
                         Looks good!
