@@ -26,7 +26,7 @@ class MenuSeeder extends Seeder
             ["name"=>"User","key"=>"user","icon"=>"bx-cog","link"=>"/user","group_name"=>"Settings"],
         ];
         foreach($menu as $item){
-            if(isset($item["group_name"])){                
+            if(isset($item["group_name"])){
             $item["group_key"]=strtolower(implode("_",explode(" ",$item["group_name"])));
             }
             Menu::create($item);

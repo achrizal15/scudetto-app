@@ -26,10 +26,10 @@ $action=request()->segment(2);
                     </select>
                     <div id="id_lapanganFeedback" class="invalid-feedback">
                         @error('id_lapangan') {{$message}} @enderror
+
                     </div>
                 </div>
             </div>
-
             <div class="row mb-3">
                 <label for="jam_pesan_awal" class="col-sm-2 col-form-label">Waktu Awal</label>
                 <div class="col-sm-6">
@@ -65,3 +65,4 @@ $action=request()->segment(2);
 </div>
 </div>
 @endsection
+

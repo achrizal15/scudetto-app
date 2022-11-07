@@ -20,18 +20,17 @@ class DasTransaksiController extends Controller
     }
     public function destroy(DasTransaksi $transaksi)
     {
+
         $transaksi->delete();
         return redirect("/transaksi")->with("message", "Data has been deleted.");
     }
     public function add()
-    {
-        
+    {  
         $lapangan = Lapangan::get()->sortBy([
             fn ($a, $b) => intval($a["name"]) <=> intval($b["name"]),
             fn ($a, $b) => $a["id"] <=> $b["id"],
         ]);
         return view("das.transaksi.form",["lapangan" => $lapangan]);
-
     }
     public function store(Request $request)
     {
@@ -51,7 +50,7 @@ class DasTransaksiController extends Controller
     }
     public function update(Request $request, DasTransaksi $transaksi)
     {
-        
+
 
         $rules = [
             "name" => "required",
