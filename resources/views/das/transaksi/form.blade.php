@@ -8,69 +8,61 @@ $action=request()->segment(2);
     {{ucwords($action)}}
 </h4>
 <div class="card">
-    <div class="card-body text-center">
-        <form action="{{$action=='add'?url($page):url($page.'/')}}" method="POST">
+    <div class="card-body">
+        <form action="{{$action=='add'?url($page):url($page.'/'.$param->id)}}" method="POST">
             @csrf
             @method($action=="add"?'POST':'PUT')
-            <div class="card-subtitle text-muted mb-3">Jumlah yang harus Dibayar</div>
-            <h3>Rp. 100.000,-</h3>
-            <div class="alert alert-secondary" role="alert">Harap lakukan pembayaran sebelum waktu habis!</div>
-            <div class="row mb-5">
-                <div class="col-md">
-                  <div class="card mb-3">
-                    <div class="row g-0">
-                      <div class="col-md-4">
-                        <img class="card-img card-img-left" src="{{asset('img/mandiri.png')}}" alt="Card image" />
-                      </div>
-                      <div class="col-md-8">
-                        <div class="card-body">
-                          <h5 class="card-title">Bank Mandiri</h5>
-                          <p class="card-text">
-                            08797287
-                          </p>
-                          <p class="card-text"><small class="text-muted">A.N Husnul Alfaini</small></p>
-                        </div>
-                      </div>
+
+            <div class="row mb-3">
+                <label for="id_lapangan" class="col-sm-2 col-form-label">Lapangan</label>
+                <div class="col-sm-10">
+                    <select class="select2 form-control @error('id_lapangan') is-invalid @enderror" id="id_lapangan"
+                        style="width: 100%" name="id_lapangan">
+                        <option value="" selected>Pilih Lapangan</option>
+                        @foreach($lapangan as $item)
+                        <option value="{{$item->id}}" @isset($param) {{$param->lapangan_id==$item->id?'selected':''}}
+                            @endisset>{{$item->name." | Ukuran ".$item->ukuran." Meter | Jenis ".$item->jenis}}</option>
+                        @endforeach
+                    </select>
+                    <div id="id_lapanganFeedback" class="invalid-feedback">
+                        @error('id_lapangan') {{$message}} @enderror
+
                     </div>
-                  </div>
                 </div>
-                <div class="col-md">
-                  <div class="card mb-3">
-                    <div class="row g-0">
-                      <div class="col-md-8">
-                        <div class="card-body">
-                          <h5 class="card-title">Bank BNI</h5>
-                          <p class="card-text">00087877
-                          </p>
-                          <p class="card-text"><small class="text-muted">A.N Husnul Alfaini</small></p>
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <img class="card-img card-img-right" src="{{asset('img/bni.jpg')}}" alt="Card image" />
-                      </div>
+            </div>
+            <div class="row mb-3">
+                <label for="jam_pesan_awal" class="col-sm-2 col-form-label">Waktu Awal</label>
+                <div class="col-sm-6">
+                    <input type="time" required class="form-control" name="jam_pesan_awal"
+                        value="<?= isset($transaksi) ? $transaksi->jam_pesan_awal : "" ?>">
+                    <div class="valid-feedback">
+                        Looks good!
                     </div>
-                  </div>
                 </div>
-              </div>
-            <div class="row mb-3 text-center">
-                <div class="col-sm-12">
-                           <input type="file" class="dropify" name="doc" data-max-file-size="10000K" data-default-file="<?= isset($param) ? base_url("assets/file/" . $param->bukti_bayar) : "" ?>">
-                           <div id="bukti_bayarFeedback" class="invalid-feedback">
-                        @error('bukti_bayar') {{$message}} @enderror
+            </div>
+            <div class="row mb-3">
+                <label for="jam_pesan_akhir" class="col-sm-2 col-form-label">Waktu Akhir</label>
+                <div class="col-sm-6">
+                    <input type="time" required class="form-control" name="jam_pesan_akhir"
+                        value="<?= isset($transaksi) ? $transaksi->jam_pesan_akhir : "" ?>">
+                    <div class="valid-feedback">
+                        Looks good!
                     </div>
                 </div>
             </div>
 
-                <div class="row text-center">
-                    <div class="col-sm-12">
-                        <button type="submit" class="btn btn-primary">Upload Bukti</button>
-                    </div>
+
+            <div class="row justify-content-end">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Send</button>
                 </div>
-            </form>
             </div>
-
-
-
+        </form>
     </div>
+
+
+
+</div>
 </div>
 @endsection
+

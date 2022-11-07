@@ -45,12 +45,10 @@ Route::group(["middleware" => "auth"], function () {
 
     // MANAGE DATA TRANSAKSI
     Route::get("/jadwal", [DasTransaksiController::class, "index"]);
-    Route::delete("/jadwal/{jadwal}", [DasTransaksiController::class, "destroy"]);
-    Route::get("/jadwal/add", [DasTransaksiController::class, "add"]);
-    Route::post("/jadwal", [DasTransaksiController::class, "store"]);
-    Route::get("/jadwal/{jadwal}/edit", [DasTransaksiController::class, "edit"]);
-    Route::put("/jadwal/{jadwal}", [DasTransaksiController::class, "update"]);
-
-
+    Route::delete("/transaksi/{transaksi}", [DasTransaksiController::class, "destroy"]);
+    Route::get("/transaksi/add", [DasTransaksiController::class, "add"]);
+    Route::post("/transaksi", [DasTransaksiController::class, "store"]);
+    Route::get("/transaksi/{transaksi}/edit", [DasTransaksiController::class, "edit"]);
+    Route::put("/transaksi/{transaksi}", [DasTransaksiController::class, "update"]);
     Route::get("/upload_bukti", [DasTransaksiController::class, "upload_bukti"]);
 });

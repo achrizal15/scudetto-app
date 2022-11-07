@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DasTransaksi;
+use App\Models\Lapangan;
 
 class DasTransaksiController extends Controller
 {
@@ -12,20 +13,24 @@ class DasTransaksiController extends Controller
         $jadwal = DasTransaksi::all();
         return view("das.jadwal.index", ["jadwal" => $jadwal]);
     }
+    public function upload_bukti()
+    {
+        return view("das.transaksi.upload");
+
+    }
     public function destroy(DasTransaksi $transaksi)
     {
+
         $transaksi->delete();
         return redirect("/transaksi")->with("message", "Data has been deleted.");
     }
     public function add()
-    {
-        return view("das.transaksi.form");
-
-    }
-    public function upload_bukti()
-    {
-        return view("das.transaksi.form");
-
+    {  
+        $lapangan = Lapangan::get()->sortBy([
+            fn ($a, $b) => intval($a["name"]) <=> intval($b["name"]),
+            fn ($a, $b) => $a["id"] <=> $b["id"],
+        ]);
+        return view("das.transaksi.form",["lapangan" => $lapangan]);
     }
     public function store(Request $request)
     {
