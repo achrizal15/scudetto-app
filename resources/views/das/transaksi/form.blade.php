@@ -32,6 +32,16 @@ $action=request()->segment(2);
                 </div>
             </div>
             <div class="row mb-3">
+                <label for="durasi_sewa" class="col-sm-2 col-form-label">Durasi Sewa<small>(Jam)</small></label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control @error('durasi_sewa') is-invalid @enderror" id="durasi_sewa" durasi_sewa="durasi_sewa"
+                        placeholder="1" value="@isset($param){{$param->durasi_sewa}}@endisset" />
+                    <div id="durasi_sewaFeedback" class="invalid-feedback">
+                        @error('durasi_sewa') {{$message}} @enderror
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
                 <label for="jam_pesan_awal" class="col-sm-2 col-form-label">Waktu Awal</label>
                 <div class="col-sm-6">
                     <input type="text"  value="Pilih Waktu" required class="form-control datetimepicker" name="jam_pesan_awal"
@@ -41,16 +51,7 @@ $action=request()->segment(2);
                     </div>
                 </div>
             </div>
-            <div class="row mb-3">
-                <label for="jam_pesan_akhir" class="col-sm-2 col-form-label">Waktu Akhir</label>
-                <div class="col-sm-6">
-                    <input type="text" value="Pilih Waktu" required class="datetimepicker form-control" name="jam_pesan_akhir"
-                        value="<?= isset($transaksi) ? $transaksi->jam_pesan_akhir : "" ?>">
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                </div>
-            </div>
+
 
 
             <div class="row justify-content-end">

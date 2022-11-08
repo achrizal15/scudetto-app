@@ -19,7 +19,7 @@ class DasTransaksiController extends Controller
     }
     public function destroy(DasTransaksi $transaksi)
     {
-        
+
         $transaksi->delete();
         return redirect("/transaksi")->with("message", "Data has been deleted.");
     }
@@ -35,14 +35,15 @@ class DasTransaksiController extends Controller
     {
         $validate = $request->validate([
             "lapangan_id" => "required",
+            "durasi_sewa" => "required",
             "jam_pesan_awal" => "required",
             "jam_pesan_akhir" => "required",
         ]);
         $validate["jam_pesan_awal"] = date("Y-m-d H", strtotime($validate["jam_pesan_awal"]));
         $validate["jam_pesan_akhir"] = date("Y-m-d H", strtotime($validate["jam_pesan_akhir"]));
         $validate["user_id"] =auth()->user()->id;
-        
-        
+
+
         DasTransaksi::create($validate);
         return view("das.transaksi.upload", ["param" => $transaksi]);
         // return redirect("upload_bukti")->with("message", "Data has been added.");
@@ -53,8 +54,8 @@ class DasTransaksiController extends Controller
     }
     public function update(Request $request, DasTransaksi $transaksi)
     {
-        
-        
+
+
         $rules = [
             "name" => "required",
             "jenis" => "required",
@@ -75,7 +76,7 @@ class DasTransaksiController extends Controller
 
     public function cetakPDF($id)
     {
-        
+
         $data ['riwayat'] = DasTransaksi::find($id);
 
         // cetak pdf
