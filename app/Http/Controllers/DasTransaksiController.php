@@ -5,17 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\DasTransaksi;
 use App\Models\Lapangan;
-
+use Barryvdh\DomPDF\Facade\Pdf;
 class DasTransaksiController extends Controller
 {
     public function index()
     {
         $jadwal = DasTransaksi::all();
         return view("das.jadwal.index", ["jadwal" => $jadwal]);
-    }
-    public function upload_bukti(DasTransaksi $transaksi)
-    {
-        return view("das.transaksi.upload");
     }
     public function destroy(DasTransaksi $transaksi)
     {
@@ -31,22 +27,23 @@ class DasTransaksiController extends Controller
         ]);
         return view("das.transaksi.form", ["lapangan" => $lapangan]);
     }
-    public function store(Request $request, DasTransaksi $transaksi)
+    public function store(Request $request)
     {
         $validate = $request->validate([
             "lapangan_id" => "required",
             "durasi_sewa" => "required",
             "jam_pesan_awal" => "required",
-            "jam_pesan_akhir" => "required",
         ]);
         $validate["jam_pesan_awal"] = date("Y-m-d H", strtotime($validate["jam_pesan_awal"]));
-        $validate["jam_pesan_akhir"] = date("Y-m-d H", strtotime($validate["jam_pesan_akhir"]));
         $validate["user_id"] =auth()->user()->id;
+        $validate["total_bayar"] =$validate["durasi_sewa"]*100000;
+        $transaksi=DasTransaksi::create($validate);
 
-
-        DasTransaksi::create($validate);
-        return view("das.transaksi.upload", ["param" => $transaksi]);
-        // return redirect("upload_bukti")->with("message", "Data has been added.");
+        return redirect("upload_bukti/$transaksi->id", ["total" => $validate["total_bayar"]]);
+    }
+    public function upload_bukti(DasTransaksi $transaksi)
+    {
+        return view("das.transaksi.upload");
     }
     public function edit(DasTransaksi $transaksi)
     {
@@ -80,8 +77,9 @@ class DasTransaksiController extends Controller
         $data ['riwayat'] = DasTransaksi::find($id);
 
         // cetak pdf
-        $pdf = \PDF::loadView('das.riwayat.cetak',$data);
+        $pdf =  Pdf::loadView('das.riwayat.cetak',$data);
+        // dd($data);
 
-        return $pdf->stream('Invoice.pdf');
+     return $pdf->download("file.pdf");
     }
 }

@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\DasPelangganController;
 use App\Http\Controllers\DasLapanganController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DasTransaksiController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DasRoleController;
+use App\Http\Controllers\DasUser;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +27,20 @@ Route::group(["middleware" => "auth"], function () {
     Route::get('/', function () {
         return view('welcome');
     });
+    Route::get("/user", [DasUser::class, "index"]);
+    Route::delete("/user/{user}", [DasUser::class, "destroy"]);
+    Route::get("/user/add", [DasUser::class, "add"]);
+    Route::post("/user", [DasUser::class, "store"]);
+    Route::get("/user/{user}/edit", [DasUser::class, "edit"]);
+    Route::put("/user/{user}", [DasUser::class, "update"]);
 
+    // MANAGE ROLE DASHBOARD
+    Route::get("/access-control", [DasRoleController::class, "index"]);
+    Route::delete("/access-control/{role}", [DasRoleController::class, "destroy"]);
+    Route::get("/access-control/add", [DasRoleController::class, "add"]);
+    Route::post("/access-control", [DasRoleController::class, "store"]);
+    Route::get("/access-control/{role}/edit", [DasRoleController::class, "edit"]);
+    Route::put("/access-control/{role}", [DasRoleController::class, "update"]);
     // MANAGE PELANGGAN
     Route::get("/pelanggan", [DasPelangganControler::class, "index"]);
     Route::delete("/pelanggan/{pelanggan}", [DasPelangganControler::class, "destroy"]);

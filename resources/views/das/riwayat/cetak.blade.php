@@ -175,7 +175,7 @@
 
 		<div class="kop">
 			<div class="logo">
-				<img src="{{asset('public/asset/dist/img/API.png')}}" alt="Flowers in Chania" width="70" height="70">
+				{{-- <img src="{{asset('public/asset/dist/img/API.png')}}" alt="Flowers in Chania" width="70" height="70"> --}}
 			</div>
 			<div class="instansi">
 				<h3>INVOICE</h3>

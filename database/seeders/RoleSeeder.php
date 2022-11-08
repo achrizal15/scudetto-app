@@ -18,5 +18,9 @@ class RoleSeeder extends Seeder
             "name"=>"IT Support",
             "landing_page"=>"/",
         ]);
+        Role::create([
+            "name"=>"Pelanggan",
+            "landing_page"=>"/transaksi/add",
+        ]);
     }
 }

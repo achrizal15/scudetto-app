@@ -12,4 +12,7 @@ class Role extends Model
     public function menus(){
         return $this->belongsToMany(Menu::class,"role_menus","role_id","menu_id")->withPivot("type")->withTimestamps();
     }
+    public function user(){
+        return $this->hasMany(User::class);
+    }
 }
