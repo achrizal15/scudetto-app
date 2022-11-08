@@ -15,8 +15,12 @@ class CreateDasTransaksisTable extends Migration
     {
         Schema::create('das_transaksis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("user_id");
-            $table->foreignId("lapangan_id");
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('lapangan_id');
+            $table->foreign('lapangan_id')->references('id')->on('lapangans');
+            // $table->foreignId("user_id");
+            // $table->foreignId("lapangan_id");
             $table->string("kode");
             $table->datetime("jam_pesan_awal");
             $table->datetime("jam_pesan_akhir");

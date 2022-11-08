@@ -51,4 +51,5 @@ Route::group(["middleware" => "auth"], function () {
     Route::get("/transaksi/{transaksi}/edit", [DasTransaksiController::class, "edit"]);
     Route::put("/transaksi/{transaksi}", [DasTransaksiController::class, "update"]);
     Route::get("/upload_bukti/{transaksi}", [DasTransaksiController::class, "upload_bukti"]);
+    Route::get("/riwayat", [DasTransaksiController::class, "riwayat"]);
 });

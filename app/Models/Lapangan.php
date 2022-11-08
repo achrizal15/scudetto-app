@@ -20,4 +20,9 @@ class Lapangan extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function transaksi()
+    {
+        return $this->hasMany(DasTransaksi::class);
+    }
 }

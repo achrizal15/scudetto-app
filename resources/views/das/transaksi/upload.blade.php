@@ -56,7 +56,7 @@ $action=request()->segment(2);
             <div class="row mb-3 text-center">
                 <div class="col-sm-12">
                     <input type="file" class="dropify" name="doc" data-max-file-size="10000K"
-                        data-default-file="<?= isset($param) ? base_url("assets/file/" . $param->bukti_bayar) : "" ?>">
+                        data-default-file="<?= isset($param) ?>">
                     <div id="bukti_bayarFeedback" class="invalid-feedback">
                         @error('bukti_bayar') {{$message}} @enderror
                     </div>
