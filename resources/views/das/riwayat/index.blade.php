@@ -20,7 +20,7 @@ $page=request()->segment(1);
                     <th>Lapangan</th>
                     <th>Jenis</th>
                     <th>Durasi Sewa</th>
-                    <th>Tanggal Sewa</th>
+                    <th>Tangal Sewa</th>
                     <th>Jam Mulai</th>
                     <th>Total Bayar</th>
                     <th>Status</th>
@@ -33,10 +33,10 @@ $page=request()->segment(1);
                     <td>{{$item->kode}}</td>
                     <td>{{$item->lapangan->name}}</td>
                     <td>{{$item->lapangan->jenis}}</td>
-                    <td>{{$item->durasi_sewa}} Jam</td>
+                    <td>{{$item->durasi_sewa}}</td>
                     <td>{{date("d-m-Y", strtotime($item->jam_pesan_awal))}}</td>
                     <td>{{date("H", strtotime($item->jam_pesan_awal))}}:00:00</td>
-                    <td>Rp.{{$item->total_bayar}}</td>
+                    <td>{{$item->total_bayar}}</td>
 
                     @if ($item->status=="PENDING")
                     <td><a class="badge bg-warning">PENDING</a></td>
@@ -50,7 +50,7 @@ $page=request()->segment(1);
                     @endif
                     <td>
                         @if ($item->status=="SELESAI")
-                        <a href="{{route('cetakPDF',[$item->id])}}" class="text-dark">Cetak Invoice <i class="bx bx-save"></i>
+                        <a href="{{route('cetakPDF',[$item->id])}}" class="text-dark"> <i class="bx bx-save"></i>Invoice</a>
 
                             @else
                             -

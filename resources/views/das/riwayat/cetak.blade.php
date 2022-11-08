@@ -175,18 +175,19 @@
 
 		<div class="kop">
 			<div class="logo">
-				{{-- <img src="{{asset('public/asset/dist/img/API.png')}}" alt="Flowers in Chania" width="70" height="70"> --}}
+            <box-icon type='solid' name='universal-access'></box-icon>
+
 			</div>
 			<div class="instansi">
 				<h3>INVOICE</h3>
 				<table class="biasa">
 					<tr>
-						<td style="width:10%">No Pesan</td>
+						<td style="width:10%">Kode</td>
 						<td style="width:2%">:</td>
 						<td style="width:40%">{{$riwayat->kode}}</td>
 					</tr>
 					<tr>
-						<td style="width:10%">Tanggal Pesan</td>
+						<td style="width:10%">Tanggal</td>
 						<td style="width:2%">:</td>
 						<td style="width:40%"> {{\Carbon\Carbon::parse($riwayat->created_at)->isoFormat('L')}}</td>
 					</tr>
@@ -232,18 +233,20 @@
 			<table id="customers">
 				<tr>
 					<th>No</th>
-					<th>Kode Pesan</th>
                     <th>Lapangan</th>
                     <th>Jenis</th>
+                    <th>Durasi Sewa</th>
+                    <th>Tangal Sewa</th>
                     <th>Jam Mulai</th>
-                    <th>Jam selesai</th>
+                    <th>Total Bayar</th>
 				</tr> @php $no=1; @endphp <tr>
 					<td>{{$no++}}</td>
-					<td>{{$riwayat->kode}}</td>
                     <td>{{$riwayat->lapangan->name}}</td>
                     <td>{{$riwayat->lapangan->jenis}}</td>
-                    <td>{{$riwayat->jam_pesan_awal}}</td>
-                    <td>{{$riwayat->jam_pesan_akhir}}</td>
+                    <td>{{$riwayat->durasi_sewa}} Jam</td>
+                    <td>{{date("d-m-Y", strtotime($riwayat->jam_pesan_awal))}}</td>
+                    <td>{{date("H", strtotime($riwayat->jam_pesan_awal))}}:00:00</td>
+                    <td>{{$riwayat->total_bayar}}</td>
 				</tr>
 			</table>
 		</Header>
@@ -258,7 +261,7 @@
 						</td>
 						<td style="width:2%">:</td>
 						<td style="width:40%">
-							<b>Rp. 500,000 ,-</b>
+							<b>Rp.{{$riwayat->total_bayar}} ,-</b>
 						</td>
 					</tr>
 				</table>
@@ -273,7 +276,7 @@
 				<br>
 				<br>
 				<br>
-				<br> Petani Terkait, <br>
+				<br> Pemesan Terkait, <br>
 				<br>
 				<br>
 				<br>
@@ -284,7 +287,7 @@
 			</div>
 		</footer>
 
-      
+
 		<div class="section"></div>
 	</body>
 </html>

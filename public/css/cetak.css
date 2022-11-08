@@ -1,0 +1,163 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.kop {
+    background-color: white;
+    height: 10%;
+    margin-bottom: 40px;
+    width: 100%;
+}
+
+.logo {
+    float: left;
+    background-color: white;
+    text-align: right;
+    height: 100%;
+    width: 15%;
+}
+
+.instansi {
+    float: right;
+    background-color: white;
+    height: 100%;
+    font-size: 15px;
+    text-align: center;
+    width: 30%;
+}
+
+.garis {
+    background-color: white;
+    height: 0.2%;
+    width: 100%;
+}
+
+.garis1 {
+    background-color: grey;
+    height: 1%;
+    width: 80%;
+}
+
+/* Style the header */
+Hseader {
+    background-color: blue;
+    padding: 30px;
+    margin-top: 0px;
+    height: 1%;
+    width: 80%;
+    padding: 0px;
+    text-align: center;
+    font-size: 18px;
+    font: arial;
+    color: Black;
+}
+
+/* Create two columns/boxes that floats next to each other */
+nav {
+    float: left;
+    width: 50%;
+    height: 180px;
+    /* only for demonstration, should be removed */
+    background: white;
+    padding: 20px;
+}
+
+/* Style the list inside the menu */
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+article {
+    float: right;
+    padding-top: 20px;
+    width: 50%;
+    background-color: white;
+    height: 200px;
+    /* only for demonstration, should be removed */
+}
+
+/* Clear floats after the columns */
+section::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Style the footer */
+Header {
+    margin-top: 20px;
+    background-color: white;
+    padding: 10px;
+    text-align: center;
+    color: black;
+}
+
+footer {
+    background-color: white;
+    padding: 10px;
+    text-align: center;
+    color: black;
+}
+
+.total {
+    float: right;
+    background-color: white;
+    height: 30%;
+    font-size: 15px;
+    text-align: left;
+    width: 28%;
+}
+
+#customers {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.biasa {
+    color: grey;
+}
+
+#customers td,
+#customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#customers tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#customers tr:hover {
+    background-color: #ddd;
+}
+
+#customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: grey;
+    color: white;
+}
+
+footer {
+    background-color: white;
+    padding: 10px;
+    text-align: center;
+    color: black;
+}
+
+/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
+@media (max-width: 600px) {
+
+    nav,
+    article {
+        width: 100%;
+        height: auto;
+    }
+}

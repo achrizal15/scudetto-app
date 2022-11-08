@@ -39,12 +39,12 @@ class DasTransaksiController extends Controller
         $validate["total_bayar"] =$validate["durasi_sewa"]*100000;
         $transaksi=DasTransaksi::create($validate);
 
-        return redirect("upload_bukti/$transaksi->id", );
+        return redirect("upload_bukti/$transaksi->id");
     }
     public function upload_bukti(DasTransaksi $transaksi)
     {
-
         return view("das.transaksi.upload",["transaksi"=>$transaksi]);
+
     }
     public function edit(DasTransaksi $transaksi)
     {

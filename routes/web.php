@@ -61,7 +61,7 @@ Route::group(["middleware" => "auth"], function () {
     Route::get("/jadwal", [DasTransaksiController::class, "index"]);
     Route::delete("/transaksi/{transaksi}", [DasTransaksiController::class, "destroy"]);
     Route::get("/transaksi/add", [DasTransaksiController::class, "add"]);
-    Route::post("/transaksi", [DasTransaksiController::class, "store"]);
+    Route::post("/transaksi/{transaksi}", [DasTransaksiController::class, "store"]);
     Route::get("/transaksi/{transaksi}/edit", [DasTransaksiController::class, "edit"]);
     Route::put("/transaksi/{transaksi}", [DasTransaksiController::class, "update"]);
     Route::get("/upload_bukti/{transaksi}", [DasTransaksiController::class, "upload_bukti"]);
