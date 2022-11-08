@@ -31,7 +31,7 @@ class DasTransaksiController extends Controller
         ]);
         return view("das.transaksi.form", ["lapangan" => $lapangan]);
     }
-    public function store(Request $request, DasTransaksi $transaksi)
+    public function store(Request $request)
     {
         $validate = $request->validate([
             "lapangan_id" => "required",
@@ -43,8 +43,8 @@ class DasTransaksiController extends Controller
         $validate["user_id"] =auth()->user()->id;
         
         
-        DasTransaksi::create($validate);
-        return view("das.transaksi.upload", ["param" => $transaksi]);
+        $transaksi=DasTransaksi::create($validate);
+      return redirect("upload_bukti/$transaksi->id");
         // return redirect("upload_bukti")->with("message", "Data has been added.");
     }
     public function edit(DasTransaksi $transaksi)
