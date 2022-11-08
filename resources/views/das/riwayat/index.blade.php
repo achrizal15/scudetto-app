@@ -19,8 +19,10 @@ $page=request()->segment(1);
                     <th>Kode Pesan</th>
                     <th>Lapangan</th>
                     <th>Jenis</th>
+                    <th>Durasi Sewa</th>
+                    <th>Tanggal Sewa</th>
                     <th>Jam Mulai</th>
-                    <th>Jam selesai</th>
+                    <th>Total Bayar</th>
                     <th>Status</th>
                     <th>Actions</th>
                 </tr>
@@ -31,8 +33,10 @@ $page=request()->segment(1);
                     <td>{{$item->kode}}</td>
                     <td>{{$item->lapangan->name}}</td>
                     <td>{{$item->lapangan->jenis}}</td>
-                    <td>{{$item->jam_pesan_awal}}</td>
-                    <td>{{$item->jam_pesan_akhir}}</td>
+                    <td>{{$item->durasi_sewa}} Jam</td>
+                    <td>{{date("d-m-Y", strtotime($item->jam_pesan_awal))}}</td>
+                    <td>{{date("H", strtotime($item->jam_pesan_awal))}}:00:00</td>
+                    <td>Rp.{{$item->total_bayar}}</td>
 
                     @if ($item->status=="PENDING")
                     <td><a class="badge bg-warning">PENDING</a></td>

@@ -13,7 +13,7 @@ $action=request()->segment(2);
             @csrf
             @method($action=="add"?'POST':'PUT')
             <div class="card-subtitle text-muted mb-3">Jumlah yang harus Dibayar</div>
-            <h3>Rp. 100.000,-</h3>
+            <h3>Rp.{{$transaksi->total_bayar}},-</h3>
             <div class="alert alert-secondary" role="alert">Harap lakukan pembayaran sebelum waktu habis!</div>
             <div class="row mb-5">
                 <div class="col-md">

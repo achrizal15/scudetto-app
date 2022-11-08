@@ -34,7 +34,7 @@ $action=request()->segment(2);
             <div class="row mb-3">
                 <label for="durasi_sewa" class="col-sm-2 col-form-label">Durasi Sewa<small>(Jam)</small></label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control @error('durasi_sewa') is-invalid @enderror" id="durasi_sewa" durasi_sewa="durasi_sewa"
+                    <input type="text" class="form-control @error('durasi_sewa') is-invalid @enderror" id="durasi_sewa" name="durasi_sewa"
                         placeholder="1" value="@isset($param){{$param->durasi_sewa}}@endisset" />
                     <div id="durasi_sewaFeedback" class="invalid-feedback">
                         @error('durasi_sewa') {{$message}} @enderror
