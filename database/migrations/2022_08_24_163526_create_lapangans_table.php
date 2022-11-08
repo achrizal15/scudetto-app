@@ -19,7 +19,7 @@ class CreateLapangansTable extends Migration
             $table->string("ukuran");
             $table->string("jenis");
             $table->string("warna");
-            $table->decimal("harga");
+            $table->decimal("harga",20,4);
             $table->timestamps();
         });
     }

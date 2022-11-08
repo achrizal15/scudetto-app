@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\DasTransaksi;
 use App\Models\Lapangan;
-
+use Barryvdh\DomPDF\Facade\Pdf;
 class DasTransaksiController extends Controller
 {
     public function index()
@@ -79,8 +79,9 @@ class DasTransaksiController extends Controller
         $data ['riwayat'] = DasTransaksi::find($id);
 
         // cetak pdf
-        $pdf = \PDF::loadView('das.riwayat.cetak',$data);
+        $pdf =  Pdf::loadView('das.riwayat.cetak',$data);
+        // dd($data);
 
-        return $pdf->stream('Invoice.pdf');
+     return $pdf->download("file.pdf");
     }
 }
