@@ -26,8 +26,7 @@ $page=request()->segment(1);
                 <tr>
                     <td>{{$item->name}}</td>
                     <td>
-                        <a href="#" id="view-access-menu" data-bs-toggle="modal" data-role="{{$item}}"
-                            data-bs-target="#modalAccessMenu">View</a>
+                        {{$item->landing_page}}
                     </td>
                     <td>
                         @if($item->id!=1&&getAccessTypeMenu()=="RW")

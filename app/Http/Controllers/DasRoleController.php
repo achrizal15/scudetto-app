@@ -19,7 +19,7 @@ class DasRoleController extends Controller
     public function destroy(Role $role)
     {
         $role->menus()->detach();
-        $role->akuns()->detach();
+        // $role->akuns()->detach();
         $role->delete();
         return redirect("/access-control")->with("message", "Data has been deleted.");
     }

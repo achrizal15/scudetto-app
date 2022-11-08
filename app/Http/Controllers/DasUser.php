@@ -22,7 +22,7 @@ class DasUser extends Controller
     }
     public function add()
     {
-        $roles = Role::orderBy("name", "ASC")->get();
+        $roles = Role::orderBy("name", "ASC")->where("id","!=",2)->get();
         return view("das.user.form", ["roles" => $roles]);
     }
     public function store(Request $request)
