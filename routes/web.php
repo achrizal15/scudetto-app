@@ -52,4 +52,5 @@ Route::group(["middleware" => "auth"], function () {
     Route::put("/transaksi/{transaksi}", [DasTransaksiController::class, "update"]);
     Route::get("/upload_bukti/{transaksi}", [DasTransaksiController::class, "upload_bukti"]);
     Route::get("/riwayat", [DasTransaksiController::class, "riwayat"]);
+    Route::get("/riwayat/cetak/{riwayat}", [DasTransaksiController::class, "cetakPDF"])->name('cetakPDF');;
 });

@@ -45,16 +45,12 @@ $page=request()->segment(1);
                     <td><a class="badge bg-warning">BATAL</a></td>
                     @endif
                     <td>
-                    @if ($item->status=="SELESAI")
-                        
-                                <a class="dropdown-item" href="{{url($page)}}/{{$item->id}}/edit"><i
-                                        class="bx bx-download me-1"></i>
-                                    Cetak</a>
-                                <form action="{{url($page)}}/{{$item->id}}" method="post">
-                                    @csrf
-                                </form>
-                        @else
-                        @endif
+                        @if ($item->status=="SELESAI")
+                        <a href="{{route('cetakPDF',[$item->id])}}" class="text-dark">Cetak Invoice <i class="bx bx-save"></i>
+
+                            @else
+                            -
+                            @endif
                     </td>
                 </tr>
                 @endforeach

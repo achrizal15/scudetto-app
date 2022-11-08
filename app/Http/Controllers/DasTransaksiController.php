@@ -72,4 +72,15 @@ class DasTransaksiController extends Controller
         $riwayat = DasTransaksi::all();
         return view("das.riwayat.index", ["riwayat" => $riwayat]);
     }
+
+    public function cetakPDF($id)
+    {
+        
+        $data ['riwayat'] = DasTransaksi::find($id);
+
+        // cetak pdf
+        $pdf = \PDF::loadView('das.riwayat.cetak',$data);
+
+        return $pdf->stream('Invoice.pdf');
+    }
 }
