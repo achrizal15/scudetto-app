@@ -20,7 +20,12 @@ class DasTransaksiController extends Controller
         return redirect("/transaksi")->with("message", "Data has been deleted.");
     }
     public function add()
-    {
+    {   $transaksi=DasTransaksi::where("user_id",auth()->user()->id)
+                                ->where("status","PENDING")
+                                ->first();
+                                if($transaksi){
+            return redirect("upload_bukti/$transaksi->id");
+        }
         $lapangan = Lapangan::get()->sortBy([
             fn ($a, $b) => intval($a["name"]) <=> intval($b["name"]),
             fn ($a, $b) => $a["id"] <=> $b["id"],
