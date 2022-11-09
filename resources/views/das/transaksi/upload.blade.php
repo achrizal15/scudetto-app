@@ -9,9 +9,8 @@ $action=request()->segment(2);
 </h4>
 <div class="card">
     <div class="card-body text-center">
-        <form action="{{$action=='add'?url($page):url($page.'/')}}" method="POST">
-            @csrf
-            @method($action=="add"?'POST':'PUT')
+    <form action="{{route('updatebukti',$transaksi->id)}}" method="post" enctype="multipart/form-data">
+    {{ csrf_field() }}
             <div class="card-subtitle text-muted mb-3">Jumlah yang harus Dibayar</div>
             <h3>Rp.{{$transaksi->total_bayar}},-</h3>
             <div class="alert alert-secondary" role="alert">Harap lakukan pembayaran sebelum waktu habis!</div>
@@ -55,8 +54,8 @@ $action=request()->segment(2);
             </div>
             <div class="row mb-3 text-center">
                 <div class="col-sm-12">
-                    <input type="file" class="dropify" name="doc" data-max-file-size="10000K"
-                        data-default-file="<?= isset($param) ?>">
+                    <input type="file" class="dropify" name="bukti_bayar" data-max-file-size="10000K"
+                        data-default-file="<?= isset($transaksi) ?>">
                     <div id="bukti_bayarFeedback" class="invalid-feedback">
                         @error('bukti_bayar') {{$message}} @enderror
                     </div>
