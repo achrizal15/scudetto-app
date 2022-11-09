@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\DasTransaksi;
 use App\Models\Lapangan;
 use Barryvdh\DomPDF\Facade\Pdf;
+
 class DasTransaksiController extends Controller
 {
     public function index()
@@ -20,10 +21,11 @@ class DasTransaksiController extends Controller
         return redirect("/transaksi")->with("message", "Data has been deleted.");
     }
     public function add()
-    {   $transaksi=DasTransaksi::where("user_id",auth()->user()->id)
-                                ->where("status","PENDING")
-                                ->first();
-                                if($transaksi){
+    {
+        $transaksi = DasTransaksi::where("user_id", auth()->user()->id)
+            ->where("status", "PENDING")
+            ->first();
+        if ($transaksi) {
             return redirect("upload_bukti/$transaksi->id");
         }
         $lapangan = Lapangan::get()->sortBy([
@@ -40,16 +42,15 @@ class DasTransaksiController extends Controller
             "jam_pesan_awal" => "required",
         ]);
         $validate["jam_pesan_awal"] = date("Y-m-d H", strtotime($validate["jam_pesan_awal"]));
-        $validate["user_id"] =auth()->user()->id;
-        $validate["total_bayar"] =$validate["durasi_sewa"]*100000;
-        $transaksi=DasTransaksi::create($validate);
+        $validate["user_id"] = auth()->user()->id;
+        $validate["total_bayar"] = $validate["durasi_sewa"] * 100000;
+        $transaksi = DasTransaksi::create($validate);
 
         return redirect("upload_bukti/$transaksi->id");
     }
     public function upload_bukti(DasTransaksi $transaksi)
     {
-        return view("das.transaksi.upload",["transaksi"=>$transaksi]);
-
+        return view("das.transaksi.upload", ["transaksi" => $transaksi]);
     }
     public function edit(DasTransaksi $transaksi)
     {
@@ -64,24 +65,25 @@ class DasTransaksiController extends Controller
         $transaksi->status       = "PROSES";
         $transaksi->save();
 
+
         return redirect("transaksi/add")->with("message", "Data has been updated.");
     }
 
     public function riwayat()
     {
-        $riwayat = DasTransaksi::all();
+        $riwayat = DasTransaksi::where("user_id",auth()->user()->id)->latest()->paginate(10)->withQueryString();
         return view("das.riwayat.index", ["riwayat" => $riwayat]);
     }
 
     public function cetakPDF($id)
     {
 
-        $data ['riwayat'] = DasTransaksi::find($id);
+        $data['riwayat'] = DasTransaksi::find($id);
 
         // cetak pdf
-        $pdf =  Pdf::loadView('das.riwayat.cetak',$data);
+        $pdf =  Pdf::loadView('das.riwayat.cetak', $data);
         // dd($data);
 
-     return $pdf->download("file.pdf");
+        return $pdf->download("file.pdf");
     }
 }

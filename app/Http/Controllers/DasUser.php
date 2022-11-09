@@ -12,7 +12,7 @@ class DasUser extends Controller
 
     public function index()
     {
-        $users = User::latest()->with("role")->get();
+        $users = User::latest()->where("role_id","!=",2)->with("role")->get();
         return view("das.user.index", ["data" => $users]);
     }
     public function destroy(User $user)
@@ -22,7 +22,7 @@ class DasUser extends Controller
     }
     public function add()
     {
-        $roles = Role::orderBy("name", "ASC")->where("id","!=",2)->get();
+        $roles = Role::orderBy("name", "ASC")->where("id", "!=", 2)->get();
         return view("das.user.form", ["roles" => $roles]);
     }
     public function store(Request $request)
@@ -33,7 +33,7 @@ class DasUser extends Controller
             "name" => "required",
             "role_id" => "required"
         ]);
-        $validate["password"]=Hash::make($validate["password"]);
+        $validate["password"] = Hash::make($validate["password"]);
         User::create($validate);
         return redirect("user")->with("message", "Data has been added.");
     }
@@ -49,10 +49,10 @@ class DasUser extends Controller
             "name" => "required",
             "role_id" => "required"
         ];
-        if($request->email!=$user->email){
-            $rules["email"].="|unique:users,email";
+        if ($request->email != $user->email) {
+            $rules["email"] .= "|unique:users,email";
         }
-        $validate=$request->validate($rules);
+        $validate = $request->validate($rules);
         $user->update($validate);
         return redirect("user")->with("message", "Data has been updated.");
     }

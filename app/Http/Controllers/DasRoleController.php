@@ -32,7 +32,7 @@ class DasRoleController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            "name" => "required|unique:das_roles,name",
+            "name" => "required|unique:roles,name",
             "landing_page" => "required",
         ]);
 
@@ -43,17 +43,12 @@ class DasRoleController extends Controller
         });
         $role = Role::create($validate);        
         $role->menus()->sync($roleMenu);
-        $role->akuns()->sync($request->akun);
         return redirect("access-control")->with("message", "Data has been added.");
     }
     public function edit(Role $role)
     {
-        $menus = DasMenu::orderBy("id", "ASC")->get();
-        $akuns = DasAkun::get()->sortBy([
-            fn ($a, $b) => intval($a["no_akun"]) <=> intval($b["no_akun"]),
-            fn ($a, $b) => $a["id"] <=> $b["id"],
-        ]);
-        return view("das.access-control.form", ["menus" => $menus, "akuns" => $akuns,"param"=>$role->load(["menus","akuns"])]);
+        $menus = Menu::orderBy("id", "ASC")->get();
+        return view("das.access-control.form", ["menus" => $menus,"param"=>$role->load(["menus"])]);
     }
     public function update(Request $request, Role $role)
     {
@@ -72,7 +67,6 @@ class DasRoleController extends Controller
         $validate=$request->validate($rules);
         $role->update($validate);
         $role->menus()->sync($roleMenu);
-        $role->akuns()->sync($request->akun);
         return redirect("access-control")->with("message", "Data has been updated.");
     }
 }
