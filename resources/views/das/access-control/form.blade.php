@@ -120,7 +120,7 @@ $action=request()->segment(2);
             </div>
         </div>
     </div>
-    <div class="card accordion-item mt-3">
+    {{-- <div class="card accordion-item mt-3">
         <h2 class="accordion-header" id="heading3">
             <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
                 data-bs-target="#accordion3" aria-expanded="false" aria-controls="accordion3">
@@ -171,7 +171,7 @@ $action=request()->segment(2);
 
             </div>
         </div>
-    </div>
+    </div> --}}
 </form>
 <script>
     const menus =JSON.parse('<?php echo json_encode($menus) ?>') ;

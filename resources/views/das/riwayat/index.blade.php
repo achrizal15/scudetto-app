@@ -13,6 +13,7 @@ $page=request()->segment(1);
             {{session("message")}}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>@endif
+        <div class="table-responsive">
         <table class="table">
             <thead>
                 <tr>
@@ -61,6 +62,7 @@ $page=request()->segment(1);
 
             </tbody>
         </table>
+      </div>
     </div>
 </div>
 @endsection
