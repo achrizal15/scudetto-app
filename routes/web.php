@@ -68,4 +68,6 @@ Route::group(["middleware" => "auth"], function () {
     Route::get("/upload_bukti/{transaksi}", [DasTransaksiController::class, "upload_bukti"]);
     Route::get("/riwayat", [DasTransaksiController::class, "riwayat"]);
     Route::get("/riwayat/cetak/{riwayat}", [DasTransaksiController::class, "cetakPDF"])->name('cetakPDF');;
+    Route::get("/data_pesan", [DasTransaksiController::class, "data_pesan"]);
+    Route::get("/data_pesan/{transaksi}", [DasTransaksiController::class, "change_condition"])->name('terima');
 });

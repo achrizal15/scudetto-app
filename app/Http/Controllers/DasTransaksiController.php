@@ -14,12 +14,14 @@ class DasTransaksiController extends Controller
         $jadwal = DasTransaksi::all();
         return view("das.jadwal.index", ["jadwal" => $jadwal]);
     }
+
     public function destroy(DasTransaksi $transaksi)
     {
 
         $transaksi->delete();
         return redirect("/transaksi")->with("message", "Data has been deleted.");
     }
+
     public function add()
     {
         $transaksi = DasTransaksi::where("user_id", auth()->user()->id)
@@ -34,6 +36,7 @@ class DasTransaksiController extends Controller
         ]);
         return view("das.transaksi.form", ["lapangan" => $lapangan]);
     }
+
     public function store(Request $request)
     {
         $validate = $request->validate([
@@ -48,14 +51,17 @@ class DasTransaksiController extends Controller
 
         return redirect("upload_bukti/$transaksi->id");
     }
+
     public function upload_bukti(DasTransaksi $transaksi)
     {
         return view("das.transaksi.upload", ["transaksi" => $transaksi]);
     }
+
     public function edit(DasTransaksi $transaksi)
     {
         return view("das.transaksi.form", ["param" => $transaksi]);
     }
+
     public function update(Request $request, DasTransaksi $transaksi)
     {
 
@@ -68,22 +74,39 @@ class DasTransaksiController extends Controller
 
         return redirect("transaksi/add")->with("message", "Data has been updated.");
     }
-
+    
     public function riwayat()
     {
         $riwayat = DasTransaksi::where("user_id",auth()->user()->id)->latest()->paginate(10)->withQueryString();
         return view("das.riwayat.index", ["riwayat" => $riwayat]);
     }
-
+    
     public function cetakPDF($id)
     {
-
+        
         $data['riwayat'] = DasTransaksi::find($id);
-
+        
         // cetak pdf
         $pdf =  Pdf::loadView('das.riwayat.cetak', $data);
         // dd($data);
-
+        
         return $pdf->download("file.pdf");
+    }
+    
+    public function data_pesan()
+    {
+        $data_pesan = DasTransaksi::where("status",'PROSES')->get();
+        return view("das.pesanan.index", ["data_pesan" => $data_pesan]);
+    }
+
+    public function change_condition(Request $request, DasTransaksi $transaksi)
+    {
+       
+        
+        $transaksi->status       = $request->status;
+        $transaksi->save();
+    
+    
+        return redirect("data_pesan")->with("message", "Status has been changes.");
     }
 }
