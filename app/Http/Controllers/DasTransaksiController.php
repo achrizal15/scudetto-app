@@ -52,18 +52,13 @@ class DasTransaksiController extends Controller
     }
     public function update(Request $request, DasTransaksi $transaksi)
     {
-        $validate               = $transaksi->id;
-        $image                  = $request->file('bukti_bayar')->getClientOriginalName();
+
+        $image                   = $request->file('bukti_bayar')->getClientOriginalName();
                                   $request->file('bukti_bayar')->move('storage', $image);
-        $validate->bukti_bayar  = $image;
-        dd($transaksi);
-        $validate->save();
-        // $rules = [
-        //     "bukti_bayar" => "required",
-        // ];
-        // $validate["bukti_bayar"] = $image;
-        // $validate = $request->validate($rules);
-        // $transaksi->update($validate);
+        $transaksi->bukti_bayar  = $image;
+        $transaksi->status       = "PROSES";
+        $transaksi->save();
+
         return redirect("transaksi/add")->with("message", "Data has been updated.");
     }
 
