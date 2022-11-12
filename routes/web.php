@@ -4,6 +4,7 @@ use App\Http\Controllers\DasLapanganController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DasTransaksiController;
 // use App\Http\Controllers\DasLandingController;
+use App\Http\Controllers\DasLaporanController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DasRoleController;
 use App\Http\Controllers\DasUser;
@@ -58,7 +59,7 @@ Route::group(["middleware" => "auth"], function () {
     Route::post("/lapangan", [DasLapanganController::class, "store"]);
     Route::get("/lapangan/{lapangan}/edit", [DasLapanganController::class, "edit"]);
     Route::put("/lapangan/{lapangan}", [DasLapanganController::class, "update"]);
-
+    
     // MANAGE DATA TRANSAKSI
     Route::get("/jadwal", [DasTransaksiController::class, "index"]);
     Route::delete("/transaksi/{transaksi}", [DasTransaksiController::class, "destroy"]);
@@ -72,4 +73,13 @@ Route::group(["middleware" => "auth"], function () {
     Route::get("/riwayat/cetak/{riwayat}", [DasTransaksiController::class, "cetakPDF"])->name('cetakPDF');;
     Route::get("/data_pesan", [DasTransaksiController::class, "data_pesan"]);
     Route::get("/data_pesan/{transaksi}", [DasTransaksiController::class, "change_condition"])->name('terima');
+
+
+    // MANAGE DATA LAPORAN
+    Route::get("/laporan", [DasLaporanController::class, "index"]);
+    Route::delete("/laporan/{laporan}", [DasLaporanController::class, "destroy"]);
+    Route::get("/laporan/add", [DasLaporanController::class, "add"]);
+    Route::post("/laporan", [DasLaporanController::class, "store"]);
+    Route::get("/laporan/{laporan}/edit", [DasLaporanController::class, "edit"]);
+    Route::put("/laporan/{laporan}", [DasLaporanController::class, "update"]);
 });
