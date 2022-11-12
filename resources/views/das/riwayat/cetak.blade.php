@@ -176,7 +176,6 @@
 		<div class="kop">
 			<div class="logo">
             <box-icon type='solid' name='universal-access'></box-icon>
-
 			</div>
 			<div class="instansi">
 				<h3>INVOICE</h3>

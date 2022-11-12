@@ -90,7 +90,7 @@ class DasTransaksiController extends Controller
         $pdf =  Pdf::loadView('das.riwayat.cetak', $data);
         // dd($data);
         
-        return $pdf->download("file.pdf");
+        return $pdf->stream("file.pdf");
     }
     
     public function data_pesan()

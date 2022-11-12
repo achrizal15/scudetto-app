@@ -3,7 +3,7 @@
 use App\Http\Controllers\DasLapanganController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DasTransaksiController;
-use App\Http\Controllers\DasLandingController;
+// use App\Http\Controllers\DasLandingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DasRoleController;
 use App\Http\Controllers\DasUser;
@@ -19,9 +19,12 @@ use App\Http\Controllers\DasUser;
 |
 */
 
-Route::get('/', [DasLandingController::class, "index"]);
+// Route::get('/', [DasLandingController::class, "index"]);
 Route::get('/logout', [AuthController::class, "destroy"])->name("logout");
 Route::group(["middleware" => "guest"], function () {
+    Route::get('/', function () {
+        return view('welcome');
+    });
     Route::get('/login', [AuthController::class, "index"])->name("login");
     Route::post("/store", [AuthController::class, "store"]);
 });

@@ -17,9 +17,9 @@ class DasTransaksi extends Model
     return [
         'kode' => [
             'format' => function () {
-                return 'PSN/' . date('Y.m.d') . '/INV/?';
+                return 'PSN/' . date('Y.m.d') . '/?';
             },
-            'length' => 5,
+            'length' => 3,
         ]
     ];
 }

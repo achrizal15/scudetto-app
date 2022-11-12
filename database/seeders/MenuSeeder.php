@@ -22,6 +22,7 @@ class MenuSeeder extends Seeder
             ["name"=>"Jadwal Lapangan","key"=>"jadwal_lapangan","icon"=>"bx-calendar","link"=>"/jadwal"],
             ["name"=>"Pemesanan Lapangan","key"=>"pemesanan_lapangan","icon"=>"bx-credit-card-alt","link"=>"/transaksi/add"],
             ["name"=>"Data Pesan Lapangan","key"=>"data_pesan","icon"=>"bx-list-ol","link"=>"/data_pesan"],
+            ["name"=>"Laporan","key"=>"laporan","icon"=>"bx-receipt","link"=>"/laporan"],
             ["name"=>"Riwayat Pesan","key"=>"riwayat_pesan","icon"=>"bx-archive","link"=>"/riwayat"],
             ["name"=>"Access Control","key"=>"access_control","icon"=>"bx-cog","link"=>"/access-control","group_name"=>"Settings"],
             ["name"=>"User","key"=>"user","icon"=>"bx-cog","link"=>"/user","group_name"=>"Settings"],
