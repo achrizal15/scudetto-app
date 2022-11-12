@@ -19,9 +19,10 @@ class DasLaporanController extends Controller
         // $totalDebet = DasTransaksi::select('total_bayar')->AkunAccess()->filters($filters)->whereHas("akun", fn ($q) => $q->where("type", "DEBET"))->sum("saldo");
         // $totalKredit = DasTransaksi::select('total_bayar')->AkunAccess()->filters($filters)->whereHas("akun", fn ($q) => $q->where("type", "KREDIT"))->sum("saldo");
         // return view("das.report-kas.index", ["data" => $data, "total" => [$totalDebet, $totalKredit], "filters" => $filters]);
-       
+
         $laporan = DasTransaksi::all();
-        return view("das.laporan.index", ["laporan" => $laporan]);
+        $total_bayar = DasTransaksi::sum('total_bayar');
+        return view("das.laporan.index", ["laporan" => $laporan, "total_bayar"=>$total_bayar]);
     }
     public function destroy(DasTransaksi $laporan)
     {
@@ -51,7 +52,7 @@ class DasLaporanController extends Controller
     }
     public function update(Request $request, DasTransaksi $laporan)
     {
-        
+
 
         $rules = [
             "name" => "required",

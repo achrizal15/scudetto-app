@@ -4,6 +4,7 @@ use App\Http\Controllers\DasLapanganController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DasLandingController;
 use App\Http\Controllers\DasTransaksiController;
+use App\Http\Controllers\DasController;
 // use App\Http\Controllers\DasLandingController;
 use App\Http\Controllers\DasLaporanController;
 use Illuminate\Support\Facades\Route;
@@ -30,9 +31,7 @@ Route::group(["middleware" => "guest"], function () {
     Route::post("/store", [AuthController::class, "store"]);
 });
 Route::group(["middleware" => "auth"], function () {
-    Route::get('/home', function () {
-        return view('welcome');
-    });
+    Route::get('/home', [DasController::class, "index"]);
     Route::get("/user", [DasUser::class, "index"]);
     Route::delete("/user/{user}", [DasUser::class, "destroy"]);
     Route::get("/user/add", [DasUser::class, "add"]);
@@ -62,7 +61,7 @@ Route::group(["middleware" => "auth"], function () {
     Route::post("/lapangan", [DasLapanganController::class, "store"]);
     Route::get("/lapangan/{lapangan}/edit", [DasLapanganController::class, "edit"]);
     Route::put("/lapangan/{lapangan}", [DasLapanganController::class, "update"]);
-    
+
     // MANAGE DATA TRANSAKSI
     Route::get("/jadwal", [DasTransaksiController::class, "index"]);
     Route::delete("/transaksi/{transaksi}", [DasTransaksiController::class, "destroy"]);

@@ -40,39 +40,41 @@ $page=request()->segment(1);
             <thead>
                 <tr>
                     <th>date</th>
-                    <th>No. Bukti</th>
-                    <th>Description</th>
-                    <th width="150px">Total Bayar</th>
-                    <th>Total Saldo</th>
+                    <th width="150px">No. Bukti</th>
+                    <th>Pemesan</th>
+                    <th>Lapangan</th>
+                    <th>Durasi</th>
+                    <th >Total Bayar</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($laporan as $item)
                 <tr>
                     <td>
-                        {{date("d/m/Y",strtotime($item->tanggal_pesan_awal))}}
+                        {{date("d/m/Y",strtotime($item->jam_pesan_awal))}}
                     </td>
                     <td>
                         {{$item->kode}}
                     </td>
                     <td>
-                        <div style="white-space: nowrap;
-                        overflow: hidden;
-                        text-overflow: ellipsis;width:150px"> {{deskripsi</div>
+                        {{$item->user->name}}
                     </td>
                     <td>
-                        {{$item->total_bayar}}
+                        {{$item->lapangan->name}}
                     </td>
                     <td>
-                        {{intval($item->total_bayar)}}
+                        {{$item->durasi_sewa}} Jam
+                    </td>
+                    <td>
+                        Rp. {{$item->total_bayar}},-
                     </td>
                 </tr>
                 @endforeach
             </tbody>
             <tfoot>
                 <tr>
-                    <th colspan="3">Total</th>
-                    <th>{{intval($item->total_bayar)}}</th>
+                    <th colspan="5">Total</th>
+                    <th>Rp. {{$total_bayar}},-</th>
                 </tr>
             </tfoot>
         </table>
