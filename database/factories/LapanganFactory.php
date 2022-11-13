@@ -14,7 +14,7 @@ class LapanganFactory extends Factory
     public function definition()
     {
         return [
-            //
+        
         ];
     }
 }

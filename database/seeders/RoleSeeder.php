@@ -16,7 +16,7 @@ class RoleSeeder extends Seeder
     {
         Role::create([
             "name"=>"IT Support",
-            "landing_page"=>"/",
+            "landing_page"=>"/home",
         ]);
         Role::create([
             "name"=>"Pelanggan",

@@ -7,6 +7,7 @@ use App\Http\Controllers\DasTransaksiController;
 use App\Http\Controllers\DasController;
 // use App\Http\Controllers\DasLandingController;
 use App\Http\Controllers\DasLaporanController;
+use App\Http\Controllers\DasPelangganController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DasRoleController;
 use App\Http\Controllers\DasUser;
@@ -47,12 +48,12 @@ Route::group(["middleware" => "auth"], function () {
     Route::get("/access-control/{role}/edit", [DasRoleController::class, "edit"]);
     Route::put("/access-control/{role}", [DasRoleController::class, "update"]);
     // MANAGE PELANGGAN
-    Route::get("/pelanggan", [DasPelangganControler::class, "index"]);
-    Route::delete("/pelanggan/{pelanggan}", [DasPelangganControler::class, "destroy"]);
-    Route::get("/pelanggan/add", [DasPelangganControler::class, "add"]);
-    Route::post("/pelanggan", [DasPelangganControler::class, "store"]);
-    Route::get("/pelanggan/{pelanggan}/edit", [DasPelangganControler::class, "edit"]);
-    Route::put("/pelanggan/{pelanggan}", [DasPelangganControler::class, "update"]);
+    Route::get("/pelanggan", [DasPelangganController::class, "index"]);
+    Route::delete("/pelanggan/{pelanggan}", [DasPelangganController::class, "destroy"]);
+    Route::get("/pelanggan/add", [DasPelangganController::class, "add"]);
+    Route::post("/pelanggan", [DasPelangganController::class, "store"]);
+    Route::get("/pelanggan/{pelanggan}/edit", [DasPelangganController::class, "edit"]);
+    Route::put("/pelanggan/{pelanggan}", [DasPelangganController::class, "update"]);
 
     // MANAGE DATA LAPANGAN
     Route::get("/lapangan", [DasLapanganController::class, "index"]);
