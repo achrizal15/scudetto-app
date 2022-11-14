@@ -24,6 +24,7 @@ class CreateDasTransaksisTable extends Migration
             $table->string("kode");
             $table->integer("durasi_sewa");
             $table->datetime("jam_pesan_awal");
+            $table->datetime("jam_pesan_akhir");
             $table->integer("total_bayar");
             $table->string("bukti_bayar")->nullable();
             $table->enum("status",["PENDING","PROSES","SELESAI","BATAL"])->default("PENDING");
