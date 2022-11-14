@@ -12,6 +12,9 @@ class AuthController extends Controller
     {
         return view("login");
     }
+    public function register(){
+        return view("register");
+    }
     public function store(Request $request)
     {
         // validasi input user
