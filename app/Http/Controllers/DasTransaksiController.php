@@ -24,6 +24,7 @@ class DasTransaksiController extends Controller
 
     public function add()
     {
+
         $transaksi = DasTransaksi::where("user_id", auth()->user()->id)
             ->where("status", "PENDING")
             ->first();
@@ -41,10 +42,15 @@ class DasTransaksiController extends Controller
     {
         $validate = $request->validate([
             "lapangan_id" => "required",
-            "durasi_sewa" => "required",
-            "jam_pesan_awal" => "required",
+            "tanggal" => "required",
+            "waktu_awal" => "required",
+            "waktu_akhir" => "required",
         ]);
-        $validate["jam_pesan_awal"] = date("Y-m-d H", strtotime($validate["jam_pesan_awal"]));
+        $waktu_awal=explode(":",$request->waktu_awal);
+        $waktu_akhir=explode(":",$request->waktu_akhir);
+        $validate["durasi_sewa"] = $waktu_akhir[0]-$waktu_awal[0];
+        $validate["jam_pesan_awal"] = date("Y-m-d H", strtotime($request->tanggal."".$request->waktu_awal));
+        $validate["jam_pesan_akhir"] = date("Y-m-d H", strtotime($request->tanggal."".$request->waktu_akhir));
         $validate["user_id"] = auth()->user()->id;
         $validate["total_bayar"] = $validate["durasi_sewa"] * 100000;
         $transaksi = DasTransaksi::create($validate);
@@ -74,25 +80,25 @@ class DasTransaksiController extends Controller
 
         return redirect("transaksi/add")->with("message", "Data has been updated.");
     }
-    
+
     public function riwayat()
     {
         $riwayat = DasTransaksi::where("user_id",auth()->user()->id)->latest()->paginate(10)->withQueryString();
         return view("das.riwayat.index", ["riwayat" => $riwayat]);
     }
-    
+
     public function cetakPDF($id)
     {
-        
+
         $data['riwayat'] = DasTransaksi::find($id);
-        
+
         // cetak pdf
         $pdf =  Pdf::loadView('das.riwayat.cetak', $data);
         // dd($data);
-        
+
         return $pdf->stream("file.pdf");
     }
-    
+
     public function data_pesan()
     {
         $data_pesan = DasTransaksi::where("status",'PROSES')->get();
@@ -101,12 +107,12 @@ class DasTransaksiController extends Controller
 
     public function change_condition(Request $request, DasTransaksi $transaksi)
     {
-       
-        
+
+
         $transaksi->status       = $request->status;
         $transaksi->save();
-    
-    
+
+
         return redirect("data_pesan")->with("message", "Status has been changes.");
     }
 }
