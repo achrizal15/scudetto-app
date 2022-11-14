@@ -74,16 +74,12 @@ Route::group(["middleware" => "auth"], function () {
     Route::post("/transaksi/{transaksi}", [DasTransaksiController::class, "update"])->name('updatebukti');
     Route::get("/upload_bukti/{transaksi}", [DasTransaksiController::class, "upload_bukti"]);
     Route::get("/riwayat", [DasTransaksiController::class, "riwayat"]);
-    Route::get("/riwayat/cetak/{riwayat}", [DasTransaksiController::class, "cetakPDF"])->name('cetakPDF');;
+    Route::get("/riwayat/cetak/{riwayat}", [DasTransaksiController::class, "cetakPDF"])->name('cetakPDF');
     Route::get("/data_pesan", [DasTransaksiController::class, "data_pesan"]);
     Route::get("/data_pesan/{transaksi}", [DasTransaksiController::class, "change_condition"])->name('terima');
 
 
     // MANAGE DATA LAPORAN
     Route::get("/laporan", [DasLaporanController::class, "index"]);
-    Route::delete("/laporan/{laporan}", [DasLaporanController::class, "destroy"]);
-    Route::get("/laporan/add", [DasLaporanController::class, "add"]);
-    Route::post("/laporan", [DasLaporanController::class, "store"]);
-    Route::get("/laporan/{laporan}/edit", [DasLaporanController::class, "edit"]);
-    Route::put("/laporan/{laporan}", [DasLaporanController::class, "update"]);
+    Route::get("/laporan/cetak", [DasLaporanController::class, "cetakPDF"])->name('cetakLaporanPDF');
 });

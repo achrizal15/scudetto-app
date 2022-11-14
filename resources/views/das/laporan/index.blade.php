@@ -31,7 +31,7 @@ $page=request()->segment(1);
                     <button type="submit" class="btn btn-primary">Filter</button>
                 </div>
                 <div class="d-grid gap-2 col-lg-3">
-                    <button name="export" type="submit" value="excel" class="btn btn-primary">Export</button>
+                    <a name="export" href="{{route('cetakLaporanPDF'.'?from='.$_GET['from'].'&to='.$GET['to'])}}" class="btn btn-primary">Export</a>
                 </div>
             </div>
 
