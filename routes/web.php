@@ -25,11 +25,11 @@ use App\Http\Controllers\DasUser;
 
 // Route::get('/', [DasLandingController::class, "index"]);
 Route::get('/logout', [AuthController::class, "destroy"])->name("logout");
-Route::get('/', [DasLandingController::class,"index"]);
+Route::get('/', [DasLandingController::class, "index"]);
 Route::group(["middleware" => "guest"], function () {
-    Route::get("/register",AuthController::class,"register")->name("register");
-    // Route::post("/register-store",AuthController::class,"registerStore")->name("registerStore");
+    Route::post("/createAuth",[AuthController::class,"createAuth"])->name("createAuth");
     Route::get('/login', [AuthController::class, "index"])->name("login");
+    Route::get("/register",[ AuthController::class, "register"])->name("register");
     Route::post("/store", [AuthController::class, "store"]);
 });
 Route::group(["middleware" => "auth"], function () {

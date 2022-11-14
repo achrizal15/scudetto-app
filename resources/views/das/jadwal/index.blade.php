@@ -22,31 +22,109 @@ $page=request()->segment(1);
                     <th>Rabu</th>
                     <th>Kamis</th>
                     <th>Jumat</th>
-                    <th>Sabtu</th>
+                    <th>Sabtu </th>
                 </tr>
             </thead>
             <tbody>
-               
-                @for ($i = 0; $i <= 14; $i++)
-                <?php
-                $jam=date("H:i",strtotime(8+$i.".00"));
-                ?>
-                <tr>
-                    <td>{{$jam}}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <?php
-                        $kamis=App\Models\DasTransaksi::where("jam_pesan_awal",">=",date("Y-m-d H:i:s",strtotime("2022-11-03 $jam")))->first();
-                        ?>
-                        {{$kamis!=null?$kamis->user->name:""}}
+
+                @for ($i = 8 ; $i <= 22; $i++) <tr>
+                    <td>{{"$i:00"}} </td>
+                    <td>@php
+                        $senin= $transaksi->filter(function($e)use($i){
+                        $start=date("H",strtotime($e->jam_pesan_awal));
+                        $duration=$start+$e->durasi_sewa;
+
+                        if(date("Y-m-d",strtotime("now"))!=date("Y-m-d",strtotime($e->jam_pesan_awal)))
+                        return false;
+                        return $start<=$i&&$duration>=$i; })->first()
+                            @endphp
+                            @if ($senin)
+                            {{$senin->user->name}}
+                            @endif
                     </td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                @endfor
-                
+                    <td>
+                        @php
+                        $senin= $transaksi->filter(function($e)use($i){
+                        $start=date("H",strtotime($e->jam_pesan_awal));
+                        $duration=$start+$e->durasi_sewa;
+
+                        if(date("Y-m-d",strtotime("now +1
+                        days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return false;
+                        return $start<=$i&&$duration>=$i; })->first()
+                            @endphp
+                            @if ($senin)
+                            {{$senin->user->name}}
+                            @endif
+                    </td>
+                    <td>
+                        @php
+                        $senin= $transaksi->filter(function($e)use($i){
+                        $start=date("H",strtotime($e->jam_pesan_awal));
+                        $duration=$start+$e->durasi_sewa;
+
+                        if(date("Y-m-d",strtotime("now +2
+                        days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return false;
+                        return $start<=$i&&$duration>=$i; })->first()
+                            @endphp
+                            @if ($senin)
+                            {{$senin->user->name}}
+                            @endif
+                    </td>
+                    <td>
+                        @php
+                        $senin= $transaksi->filter(function($e)use($i){
+                        $start=date("H",strtotime($e->jam_pesan_awal));
+                        $duration=$start+$e->durasi_sewa;
+
+                        if(date("Y-m-d",strtotime("now +3
+                        days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return false;
+                        return $start<=$i&&$duration>=$i; })->first()
+                            @endphp
+                            @if ($senin)
+                            {{$senin->user->name}}
+                            @endif
+                    </td>
+                    <td>
+                        @php
+                        $senin= $transaksi->filter(function($e)use($i){
+                        $start=date("H",strtotime($e->jam_pesan_awal));
+                        $duration=$start+$e->durasi_sewa;
+
+                        if(date("Y-m-d",strtotime("now +4
+                        days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return false;
+                        return $start<=$i&&$duration>=$i; })->first()
+                            @endphp
+                            @if ($senin)
+                            {{$senin->user->name}}
+                            @endif
+                    </td>
+                    <td> @php
+                        $senin= $transaksi->filter(function($e)use($i){
+                        $start=date("H",strtotime($e->jam_pesan_awal));
+                        $duration=$start+$e->durasi_sewa;
+
+                        if(date("Y-m-d",strtotime("now +5
+                        days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return false;
+                        return $start<=$i&&$duration>=$i; })->first()
+                            @endphp
+                            @if ($senin)
+                            {{$senin->user->name}}
+                            @endif</td>
+                    <td> @php
+                        $senin= $transaksi->filter(function($e)use($i){
+                        $start=date("H",strtotime($e->jam_pesan_awal));
+                        $duration=$start+$e->durasi_sewa;
+
+                        if(date("Y-m-d",strtotime("now +6
+                        days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return false;
+                        return $start<=$i&&$duration>=$i; })->first()
+                            @endphp
+                            @if ($senin)
+                            {{$senin->user->name}}
+                            @endif</td>
+                    </tr>
+                    @endfor
+
 
             </tbody>
         </table>

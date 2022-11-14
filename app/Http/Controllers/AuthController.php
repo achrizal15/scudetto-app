@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AlamatLengkap;
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -12,8 +15,26 @@ class AuthController extends Controller
     {
         return view("login");
     }
-    public function register(){
+    public function register()
+    {
         return view("register");
+    }
+    public function createAuth(Request $request)
+    {
+        $validate = $request->validate([
+            "name" => "required",
+            "email" => "required|unique:users,email",
+            "password" => "required",
+            "role_id" => "required",
+        ]);
+        $validate["password"] = Hash::make($request->password);
+        $user = User::create($validate);
+        AlamatLengkap::create([
+            "user_id" => $user->id,
+            "alamat" => $request->alamat,
+            "no_hp" => $request->no_hp,
+        ]);
+      return  $this->store($request);
     }
     public function store(Request $request)
     {

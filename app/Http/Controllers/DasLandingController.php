@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DasTransaksi;
 use Illuminate\Http\Request;
 use App\Models\Lapangan;
 
@@ -15,7 +16,9 @@ class DasLandingController extends Controller
     public function index()
     {
         $lapangan = Lapangan::all();
-        return view("landing.index", ["lapangan" => $lapangan]);
+        $transaksi = DasTransaksi::with('user')->where("jam_pesan_awal",">=",date("Y-m-d",strtotime("now")))->where("jam_pesan_akhir","<=",date("Y-m-d H:i",strtotime("now +7 days")))->get();
+   
+        return view("landing.index", ["lapangan" => $lapangan,"transaksi" => $transaksi]);
     }
 
     /**
