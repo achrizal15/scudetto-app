@@ -27,33 +27,57 @@ $action=request()->segment(2);
                     </select>
                     <div id="lapangan_idFeedback" class="invalid-feedback">
                         @error('lapangan_id') {{$message}} @enderror
-
                     </div>
                 </div>
             </div>
             <div class="row mb-3">
-                <label for="durasi_sewa" class="col-sm-2 col-form-label">Durasi Sewa<small>(Jam)</small></label>
+                    <label for="tanggal" class="col-sm-2 col-form-label">tanggal</label>
+                    <div class="col-sm-10">
+                        <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" name="tanggal"
+                        value="@isset($param){{$param->tanggal}}@endisset" />
+                        <div id="tanggalFeedback" class="invalid-feedback">
+                            @error('tanggal') {{$message}} @enderror
+                        </div>
+                    </div>
+                </div>
+            <div class="row mb-3">
+                <label for="waktu_awal" class="col-sm-2 col-form-label">Waktu Awal</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control @error('durasi_sewa') is-invalid @enderror" id="durasi_sewa" name="durasi_sewa"
-                        placeholder="1" value="@isset($param){{$param->durasi_sewa}}@endisset" />
-                    <div id="durasi_sewaFeedback" class="invalid-feedback">
-                        @error('durasi_sewa') {{$message}} @enderror
+                    <select class="select2 form-control @error('waktu_awal') is-invalid @enderror" id="waktu_awal"
+                        style="width: 100%" name="waktu_awal">
+                        <option value="" selected>Waktu Awal</option>
+                        @for ($i =0; $i <= 14; $i++)
+                        <?php
+                        $jam=date("H:i",strtotime(8+$i.".00"));
+                        ?>
+                     <option value="{{$jam}}" @isset($param) {{$param->waktu_awal}}
+                            @endisset>{{$jam}}</option>
+                        @endfor
+                    </select>
+                    <div id="waktu_awalFeedback" class="invalid-feedback">
+                        @error('waktu_awal') {{$message}} @enderror
                     </div>
                 </div>
             </div>
             <div class="row mb-3">
-                <label for="jam_pesan_awal" class="col-sm-2 col-form-label">Waktu Awal</label>
-                <div class="col-sm-6">
-                    <input type="text"  value="Pilih Waktu" required class="form-control datetimepicker" name="jam_pesan_awal"
-                        value="<?= isset($transaksi) ? $transaksi->jam_pesan_awal : "" ?>">
-                    <div class="valid-feedback">
-                        Looks good!
+                <label for="waktu_akhir" class="col-sm-2 col-form-label">Waktu Akhir</label>
+                <div class="col-sm-10">
+                    <select class="select2 form-control @error('waktu_akhir') is-invalid @enderror" id="waktu_akhir"
+                        style="width: 100%" name="waktu_akhir">
+                        <option value="" selected>waktu Akhir</option>
+                        @for ($i =0; $i <= 14; $i++)
+                        <?php
+                        $jam=date("H:i",strtotime(8+$i.".00"));
+                        ?>
+                     <option value="{{$jam}}" @isset($param) {{$param->waktu_akhir}}
+                            @endisset>{{$jam}}</option>
+                        @endfor
+                    </select>
+                    <div id="waktu_akhirFeedback" class="invalid-feedback">
+                        @error('waktu_akhir') {{$message}} @enderror
                     </div>
                 </div>
             </div>
-
-
-
             <div class="row justify-content-end">
                 <div class="col-sm-10">
                     <button type="submit" class="btn btn-primary">Send</button>
