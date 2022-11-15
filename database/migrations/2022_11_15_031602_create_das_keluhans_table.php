@@ -18,7 +18,7 @@ class CreateDasKeluhansTable extends Migration
             $table->foreignId("user_id");
             $table->string("title");
             $table->string("deskripsi");
-            $table->string("respon");
+            $table->string("respon")->nullable();
             $table->timestamps();
         });
     }
