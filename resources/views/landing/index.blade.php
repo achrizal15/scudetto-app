@@ -50,9 +50,10 @@
 
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-                    <li><a class="nav-link scrollto" href="#Information">Information</a></li>
-                    <li><a class="nav-link scrollto" href="#pricing">Pricing</a></li>
+                    <li><a class="nav-link " href="#hero">Home</a></li>
+                    <li><a class="nav-link " href="#Information">Information</a></li>
+                    <li><a class="nav-link " href="#pricing">Pricing</a></li>
+                    <li><a class="nav-link " href="#jadwal">Schedule</a></li>
                     @if(!auth()->user())
                     <li><a class="getstarted scrollto" href="{{asset('login')}}">Login</a></li>
                     @endif
@@ -191,9 +192,9 @@
                                 <li><i class="bx bx-check"></i> Jenis : {{$item->jenis}}</li>
                             </ul>
                             <h4><sup>Rp.</sup>{{intval($item->harga)}},-<span>per Jam</span></h4>
-                            <button type="button" class="buy-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                Jadwal
-                            </button>
+                            <a  href="/transaksi/add"class="buy-btn">
+                           Pesan Sekarang
+                            </a>
                         </div>
                     </div>
                     @endforeach
@@ -201,7 +202,143 @@
 
             </div>
         </section><!-- End Pricing Section -->
-
+        <section class="container" id="jadwal">
+            <div class="section-title">
+                <h2 >Schedule</h2>
+            </div>
+            <form action="" class="d-flex gap-2 mb-3">
+                <div class="col-3">
+                    <select class="form-control" name="lapangan" id="">
+                        @foreach ($lapangan as $item)
+                        <option value="{{$item->id}}" @if(request()->lapangan==$item->id) selected @endif>{{$item->name}}
+                        </option>
+                        @endforeach
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-info text-white">Filter</button>
+            </form>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Jam</th>
+                        <th>{{date("d/m/Y",strtotime("now"))}}</th>
+                        <th>{{date("d/m/Y",strtotime("now +1 days"))}}</th>
+                        <th>{{date("d/m/Y",strtotime("now +2 days"))}}</th>
+                        <th>{{date("d/m/Y",strtotime("now +3 days"))}}</th>
+                        <th>{{date("d/m/Y",strtotime("now +4 days"))}}</th>
+                        <th>{{date("d/m/Y",strtotime("now +5 days"))}}</th>
+                        <th>{{date("d/m/Y",strtotime("now +6 days"))}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+    
+                    @for ($i = 8 ; $i <= 24; $i++) <tr>
+                        <td>{{"$i:00"}} </td>
+                        <td>@php
+                            $senin= $transaksi->filter(function($e)use($i){
+                            $start=date("H",strtotime($e->jam_pesan_awal));
+                            $duration=$start+$e->durasi_sewa;
+    
+                            if(date("Y-m-d",strtotime("now"))!=date("Y-m-d",strtotime($e->jam_pesan_awal)))
+                            return false;
+                            return $start<=$i&&$duration>$i; })->first()
+                                @endphp
+                                @if ($senin)
+                                <span
+                                    class="@if($senin->status=='PENDING') text-warning @endif ">{{$senin->user->name}}</span>
+                                @endif
+                        </td>
+                        <td>
+                            @php
+                            $senin= $transaksi->filter(function($e)use($i){
+                            $start=date("H",strtotime($e->jam_pesan_awal));
+                            $duration=$start+$e->durasi_sewa;
+                            $strtime="now +1 days";
+                            if(date("Y-m-d",strtotime($strtime))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
+                            false;
+                            return $start<=$i&&$duration>$i; })->first()
+                                @endphp
+                                @if ($senin)
+                                <span
+                                    class="@if($senin->status=='PENDING') text-warning @endif ">{{$senin->user->name}}</span>
+                                @endif
+                        </td>
+                        <td>
+                            @php
+                            $senin= $transaksi->filter(function($e)use($i){
+                            $start=date("H",strtotime($e->jam_pesan_awal));
+                            $duration=$start+$e->durasi_sewa;
+                            $strtime="now +2 days";
+                            if(date("Y-m-d",strtotime($strtime))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
+                            false;
+                            return $start<=$i&&$duration>$i; })->first()
+                                @endphp
+                                @if ($senin)
+                                <span
+                                    class="@if($senin->status=='PENDING') text-warning @endif ">{{$senin->user->name}}</span>
+                                @endif
+                        </td>
+                        <td>
+                            @php
+                            $senin= $transaksi->filter(function($e)use($i){
+                            $start=date("H",strtotime($e->jam_pesan_awal));
+                            $duration=$start+$e->durasi_sewa;
+                            $strtime="now +3 days";
+                            if(date("Y-m-d",strtotime($strtime))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
+                            false;
+                            return $start<=$i&&$duration>$i; })->first()
+                                @endphp
+                                @if ($senin)
+                                <span
+                                    class="@if($senin->status=='PENDING') text-warning @endif ">{{$senin->user->name}}</span>
+                                @endif
+                        </td>
+                        <td>
+                            @php
+                            $senin= $transaksi->filter(function($e)use($i){
+                            $start=date("H",strtotime($e->jam_pesan_awal));
+                            $duration=$start+$e->durasi_sewa;
+                            $strtime="now +4 days";
+                            if(date("Y-m-d",strtotime($strtime))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
+                            false;
+                            return $start<=$i&&$duration>$i; })->first()
+                                @endphp
+                                @if ($senin)
+                                <span
+                                    class="@if($senin->status=='PENDING') text-warning @endif ">{{$senin->user->name}}</span>
+                                @endif
+                        </td>
+                        <td> @php
+                            $senin= $transaksi->filter(function($e)use($i){
+                            $start=date("H",strtotime($e->jam_pesan_awal));
+                            $duration=$start+$e->durasi_sewa;
+                            $strtime="now +5 days";
+                            if(date("Y-m-d",strtotime($strtime))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
+                            false;
+                            return $start<=$i&&$duration>$i; })->first()
+                                @endphp
+                                @if ($senin)
+                                <span
+                                    class="@if($senin->status=='PENDING') text-warning @endif ">{{$senin->user->name}}</span>
+                                @endif</td>
+                        <td> @php
+                            $senin= $transaksi->filter(function($e)use($i){
+                            $start=date("H",strtotime($e->jam_pesan_awal));
+                            $duration=$start+$e->durasi_sewa;
+                            $strtime="now +4 days";
+                            if(date("Y-m-d",strtotime($strtime))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
+                            false;
+                            return $start<=$i&&$duration>$i; })->first()
+                                @endphp
+                                @if ($senin)
+                                <span
+                                    class="@if($senin->status=='PENDING') text-warning @endif ">{{$senin->user->name}}</span>
+                                @endif</td>
+                        </tr>
+                        @endfor
+                </tbody>
+            </table>
+        </section>
     </main><!-- End #main -->
 
     <!-- ======= Footer ======= -->
@@ -239,144 +376,7 @@
 
 
     <!-- Modal -->
-    <div class="modal fade modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Jadwal</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Jam</th>
-                                <th>{{date("d/m/Y",strtotime("now"))}}</th>
-                                <th>{{date("d/m/Y",strtotime("now +1 days"))}}</th>
-                                <th>{{date("d/m/Y",strtotime("now +2 days"))}}</th>
-                                <th>{{date("d/m/Y",strtotime("now +3 days"))}}</th>
-                                <th>{{date("d/m/Y",strtotime("now +4 days"))}}</th>
-                                <th>{{date("d/m/Y",strtotime("now +5 days"))}}</th>
-                                <th>{{date("d/m/Y",strtotime("now +6 days"))}}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-            
-                            @for ($i = 8 ; $i <= 24; $i++) <tr>
-                                <td>{{"$i:00"}} </td>
-                                <td>@php
-                                    $senin= $transaksi->filter(function($e)use($i){
-                                    $start=date("H",strtotime($e->jam_pesan_awal));
-                                    $duration=$start+$e->durasi_sewa;
-            
-                                    if(date("Y-m-d",strtotime("now"))!=date("Y-m-d",strtotime($e->jam_pesan_awal)))
-                                    return false;
-                                    return $start<=$i&&$duration>$i; })->first()
-                                        @endphp
-                                        @if ($senin)
-                                        <span
-                                            class="@if($senin->status=='PENDING') text-warning @endif ">{{$senin->user->name}}</span>
-                                        @endif
-                                </td>
-                                <td>
-                                    @php
-                                    $senin= $transaksi->filter(function($e)use($i){
-                                    $start=date("H",strtotime($e->jam_pesan_awal));
-                                    $duration=$start+$e->durasi_sewa;
-                                    $strtime="now +1 days";
-                                    if(date("Y-m-d",strtotime($strtime))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
-                                    false;
-                                    return $start<=$i&&$duration>$i; })->first()
-                                        @endphp
-                                        @if ($senin)
-                                        <span
-                                            class="@if($senin->status=='PENDING') text-warning @endif ">{{$senin->user->name}}</span>
-                                        @endif
-                                </td>
-                                <td>
-                                    @php
-                                    $senin= $transaksi->filter(function($e)use($i){
-                                    $start=date("H",strtotime($e->jam_pesan_awal));
-                                    $duration=$start+$e->durasi_sewa;
-                                    $strtime="now +2 days";
-                                    if(date("Y-m-d",strtotime($strtime))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
-                                    false;
-                                    return $start<=$i&&$duration>$i; })->first()
-                                        @endphp
-                                        @if ($senin)
-                                        <span
-                                            class="@if($senin->status=='PENDING') text-warning @endif ">{{$senin->user->name}}</span>
-                                        @endif
-                                </td>
-                                <td>
-                                    @php
-                                    $senin= $transaksi->filter(function($e)use($i){
-                                    $start=date("H",strtotime($e->jam_pesan_awal));
-                                    $duration=$start+$e->durasi_sewa;
-                                    $strtime="now +3 days";
-                                    if(date("Y-m-d",strtotime($strtime))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
-                                    false;
-                                    return $start<=$i&&$duration>$i; })->first()
-                                        @endphp
-                                        @if ($senin)
-                                        <span
-                                            class="@if($senin->status=='PENDING') text-warning @endif ">{{$senin->user->name}}</span>
-                                        @endif
-                                </td>
-                                <td>
-                                    @php
-                                    $senin= $transaksi->filter(function($e)use($i){
-                                    $start=date("H",strtotime($e->jam_pesan_awal));
-                                    $duration=$start+$e->durasi_sewa;
-                                    $strtime="now +4 days";
-                                    if(date("Y-m-d",strtotime($strtime))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
-                                    false;
-                                    return $start<=$i&&$duration>$i; })->first()
-                                        @endphp
-                                        @if ($senin)
-                                        <span
-                                            class="@if($senin->status=='PENDING') text-warning @endif ">{{$senin->user->name}}</span>
-                                        @endif
-                                </td>
-                                <td> @php
-                                    $senin= $transaksi->filter(function($e)use($i){
-                                    $start=date("H",strtotime($e->jam_pesan_awal));
-                                    $duration=$start+$e->durasi_sewa;
-                                    $strtime="now +5 days";
-                                    if(date("Y-m-d",strtotime($strtime))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
-                                    false;
-                                    return $start<=$i&&$duration>$i; })->first()
-                                        @endphp
-                                        @if ($senin)
-                                        <span
-                                            class="@if($senin->status=='PENDING') text-warning @endif ">{{$senin->user->name}}</span>
-                                        @endif</td>
-                                <td> @php
-                                    $senin= $transaksi->filter(function($e)use($i){
-                                    $start=date("H",strtotime($e->jam_pesan_awal));
-                                    $duration=$start+$e->durasi_sewa;
-                                    $strtime="now +4 days";
-                                    if(date("Y-m-d",strtotime($strtime))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
-                                    false;
-                                    return $start<=$i&&$duration>$i; })->first()
-                                        @endphp
-                                        @if ($senin)
-                                        <span
-                                            class="@if($senin->status=='PENDING') text-warning @endif ">{{$senin->user->name}}</span>
-                                        @endif</td>
-                                </tr>
-                                @endfor
-                        </tbody>
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-
-                </div>
-            </div>
-        </div>
-    </div>
+ 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
 
