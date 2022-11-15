@@ -15,7 +15,7 @@ class DasTransaksiController extends Controller
     }
     public function index()
     {
-        $transaksi = DasTransaksi::with('user')->where("lapangan_id",request("lapangan"))->where("status", "!=", "BATAL")->where("jam_pesan_awal", ">=", date("Y-m-d", strtotime("now")))->where("jam_pesan_akhir", "<=", date("Y-m-d H:i", strtotime("now +7 days")))->get();
+        $transaksi = DasTransaksi::with('user')->where("lapangan_id",request("lapangan")??1)->where("status", "!=", "BATAL")->where("jam_pesan_awal", ">=", date("Y-m-d", strtotime("now")))->where("jam_pesan_akhir", "<=", date("Y-m-d H:i", strtotime("now +7 days")))->get();
         $lapangan=Lapangan::get();
         return view("das.jadwal.index", ["transaksi" => $transaksi,"lapangan"=>$lapangan]);
     }
