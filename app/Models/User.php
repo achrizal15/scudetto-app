@@ -47,6 +47,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(DasTransaksi::class);
     }
+    public function keluhan()
+    {
+        return $this->hasMany(DasKeluhan::class);
+    }
     public function role(){
         return $this->belongsTo(Role::class);
     }

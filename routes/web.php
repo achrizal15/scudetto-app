@@ -7,6 +7,7 @@ use App\Http\Controllers\DasTransaksiController;
 use App\Http\Controllers\DasController;
 // use App\Http\Controllers\DasLandingController;
 use App\Http\Controllers\DasLaporanController;
+use App\Http\Controllers\DasKeluhanController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DasRoleController;
 use App\Http\Controllers\DasUser;
@@ -80,4 +81,12 @@ Route::group(["middleware" => "auth"], function () {
     // MANAGE DATA LAPORAN
     Route::get("/laporan", [DasLaporanController::class, "index"]);
     Route::get("/laporan/cetak", [DasLaporanController::class, "cetakPDF"])->name('cetakLaporanPDF');
+
+    // MANAGE DATA KELUHAN
+    Route::get("/keluhan", [DasKeluhanController::class, "index"]);
+    Route::delete("/keluhan/{keluhan}", [DasKeluhanController::class, "destroy"]);
+    Route::get("/keluhan/add", [DasKeluhanController::class, "add"]);
+    Route::post("/keluhan", [DasKeluhanController::class, "store"]);
+    Route::get("/keluhan/{keluhan}/edit", [DasKeluhanController::class, "edit"]);
+    Route::put("/keluhan/{keluhan}", [DasKeluhanController::class, "update"]);
 });
