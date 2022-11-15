@@ -61,14 +61,22 @@
         @php
         $hasGroup=[];
         $linkActive=request()->segment(1)==""?"/":'/'.request()->segment(1);
-        $groupActive=""
+        $groupActive="";
+        $notif=getNotifKeluhan();
         @endphp
         @foreach (session("role_menus")->menus->sortBy("id") as $item)
         @if ($item->group_key==null)
         <li class="menu-item {{$linkActive==$item->link?'active':''}}">
             <a href="{{$item->link}}" class="menu-link">
                 <i class="menu-icon tf-icons bx {{$item->icon}}"></i>
-                <div data-i18n="{{$item->key}}">{{$item->name}}</div>
+                <div data-i18n="{{$item->key}}" class="d-flex">{{$item->name}}   
+                    @if($item->key=="data_pesan"||$item->key=="data_keluhan")
+                    @if($notif[$item->key])
+                     <div style="width: 8px;height:8px;border-radius:100%;background-color:red"></div>
+                     @endif
+                   @endif
+                  
+                </div>
             </a>
         </li>
         @else

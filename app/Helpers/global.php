@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\DasKeluhan;
 use App\Models\DasTransaksi;
 
 if(!function_exists("getAccessType")){
@@ -28,4 +29,10 @@ if(!function_exists("expiredOrder")){
         }
         return true;
     }
+}
+
+function getNotifKeluhan(){
+    $keluhan=DasKeluhan::where("respon",null)->get()->count();
+    $transaksi=DasTransaksi::where("status","PROSES")->get()->count();
+    return ["data_keluhan"=>$keluhan,"data_pesan"=>$transaksi];
 }
