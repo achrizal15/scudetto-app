@@ -11,12 +11,13 @@ class DasTransaksiController extends Controller
 {
     public function __construct()
     {
-    expiredOrder();    
+        expiredOrder();
     }
     public function index()
     {
-        $transaksi = DasTransaksi::with('user')->where("status","!=","BATAL")->where("jam_pesan_awal",">=",date("Y-m-d",strtotime("now")))->where("jam_pesan_akhir","<=",date("Y-m-d H:i",strtotime("now +7 days")))->get();
-        return view("das.jadwal.index", ["transaksi" => $transaksi]);
+        $transaksi = DasTransaksi::with('user')->where("lapangan_id",request("lapangan"))->where("status", "!=", "BATAL")->where("jam_pesan_awal", ">=", date("Y-m-d", strtotime("now")))->where("jam_pesan_akhir", "<=", date("Y-m-d H:i", strtotime("now +7 days")))->get();
+        $lapangan=Lapangan::get();
+        return view("das.jadwal.index", ["transaksi" => $transaksi,"lapangan"=>$lapangan]);
     }
 
     public function destroy(DasTransaksi $transaksi)
@@ -32,9 +33,9 @@ class DasTransaksiController extends Controller
         $transaksi = DasTransaksi::where("user_id", auth()->user()->id)
             ->where("status", "PENDING")
             ->first();
-          
+
         if ($transaksi) {
-         
+
             return redirect("upload_bukti/$transaksi->id");
         }
         $lapangan = Lapangan::get()->sortBy([
@@ -66,6 +67,9 @@ class DasTransaksiController extends Controller
 
     public function upload_bukti(DasTransaksi $transaksi)
     {
+        if(date("Y-m-d H:i:s",strtotime($transaksi->created_at." +5 minutes"))<date("Y-m-d H:i:s",strtotime("now"))){
+           return redirect("/jadwal");
+        }
         return view("das.transaksi.upload", ["transaksi" => $transaksi]);
     }
 

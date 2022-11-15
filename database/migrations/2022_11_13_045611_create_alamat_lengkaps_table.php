@@ -17,7 +17,7 @@ class CreateAlamatLengkapsTable extends Migration
             $table->id();
             $table->foreignId("user_id");
             $table->text("alamat");
-            $table->bigInteger("no_hp");
+            $table->text("no_hp");
             $table->timestamps();
         });
     }

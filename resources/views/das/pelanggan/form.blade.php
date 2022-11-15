@@ -38,7 +38,7 @@ $action=request()->segment(2);
                 <label for="no_hp" class="col-sm-2 col-form-label">no hp</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control @error('no_hp') is-invalid @enderror" id="no_hp"
-                        name="no_hp" placeholder="jon@mvb.co.id" value="@isset($param){{$param->alamatLengkap->no_hp}}@endisset" />
+                        name="no_hp" placeholder="0812xxxxx" value="@isset($param){{$param->alamatLengkap->no_hp}}@endisset" />
                     <div id="no_hpFeedback" class="invalid-feedback">
                         @error('no_hp') {{$message}} @enderror
                     </div>
@@ -48,7 +48,7 @@ $action=request()->segment(2);
                 <label for="alamat" class="col-sm-2 col-form-label">alamat</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control @error('alamat') is-invalid @enderror" id="alamat"
-                    name="alamat" placeholder="jon@mvb.co.id" value="@isset($param){{$param->alamatLengkap->alamat}}@endisset" />
+                    name="alamat" placeholder="Your address" value="@isset($param){{$param->alamatLengkap->alamat}}@endisset" />
                 <div id="alamatFeedback" class="invalid-feedback">
                     @error('alamat') {{$message}} @enderror
                 </div>

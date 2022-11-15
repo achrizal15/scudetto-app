@@ -10,10 +10,10 @@ class DasLaporanController extends Controller
 {
     public function index()
     {
-        $laporan = DasTransaksi::where('created_at',">=",date("Y-m-d H:i", strtotime(request()->from)))
+        $laporan = DasTransaksi::where("status","SELESAI")->where('created_at',">=",date("Y-m-d H:i", strtotime(request()->from)))
         ->where('created_at',"<=",date("Y-m-d H:i", strtotime(request()->to)))->get();
         // dd($laporan);
-        $total_bayar =  DasTransaksi::where('created_at',">=",date("Y-m-d H:i", strtotime(request()->from)))
+        $total_bayar =  DasTransaksi::where("status","SELESAI")->where('created_at',">=",date("Y-m-d H:i", strtotime(request()->from)))
         ->where('created_at',"<=",date("Y-m-d H:i", strtotime(request()->to)))->sum('total_bayar');
         $from=request("from");
         $to=request("to");
@@ -23,10 +23,10 @@ class DasLaporanController extends Controller
     public function cetakPDF()
     {
 
-        $data["laporan"] = DasTransaksi::where('created_at',">=",date("Y-m-d H:i", strtotime(request()->from)))
+        $data["laporan"] = DasTransaksi::where("status","SELESAI")->where('created_at',">=",date("Y-m-d H:i", strtotime(request()->from)))
         ->where('created_at',"<=",date("Y-m-d H:i", strtotime(request()->to)))->get();
         // dd($laporan);
-        $data["total_bayar"] =  DasTransaksi::where('created_at',">=",date("Y-m-d H:i", strtotime(request()->from)))
+        $data["total_bayar"] =  DasTransaksi::where("status","SELESAI")->where('created_at',">=",date("Y-m-d H:i", strtotime(request()->from)))
         ->where('created_at',"<=",date("Y-m-d H:i", strtotime(request()->to)))->sum('total_bayar');
         // cetak pdf
         $pdf =  Pdf::loadView('das.laporan.cetak', $data);

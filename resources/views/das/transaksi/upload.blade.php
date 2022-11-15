@@ -13,7 +13,9 @@ $action=request()->segment(2);
     {{ csrf_field() }}
             <div class="card-subtitle text-muted mb-3">Jumlah yang harus Dibayar</div>
             <h3>Rp.{{$transaksi->total_bayar}},-</h3>
-            <div class="alert alert-secondary" role="alert">Harap lakukan pembayaran sebelum waktu habis!</div>
+            <div class="alert alert-secondary" role="alert"> 
+           <h5 id="countdown" data-time="{{date("Y-m-d H:i:s",strtotime("now +5 minutes"))}}">  00:05:00 </h5>
+          Harap lakukan pembayaran sebelum waktu habis!</div>
             <div class="row mb-5">
                 <div class="col-md">
                     <div class="card mb-3">
@@ -28,7 +30,7 @@ $action=request()->segment(2);
                                     <p class="card-text">
                                         08797287
                                     </p>
-                                    <p class="card-text"><small class="text-muted">A.N Husnul Alfaini</small></p>
+                                    <p class="card-text"><small class="text-muted">Scudetto Futsal Banyuwangi</small></p>
                                 </div>
                             </div>
                         </div>
@@ -42,7 +44,7 @@ $action=request()->segment(2);
                                     <h5 class="card-title">Bank BNI</h5>
                                     <p class="card-text">00087877
                                     </p>
-                                    <p class="card-text"><small class="text-muted">A.N Husnul Alfaini</small></p>
+                                    <p class="card-text"><small class="text-muted">Scudetto Futsal Banyuwangi</small></p>
                                 </div>
                             </div>
                             <div class="col-md-4">

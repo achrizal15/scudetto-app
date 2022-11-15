@@ -102,7 +102,16 @@ const InitialDateTimePicker = () => {
     })
  })
 }
+const countDownTimer = () => {
+    const countdown = $("#countdown");
+    if ($("#countdown").length <= 0) return false;
+    const time = countdown.data("time");
+    countdown.countdown(time, function (param) {
+        $(this).html(param.strftime("%H jam %M menit %S detik"));
+    });
+};
 $(document).ready(function () {
+    countDownTimer()
     InitialDateTimePicker()
     FormFilters()
     AccessControl()

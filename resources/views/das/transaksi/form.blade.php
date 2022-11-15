@@ -46,9 +46,9 @@ $action=request()->segment(2);
                     <select class="select2 form-control @error('waktu_awal') is-invalid @enderror" id="waktu_awal"
                         style="width: 100%" name="waktu_awal">
                         <option value="" selected>Waktu Awal</option>
-                        @for ($i =0; $i <= 14; $i++)
+                        @for ($i =8; $i <= 23; $i++)
                         <?php
-                        $jam=date("H:i",strtotime(8+$i.".00"));
+                        $jam=date("H:i",strtotime($i.".00"));
                         ?>
                      <option value="{{$jam}}" @isset($param) {{$param->waktu_awal}}
                             @endisset>{{$jam}}</option>
@@ -64,10 +64,10 @@ $action=request()->segment(2);
                 <div class="col-sm-10">
                     <select class="select2 form-control @error('waktu_akhir') is-invalid @enderror" id="waktu_akhir"
                         style="width: 100%" name="waktu_akhir">
-                        <option value="" selected>waktu Akhir</option>
-                        @for ($i =0; $i <= 14; $i++)
+                        <option value="" selected>Waktu Akhir</option>
+                        @for ($i =9; $i <= 24; $i++)
                         <?php
-                        $jam=date("H:i",strtotime(8+$i.".00"));
+                        $jam=date("H:i",strtotime($i.".00"));
                         ?>
                      <option value="{{$jam}}" @isset($param) {{$param->waktu_akhir}}
                             @endisset>{{$jam}}</option>

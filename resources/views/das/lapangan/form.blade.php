@@ -64,7 +64,7 @@ $action=request()->segment(2);
                 <label for="harga" class="col-sm-2 col-form-label">harga <small>(Rupiah)</small></label>
                 <div class="col-sm-10">
                     <input type="number" class="form-control @error('harga') is-invalid @enderror" id="harga"
-                        name="harga" placeholder="Rp 100.000,-"
+                        name="harga" min="0" placeholder="Rp 100.000,-"
                         value="@isset($param){{intval($param->harga)}}@endisset" />
                     <div id="hargaFeedback" class="invalid-feedback">
                         @error('harga') {{$message}} @enderror

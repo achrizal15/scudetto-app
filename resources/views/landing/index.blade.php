@@ -248,22 +248,22 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <table class="table">
+                    <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>Jam</th>
-                                <th>{{date("Y/m/d",strtotime("now"))}}</th>
-                                <th>{{date("Y/m/d",strtotime("now +1 days"))}}</th>
-                                <th>{{date("Y/m/d",strtotime("now +2 days"))}}</th>
-                                <th>{{date("Y/m/d",strtotime("now +3 days"))}}</th>
-                                <th>{{date("Y/m/d",strtotime("now +4 days"))}}</th>
-                                <th>{{date("Y/m/d",strtotime("now +5 days"))}}</th>
-                                <th>{{date("Y/m/d",strtotime("now +6 days"))}}</th>
+                                <th>{{date("d/m/Y",strtotime("now"))}}</th>
+                                <th>{{date("d/m/Y",strtotime("now +1 days"))}}</th>
+                                <th>{{date("d/m/Y",strtotime("now +2 days"))}}</th>
+                                <th>{{date("d/m/Y",strtotime("now +3 days"))}}</th>
+                                <th>{{date("d/m/Y",strtotime("now +4 days"))}}</th>
+                                <th>{{date("d/m/Y",strtotime("now +5 days"))}}</th>
+                                <th>{{date("d/m/Y",strtotime("now +6 days"))}}</th>
                             </tr>
                         </thead>
                         <tbody>
             
-                            @for ($i = 8 ; $i <= 22; $i++) <tr>
+                            @for ($i = 8 ; $i <= 24; $i++) <tr>
                                 <td>{{"$i:00"}} </td>
                                 <td>@php
                                     $senin= $transaksi->filter(function($e)use($i){
@@ -272,10 +272,11 @@
             
                                     if(date("Y-m-d",strtotime("now"))!=date("Y-m-d",strtotime($e->jam_pesan_awal)))
                                     return false;
-                                    return $start<=$i&&$duration>=$i; })->first()
+                                    return $start<=$i&&$duration>$i; })->first()
                                         @endphp
                                         @if ($senin)
-                                        {{$senin->user->name}}
+                                        <span
+                                            class="@if($senin->status=='PENDING') text-warning @endif ">{{$senin->user->name}}</span>
                                         @endif
                                 </td>
                                 <td>
@@ -284,12 +285,14 @@
                                     $start=date("H",strtotime($e->jam_pesan_awal));
                                     $duration=$start+$e->durasi_sewa;
             
-                                    if(date("Y-m-d",strtotime("now +1 days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
+                                    if(date("Y-m-d",strtotime("now +1
+                                    days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
                                     false;
-                                    return $start<=$i&&$duration>=$i; })->first()
+                                    return $start<=$i&&$duration>$i; })->first()
                                         @endphp
                                         @if ($senin)
-                                        {{$senin->user->name}}
+                                        <span
+                                            class="@if($senin->status=='PENDING') text-warning @endif ">{{$senin->user->name}}</span>
                                         @endif
                                 </td>
                                 <td>
@@ -298,12 +301,14 @@
                                     $start=date("H",strtotime($e->jam_pesan_awal));
                                     $duration=$start+$e->durasi_sewa;
             
-                                    if(date("Y-m-d",strtotime("now +2 days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
+                                    if(date("Y-m-d",strtotime("now +2
+                                    days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
                                     false;
-                                    return $start<=$i&&$duration>=$i; })->first()
+                                    return $start<=$i&&$duration>$i; })->first()
                                         @endphp
                                         @if ($senin)
-                                        {{$senin->user->name}}
+                                        <span
+                                            class="@if($senin->status=='PENDING') text-warning @endif ">{{$senin->user->name}}</span>
                                         @endif
                                 </td>
                                 <td>
@@ -312,12 +317,14 @@
                                     $start=date("H",strtotime($e->jam_pesan_awal));
                                     $duration=$start+$e->durasi_sewa;
             
-                                    if(date("Y-m-d",strtotime("now +3 days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
+                                    if(date("Y-m-d",strtotime("now +3
+                                    days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
                                     false;
-                                    return $start<=$i&&$duration>=$i; })->first()
+                                    return $start<=$i&&$duration>$i; })->first()
                                         @endphp
                                         @if ($senin)
-                                        {{$senin->user->name}}
+                                        <span
+                                            class="@if($senin->status=='PENDING') text-warning @endif ">{{$senin->user->name}}</span>
                                         @endif
                                 </td>
                                 <td>
@@ -326,12 +333,14 @@
                                     $start=date("H",strtotime($e->jam_pesan_awal));
                                     $duration=$start+$e->durasi_sewa;
             
-                                    if(date("Y-m-d",strtotime("now +4 days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
+                                    if(date("Y-m-d",strtotime("now +4
+                                    days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
                                     false;
-                                    return $start<=$i&&$duration>=$i; })->first()
+                                    return $start<=$i&&$duration>$i; })->first()
                                         @endphp
                                         @if ($senin)
-                                        {{$senin->user->name}}
+                                        <span
+                                            class="@if($senin->status=='PENDING') text-warning @endif ">{{$senin->user->name}}</span>
                                         @endif
                                 </td>
                                 <td> @php
@@ -339,29 +348,31 @@
                                     $start=date("H",strtotime($e->jam_pesan_awal));
                                     $duration=$start+$e->durasi_sewa;
             
-                                    if(date("Y-m-d",strtotime("now +5 days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
+                                    if(date("Y-m-d",strtotime("now +5
+                                    days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
                                     false;
-                                    return $start<=$i&&$duration>=$i; })->first()
+                                    return $start<=$i&&$duration>$i; })->first()
                                         @endphp
                                         @if ($senin)
-                                        {{$senin->user->name}}
+                                        <span
+                                            class="@if($senin->status=='PENDING') text-warning @endif ">{{$senin->user->name}}</span>
                                         @endif</td>
                                 <td> @php
                                     $senin= $transaksi->filter(function($e)use($i){
                                     $start=date("H",strtotime($e->jam_pesan_awal));
                                     $duration=$start+$e->durasi_sewa;
             
-                                    if(date("Y-m-d",strtotime("now +6 days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
+                                    if(date("Y-m-d",strtotime("now +6
+                                    days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
                                     false;
-                                    return $start<=$i&&$duration>=$i; })->first()
+                                    return $start<=$i&&$duration>$i; })->first()
                                         @endphp
                                         @if ($senin)
-                                        {{$senin->user->name}}
+                                        <span
+                                            class="@if($senin->status=='PENDING') text-warning @endif ">{{$senin->user->name}}</span>
                                         @endif</td>
                                 </tr>
                                 @endfor
-            
-            
                         </tbody>
                     </table>
                 </div>
