@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(LapanganSeeder::class);
         foreach (Menu::all() as $key => $value) {
             RoleMenu::create(["menu_id"=>$value->id,"role_id"=>1,"type"=>"RW"]);
+            RoleMenu::create(["menu_id"=>$value->id,"role_id"=>2,"type"=>"RW"]);
         }
 
     }
