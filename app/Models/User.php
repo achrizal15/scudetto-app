@@ -51,6 +51,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(DasKeluhan::class);
     }
+    public function massage()
+    {
+        return $this->hasMany(DasMassage::class);
+    }
     public function role(){
         return $this->belongsTo(Role::class);
     }

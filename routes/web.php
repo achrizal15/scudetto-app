@@ -8,6 +8,7 @@ use App\Http\Controllers\DasController;
 // use App\Http\Controllers\DasLandingController;
 use App\Http\Controllers\DasLaporanController;
 use App\Http\Controllers\DasKeluhanController;
+use App\Http\Controllers\DasMassageController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DasRoleController;
 use App\Http\Controllers\DasUser;
@@ -89,4 +90,12 @@ Route::group(["middleware" => "auth"], function () {
     Route::post("/keluhan", [DasKeluhanController::class, "store"]);
     Route::get("/keluhan/{keluhan}/edit", [DasKeluhanController::class, "edit"]);
     Route::put("/keluhan/{keluhan}", [DasKeluhanController::class, "update"]);
+
+    // MANAGE DATA MASSAGE
+    Route::get("/massage", [DasMassageController::class, "index"]);
+    Route::delete("/massage/{massage}", [DasMassageController::class, "destroy"]);
+    Route::get("/massage/add", [DasMassageController::class, "add"]);
+    Route::post("/massage", [DasMassageController::class, "store"]);
+    Route::get("/massage/{massage}/edit", [DasMassageController::class, "edit"]);
+    Route::put("/massage/{massage}", [DasMassageController::class, "update"]);
 });

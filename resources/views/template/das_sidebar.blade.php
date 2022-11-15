@@ -46,7 +46,7 @@
                     </g>
                 </svg>
             </span>
-            <span class="app-brand-text demo menu-text fw-bolder ms-2">mvb</span>
+            <span class="app-brand-text demo menu-text fw-bolder ms-2">Scudetto</span>
         </a>
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -73,7 +73,7 @@
         </li>
         @else
         @if (!in_array($item->group_key,$hasGroup))
-            
+
         @foreach (session("role_menus")->menus as $sub)
             @if ($sub->group_key!=$item->group_key)@continue @endif
             @if($sub->link==$linkActive)
