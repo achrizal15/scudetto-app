@@ -16,7 +16,7 @@ class DasLandingController extends Controller
     public function index()
     {
         $lapangan = Lapangan::all();
-        $transaksi = DasTransaksi::with('user')->where("jam_pesan_awal",">=",date("Y-m-d",strtotime("now")))->where("jam_pesan_akhir","<=",date("Y-m-d H:i",strtotime("now +7 days")))->get();
+        $transaksi = DasTransaksi::with('user')->where("status","!=","BATAL")->where("jam_pesan_awal",">=",date("Y-m-d",strtotime("now")))->where("jam_pesan_akhir","<=",date("Y-m-d H:i",strtotime("now +7 days")))->get();
    
         return view("landing.index", ["lapangan" => $lapangan,"transaksi" => $transaksi]);
     }

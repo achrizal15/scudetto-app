@@ -53,7 +53,9 @@
                     <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
                     <li><a class="nav-link scrollto" href="#Information">Information</a></li>
                     <li><a class="nav-link scrollto" href="#pricing">Pricing</a></li>
+                    @if(!auth()->user())
                     <li><a class="getstarted scrollto" href="{{asset('login')}}">Login</a></li>
+                    @endif
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
@@ -71,7 +73,11 @@
                     <h2>Anda ingin memesan lapangan?</h2>
                     <h1>Bergabung Bersama Kami dan Dapatkan layanan Maksimal</h1>
                     <div class="d-flex justify-content-center justify-content-lg-start">
+                        @if(!auth()->user())
                         <a href="{{route('register')}}" class="btn-get-started scrollto">Register</a>
+                        @else
+                        <a href="/home" class="btn-get-started scrollto">Dashboard</a>
+                        @endif
                     </div>
                 </div>
                 <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
@@ -186,7 +192,7 @@
                             </ul>
                             <h4><sup>Rp.</sup>{{intval($item->harga)}},-<span>per Jam</span></h4>
                             <button type="button" class="buy-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                Launch demo modal
+                                Jadwal
                             </button>
                         </div>
                     </div>
@@ -246,24 +252,24 @@
                         <thead>
                             <tr>
                                 <th>Jam</th>
-                                <th>Senin</th>
-                                <th>Selasa</th>
-                                <th>Rabu</th>
-                                <th>Kamis</th>
-                                <th>Jumat</th>
-                                <th>Sabtu </th>
-                                <th>Minggu </th>
+                                <th>{{date("Y/m/d",strtotime("now"))}}</th>
+                                <th>{{date("Y/m/d",strtotime("now +1 days"))}}</th>
+                                <th>{{date("Y/m/d",strtotime("now +2 days"))}}</th>
+                                <th>{{date("Y/m/d",strtotime("now +3 days"))}}</th>
+                                <th>{{date("Y/m/d",strtotime("now +4 days"))}}</th>
+                                <th>{{date("Y/m/d",strtotime("now +5 days"))}}</th>
+                                <th>{{date("Y/m/d",strtotime("now +6 days"))}}</th>
                             </tr>
                         </thead>
                         <tbody>
-
+            
                             @for ($i = 8 ; $i <= 22; $i++) <tr>
                                 <td>{{"$i:00"}} </td>
                                 <td>@php
                                     $senin= $transaksi->filter(function($e)use($i){
                                     $start=date("H",strtotime($e->jam_pesan_awal));
                                     $duration=$start+$e->durasi_sewa;
-
+            
                                     if(date("Y-m-d",strtotime("now"))!=date("Y-m-d",strtotime($e->jam_pesan_awal)))
                                     return false;
                                     return $start<=$i&&$duration>=$i; })->first()
@@ -277,9 +283,9 @@
                                     $senin= $transaksi->filter(function($e)use($i){
                                     $start=date("H",strtotime($e->jam_pesan_awal));
                                     $duration=$start+$e->durasi_sewa;
-
-                                    if(date("Y-m-d",strtotime("now +1
-                                    days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return false;
+            
+                                    if(date("Y-m-d",strtotime("now +1 days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
+                                    false;
                                     return $start<=$i&&$duration>=$i; })->first()
                                         @endphp
                                         @if ($senin)
@@ -291,9 +297,9 @@
                                     $senin= $transaksi->filter(function($e)use($i){
                                     $start=date("H",strtotime($e->jam_pesan_awal));
                                     $duration=$start+$e->durasi_sewa;
-
-                                    if(date("Y-m-d",strtotime("now +2
-                                    days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return false;
+            
+                                    if(date("Y-m-d",strtotime("now +2 days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
+                                    false;
                                     return $start<=$i&&$duration>=$i; })->first()
                                         @endphp
                                         @if ($senin)
@@ -305,9 +311,9 @@
                                     $senin= $transaksi->filter(function($e)use($i){
                                     $start=date("H",strtotime($e->jam_pesan_awal));
                                     $duration=$start+$e->durasi_sewa;
-
-                                    if(date("Y-m-d",strtotime("now +3
-                                    days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return false;
+            
+                                    if(date("Y-m-d",strtotime("now +3 days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
+                                    false;
                                     return $start<=$i&&$duration>=$i; })->first()
                                         @endphp
                                         @if ($senin)
@@ -319,9 +325,9 @@
                                     $senin= $transaksi->filter(function($e)use($i){
                                     $start=date("H",strtotime($e->jam_pesan_awal));
                                     $duration=$start+$e->durasi_sewa;
-
-                                    if(date("Y-m-d",strtotime("now +4
-                                    days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return false;
+            
+                                    if(date("Y-m-d",strtotime("now +4 days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
+                                    false;
                                     return $start<=$i&&$duration>=$i; })->first()
                                         @endphp
                                         @if ($senin)
@@ -332,9 +338,9 @@
                                     $senin= $transaksi->filter(function($e)use($i){
                                     $start=date("H",strtotime($e->jam_pesan_awal));
                                     $duration=$start+$e->durasi_sewa;
-
-                                    if(date("Y-m-d",strtotime("now +5
-                                    days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return false;
+            
+                                    if(date("Y-m-d",strtotime("now +5 days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
+                                    false;
                                     return $start<=$i&&$duration>=$i; })->first()
                                         @endphp
                                         @if ($senin)
@@ -344,9 +350,9 @@
                                     $senin= $transaksi->filter(function($e)use($i){
                                     $start=date("H",strtotime($e->jam_pesan_awal));
                                     $duration=$start+$e->durasi_sewa;
-
-                                    if(date("Y-m-d",strtotime("now +6
-                                    days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return false;
+            
+                                    if(date("Y-m-d",strtotime("now +6 days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
+                                    false;
                                     return $start<=$i&&$duration>=$i; })->first()
                                         @endphp
                                         @if ($senin)
@@ -354,8 +360,8 @@
                                         @endif</td>
                                 </tr>
                                 @endfor
-
-
+            
+            
                         </tbody>
                     </table>
                 </div>

@@ -9,9 +9,13 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class DasTransaksiController extends Controller
 {
+    public function __construct()
+    {
+    expiredOrder();    
+    }
     public function index()
     {
-        $transaksi = DasTransaksi::with('user')->where("jam_pesan_awal",">=",date("Y-m-d",strtotime("now")))->where("jam_pesan_akhir","<=",date("Y-m-d H:i",strtotime("now +7 days")))->get();
+        $transaksi = DasTransaksi::with('user')->where("status","!=","BATAL")->where("jam_pesan_awal",">=",date("Y-m-d",strtotime("now")))->where("jam_pesan_akhir","<=",date("Y-m-d H:i",strtotime("now +7 days")))->get();
         return view("das.jadwal.index", ["transaksi" => $transaksi]);
     }
 
@@ -28,7 +32,9 @@ class DasTransaksiController extends Controller
         $transaksi = DasTransaksi::where("user_id", auth()->user()->id)
             ->where("status", "PENDING")
             ->first();
+          
         if ($transaksi) {
+         
             return redirect("upload_bukti/$transaksi->id");
         }
         $lapangan = Lapangan::get()->sortBy([

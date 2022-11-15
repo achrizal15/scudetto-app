@@ -8,7 +8,8 @@
                     <div class="card-body">
                         <h5 class="card-title text-primary">Hallo {{auth()->user()->name}}! 🎉</h5>
                         <p class="mb-4">
-                           Selamat Datang di Dashboard Penyewaan Lapangan Futsal <span class="fw-bold">Scudetto Banyuwangi</span>
+                           Selamat Datang di Dashboard Penyewaan Lapangan Futsal <span class="fw-bold">Scudetto Banyuwangi.</span>
+                           <a href="/">Pergi ke halaman depan</a>
                         </p>
                     </div>
                 </div>
