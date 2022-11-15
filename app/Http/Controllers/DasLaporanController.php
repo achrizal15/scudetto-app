@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DasTransaksi;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class DasLaporanController extends Controller
 {
@@ -14,16 +15,18 @@ class DasLaporanController extends Controller
         // dd($laporan);
         $total_bayar =  DasTransaksi::where('created_at',">=",date("Y-m-d H:i", strtotime(request()->from)))
         ->where('created_at',"<=",date("Y-m-d H:i", strtotime(request()->to)))->sum('total_bayar');
-        return view("das.laporan.index", ["laporan" => $laporan, "total_bayar"=>$total_bayar]);
+        $from=request("from");
+        $to=request("to");
+        return view("das.laporan.index", ["laporan" => $laporan, "total_bayar"=>$total_bayar,"from"=>$from,"to"=>$to]);
     }
 
     public function cetakPDF()
     {
 
-        $data[laporan] = DasTransaksi::where('created_at',">=",date("Y-m-d H:i", strtotime(request()->from)))
+        $data["laporan"] = DasTransaksi::where('created_at',">=",date("Y-m-d H:i", strtotime(request()->from)))
         ->where('created_at',"<=",date("Y-m-d H:i", strtotime(request()->to)))->get();
         // dd($laporan);
-        $data[total_bayar] =  DasTransaksi::where('created_at',">=",date("Y-m-d H:i", strtotime(request()->from)))
+        $data["total_bayar"] =  DasTransaksi::where('created_at',">=",date("Y-m-d H:i", strtotime(request()->from)))
         ->where('created_at',"<=",date("Y-m-d H:i", strtotime(request()->to)))->sum('total_bayar');
         // cetak pdf
         $pdf =  Pdf::loadView('das.laporan.cetak', $data);

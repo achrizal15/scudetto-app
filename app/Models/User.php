@@ -58,4 +58,7 @@ class User extends Authenticatable
     public function role(){
         return $this->belongsTo(Role::class);
     }
+    public function alamatLengkap(){
+        return $this->hasOne(AlamatLengkap::class,"user_id","id");
+    }
 }

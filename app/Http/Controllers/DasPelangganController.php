@@ -2,49 +2,68 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AlamatLengkap;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class DasPelangganController extends Controller
 {
     public function index()
     {
-        $pengguna = User::all();
-        return view("das.produk.index", ["pengguna" => $pengguna]);
+        $pelanggan = User::latest()->where("role_id", 2)->with("alamatLengkap")->paginate()->withQueryString();
+
+        return view("das.pelanggan.index", ["pelanggan" => $pelanggan]);
     }
-    public function destroy(User $pengguna)
+    public function destroy(User $pelanggan)
     {
-        $pengguna->delete();
-        return redirect("/pengguna")->with("message", "Data has been deleted.");
+        $pelanggan->delete();
+        return redirect("/pelanggan")->with("message", "Data has been deleted.");
     }
     public function add()
     {
-        return view("das.produk.form");
-
+        return view("das.pelanggan.form");
     }
     public function store(Request $request)
     {
         $validate = $request->validate([
-            "nama" => "required",
+            "name" => "required",
+            "email" => "required|unique:users,email",
+            "password" => "required",
+            "role_id"=>"required",
         ]);
-        $validate["status"]=$request->status=="on"?"ACTIVE":"INACTIVE";
-        User::create($validate);
-        return redirect("pengguna")->with("message", "Data has been added.");
+        $validate["password"]=Hash::make($request->password);
+        $user = User::create($validate);
+        AlamatLengkap::create([
+            "user_id" => $user->id,
+            "alamat" => $request->alamat,
+            "no_hp" => $request->no_hp,
+        ]);
+        return redirect("pelanggan")->with("message", "Data has been added.");
     }
-    public function edit(User $pengguna)
+    public function edit(User $pelanggan)
     {
-        return view("das.produk.form",["param"=>$pengguna]);
+        return view("das.pelanggan.form", ["param" => $pelanggan->load("alamatLengkap")]);
     }
-    public function update(Request $request, User $pengguna)
+    public function update(Request $request, User $pelanggan)
     {
-        
-
         $rules = [
-            "nama" => "required",
+            "name" => "required",
+            "email" => "required",
+            "role_id"=>"required",
         ];
-        $validate=$request->validate($rules);
-        $validate["status"]=$request->status=="on"?"ACTIVE":"INACTIVE";
-        $pengguna->update($validate);
-        return redirect("pengguna")->with("message", "Data has been updated.");
+        if($request->email!=$pelanggan->email){
+            $rules["email"].="|unique:users,email";
+        }
+        $validate = $request->validate($rules);
+        if($request->password!=""){
+            $validate["password"]=Hash::make($request->password);
+        }
+        $pelanggan->update($validate);
+        $pelanggan->alamatLengkap()->update([
+            "alamat"=>$request->alamat,
+            "no_hp"=>$request->no_hp
+        ]);
+        return redirect("pelanggan")->with("message", "Data has been updated.");
     }
 }

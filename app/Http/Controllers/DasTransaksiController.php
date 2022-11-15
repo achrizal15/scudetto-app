@@ -11,8 +11,8 @@ class DasTransaksiController extends Controller
 {
     public function index()
     {
-        $jadwal = DasTransaksi::all();
-        return view("das.jadwal.index", ["jadwal" => $jadwal]);
+        $transaksi = DasTransaksi::with('user')->where("jam_pesan_awal",">=",date("Y-m-d",strtotime("now")))->where("jam_pesan_akhir","<=",date("Y-m-d H:i",strtotime("now +7 days")))->get();
+        return view("das.jadwal.index", ["transaksi" => $transaksi]);
     }
 
     public function destroy(DasTransaksi $transaksi)
@@ -46,11 +46,11 @@ class DasTransaksiController extends Controller
             "waktu_awal" => "required",
             "waktu_akhir" => "required",
         ]);
-        $waktu_awal=explode(":",$request->waktu_awal);
-        $waktu_akhir=explode(":",$request->waktu_akhir);
-        $validate["durasi_sewa"] = $waktu_akhir[0]-$waktu_awal[0];
-        $validate["jam_pesan_awal"] = date("Y-m-d H", strtotime($request->tanggal."".$request->waktu_awal));
-        $validate["jam_pesan_akhir"] = date("Y-m-d H", strtotime($request->tanggal."".$request->waktu_akhir));
+        $waktu_awal = explode(":", $request->waktu_awal);
+        $waktu_akhir = explode(":", $request->waktu_akhir);
+        $validate["durasi_sewa"] = $waktu_akhir[0] - $waktu_awal[0];
+        $validate["jam_pesan_awal"] = date("Y-m-d H", strtotime($request->tanggal . "" . $request->waktu_awal));
+        $validate["jam_pesan_akhir"] = date("Y-m-d H", strtotime($request->tanggal . "" . $request->waktu_akhir));
         $validate["user_id"] = auth()->user()->id;
         $validate["total_bayar"] = $validate["durasi_sewa"] * 100000;
         $transaksi = DasTransaksi::create($validate);
@@ -72,7 +72,7 @@ class DasTransaksiController extends Controller
     {
 
         $image                   = $request->file('bukti_bayar')->getClientOriginalName();
-                                  $request->file('bukti_bayar')->move('storage', $image);
+        $request->file('bukti_bayar')->move('storage', $image);
         $transaksi->bukti_bayar  = $image;
         $transaksi->status       = "PROSES";
         $transaksi->save();
@@ -83,7 +83,7 @@ class DasTransaksiController extends Controller
 
     public function riwayat()
     {
-        $riwayat = DasTransaksi::where("user_id",auth()->user()->id)->latest()->paginate(10)->withQueryString();
+        $riwayat = DasTransaksi::where("user_id", auth()->user()->id)->latest()->paginate(10)->withQueryString();
         return view("das.riwayat.index", ["riwayat" => $riwayat]);
     }
 
@@ -101,7 +101,7 @@ class DasTransaksiController extends Controller
 
     public function data_pesan()
     {
-        $data_pesan = DasTransaksi::where("status",'PROSES')->get();
+        $data_pesan = DasTransaksi::where("status", 'PROSES')->get();
         return view("das.pesanan.index", ["data_pesan" => $data_pesan]);
     }
 

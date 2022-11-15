@@ -28,60 +28,61 @@ $action=request()->segment(2);
                 <label for="jenis" class="col-sm-2 col-form-label">jenis</label>
                 <div class="col-sm-10">
                     <select class="select2 form-control @error('jenis') is-invalid @enderror" id="jenis"
-                    style="width: 100%" name="jenis">
-                    <option value="" selected>Select one</option>
-                    <option value="Rumput" @isset($param) {{$param->jenis}}
-                        @endisset>Rumput</option>
-                        <option value="Matras" @isset($param) {{$param->jenis}}
+                        style="width: 100%" name="jenis">
+                        <option value="" selected>Select one</option>
+                        <option value="Rumput" @isset($param) {{$param->jenis =="Rumput"?'selected':''}}
+                            @endisset>Rumput</option>
+                        <option value="Matras" @isset($param) {{$param->jenis =="Matras"?"selected":""}}
                             @endisset>Matras</option>
-                        </select>
-                        <div id="jenisFeedback" class="invalid-feedback">
-                            @error('jenis') {{$message}} @enderror
-                        </div>
+                    </select>
+                    <div id="jenisFeedback" class="invalid-feedback">
+                        @error('jenis') {{$message}} @enderror
                     </div>
                 </div>
-                <div class="row mb-3">
-                    <label for="ukuran" class="col-sm-2 col-form-label">ukuran</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control @error('ukuran') is-invalid @enderror" id="ukuran" name="ukuran"
-                        placeholder="4 x 10 meter" value="@isset($param){{$param->ukuran}}@endisset" />
-                        <div id="ukuranFeedback" class="invalid-feedback">
-                            @error('ukuran') {{$message}} @enderror
-                        </div>
+            </div>
+            <div class="row mb-3">
+                <label for="ukuran" class="col-sm-2 col-form-label">ukuran</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control @error('ukuran') is-invalid @enderror" id="ukuran"
+                        name="ukuran" placeholder="4 x 10 meter" value="@isset($param){{$param->ukuran}}@endisset" />
+                    <div id="ukuranFeedback" class="invalid-feedback">
+                        @error('ukuran') {{$message}} @enderror
                     </div>
                 </div>
-                <div class="row mb-3">
-                    <label for="warna" class="col-sm-2 col-form-label">warna</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control @error('warna') is-invalid @enderror" id="warna" name="warna"
+            </div>
+            <div class="row mb-3">
+                <label for="warna" class="col-sm-2 col-form-label">warna</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control @error('warna') is-invalid @enderror" id="warna" name="warna"
                         placeholder="Hijau" value="@isset($param){{$param->warna}}@endisset" />
-                        <div id="warnaFeedback" class="invalid-feedback">
-                            @error('warna') {{$message}} @enderror
-                        </div>
+                    <div id="warnaFeedback" class="invalid-feedback">
+                        @error('warna') {{$message}} @enderror
                     </div>
                 </div>
-                <div class="row mb-3">
-                    <label for="harga" class="col-sm-2 col-form-label">harga <small>(Rupiah)</small></label>
-                    <div class="col-sm-10">
-                        <input type="number" class="form-control @error('harga') is-invalid @enderror" id="harga" name="harga"
-                            placeholder="Rp 100.000,-" value="@isset($param){{intval($param->harga)}}@endisset" />
-                        <div id="hargaFeedback" class="invalid-feedback">
-                            @error('harga') {{$message}} @enderror
-                        </div>
+            </div>
+            <div class="row mb-3">
+                <label for="harga" class="col-sm-2 col-form-label">harga <small>(Rupiah)</small></label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control @error('harga') is-invalid @enderror" id="harga"
+                        name="harga" placeholder="Rp 100.000,-"
+                        value="@isset($param){{intval($param->harga)}}@endisset" />
+                    <div id="hargaFeedback" class="invalid-feedback">
+                        @error('harga') {{$message}} @enderror
                     </div>
                 </div>
-
-
-                <div class="row justify-content-end">
-                    <div class="col-sm-10">
-                        <button type="submit" class="btn btn-primary">Send</button>
-                    </div>
-                </div>
-            </form>
             </div>
 
 
-
+            <div class="row justify-content-end">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </div>
+            </div>
+        </form>
     </div>
+
+
+
+</div>
 </div>
 @endsection

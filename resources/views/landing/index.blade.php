@@ -71,7 +71,7 @@
                     <h2>Anda ingin memesan lapangan?</h2>
                     <h1>Bergabung Bersama Kami dan Dapatkan layanan Maksimal</h1>
                     <div class="d-flex justify-content-center justify-content-lg-start">
-                        <a href="#about" class="btn-get-started scrollto">Register</a>
+                        <a href="{{route('register')}}" class="btn-get-started scrollto">Register</a>
                     </div>
                 </div>
                 <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
@@ -159,7 +159,7 @@
                     </div>
 
                     <div class="col-lg-5 align-items-stretch order-1 order-lg-2 img"
-                        style='background-image: url("{{asset('arsha/assets')}}//img/why-us.png");' data-aos="zoom-in"
+                        style='background-image: url("{{asset(' arsha/assets')}}//img/why-us.png");' data-aos="zoom-in"
                         data-aos-delay="150">&nbsp;</div>
                 </div>
 
@@ -185,7 +185,9 @@
                                 <li><i class="bx bx-check"></i> Jenis : {{$item->jenis}}</li>
                             </ul>
                             <h4><sup>Rp.</sup>{{intval($item->harga)}},-<span>per Jam</span></h4>
-                            <a href="#" class="buy-btn">Jadwal</a>
+                            <button type="button" class="buy-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Launch demo modal
+                            </button>
                         </div>
                     </div>
                     @endforeach
@@ -227,7 +229,143 @@
             </div>
         </div>
     </footer><!-- End Footer -->
+    <!-- Button trigger modal -->
 
+
+    <!-- Modal -->
+    <div class="modal fade modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Jadwal</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Jam</th>
+                                <th>Senin</th>
+                                <th>Selasa</th>
+                                <th>Rabu</th>
+                                <th>Kamis</th>
+                                <th>Jumat</th>
+                                <th>Sabtu </th>
+                                <th>Minggu </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @for ($i = 8 ; $i <= 22; $i++) <tr>
+                                <td>{{"$i:00"}} </td>
+                                <td>@php
+                                    $senin= $transaksi->filter(function($e)use($i){
+                                    $start=date("H",strtotime($e->jam_pesan_awal));
+                                    $duration=$start+$e->durasi_sewa;
+
+                                    if(date("Y-m-d",strtotime("now"))!=date("Y-m-d",strtotime($e->jam_pesan_awal)))
+                                    return false;
+                                    return $start<=$i&&$duration>=$i; })->first()
+                                        @endphp
+                                        @if ($senin)
+                                        {{$senin->user->name}}
+                                        @endif
+                                </td>
+                                <td>
+                                    @php
+                                    $senin= $transaksi->filter(function($e)use($i){
+                                    $start=date("H",strtotime($e->jam_pesan_awal));
+                                    $duration=$start+$e->durasi_sewa;
+
+                                    if(date("Y-m-d",strtotime("now +1
+                                    days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return false;
+                                    return $start<=$i&&$duration>=$i; })->first()
+                                        @endphp
+                                        @if ($senin)
+                                        {{$senin->user->name}}
+                                        @endif
+                                </td>
+                                <td>
+                                    @php
+                                    $senin= $transaksi->filter(function($e)use($i){
+                                    $start=date("H",strtotime($e->jam_pesan_awal));
+                                    $duration=$start+$e->durasi_sewa;
+
+                                    if(date("Y-m-d",strtotime("now +2
+                                    days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return false;
+                                    return $start<=$i&&$duration>=$i; })->first()
+                                        @endphp
+                                        @if ($senin)
+                                        {{$senin->user->name}}
+                                        @endif
+                                </td>
+                                <td>
+                                    @php
+                                    $senin= $transaksi->filter(function($e)use($i){
+                                    $start=date("H",strtotime($e->jam_pesan_awal));
+                                    $duration=$start+$e->durasi_sewa;
+
+                                    if(date("Y-m-d",strtotime("now +3
+                                    days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return false;
+                                    return $start<=$i&&$duration>=$i; })->first()
+                                        @endphp
+                                        @if ($senin)
+                                        {{$senin->user->name}}
+                                        @endif
+                                </td>
+                                <td>
+                                    @php
+                                    $senin= $transaksi->filter(function($e)use($i){
+                                    $start=date("H",strtotime($e->jam_pesan_awal));
+                                    $duration=$start+$e->durasi_sewa;
+
+                                    if(date("Y-m-d",strtotime("now +4
+                                    days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return false;
+                                    return $start<=$i&&$duration>=$i; })->first()
+                                        @endphp
+                                        @if ($senin)
+                                        {{$senin->user->name}}
+                                        @endif
+                                </td>
+                                <td> @php
+                                    $senin= $transaksi->filter(function($e)use($i){
+                                    $start=date("H",strtotime($e->jam_pesan_awal));
+                                    $duration=$start+$e->durasi_sewa;
+
+                                    if(date("Y-m-d",strtotime("now +5
+                                    days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return false;
+                                    return $start<=$i&&$duration>=$i; })->first()
+                                        @endphp
+                                        @if ($senin)
+                                        {{$senin->user->name}}
+                                        @endif</td>
+                                <td> @php
+                                    $senin= $transaksi->filter(function($e)use($i){
+                                    $start=date("H",strtotime($e->jam_pesan_awal));
+                                    $duration=$start+$e->durasi_sewa;
+
+                                    if(date("Y-m-d",strtotime("now +6
+                                    days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return false;
+                                    return $start<=$i&&$duration>=$i; })->first()
+                                        @endphp
+                                        @if ($senin)
+                                        {{$senin->user->name}}
+                                        @endif</td>
+                                </tr>
+                                @endfor
+
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
 
