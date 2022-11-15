@@ -15,14 +15,15 @@ $page=request()->segment(1);
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>@endif
         <form action="" class="d-flex gap-2">
-               <div class="col-3">
+            <div class="col-3">
                 <select class="form-control" name="lapangan" id="">
                     @foreach ($lapangan as $item)
-                    <option value="{{$item->id}}" @if(request()->lapangan==$item->id) selected @endif>{{$item->name}}</option>
+                    <option value="{{$item->id}}" @if(request()->lapangan==$item->id) selected @endif>{{$item->name}}
+                    </option>
                     @endforeach
                 </select>
-               </div>
-                <button type="submit" class="btn btn-primary">Filter</button>
+            </div>
+            <button type="submit" class="btn btn-primary">Filter</button>
         </form>
         <table class="table">
             <thead>
@@ -60,9 +61,8 @@ $page=request()->segment(1);
                         $senin= $transaksi->filter(function($e)use($i){
                         $start=date("H",strtotime($e->jam_pesan_awal));
                         $duration=$start+$e->durasi_sewa;
-
-                        if(date("Y-m-d",strtotime("now +1
-                        days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
+                        $strtime="now +1 days";
+                        if(date("Y-m-d",strtotime($strtime))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
                         false;
                         return $start<=$i&&$duration>$i; })->first()
                             @endphp
@@ -76,9 +76,8 @@ $page=request()->segment(1);
                         $senin= $transaksi->filter(function($e)use($i){
                         $start=date("H",strtotime($e->jam_pesan_awal));
                         $duration=$start+$e->durasi_sewa;
-
-                        if(date("Y-m-d",strtotime("now +2
-                        days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
+                        $strtime="now +2 days";
+                        if(date("Y-m-d",strtotime($strtime))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
                         false;
                         return $start<=$i&&$duration>$i; })->first()
                             @endphp
@@ -92,9 +91,8 @@ $page=request()->segment(1);
                         $senin= $transaksi->filter(function($e)use($i){
                         $start=date("H",strtotime($e->jam_pesan_awal));
                         $duration=$start+$e->durasi_sewa;
-
-                        if(date("Y-m-d",strtotime("now +3
-                        days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
+                        $strtime="now +3 days";
+                        if(date("Y-m-d",strtotime($strtime))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
                         false;
                         return $start<=$i&&$duration>$i; })->first()
                             @endphp
@@ -108,9 +106,8 @@ $page=request()->segment(1);
                         $senin= $transaksi->filter(function($e)use($i){
                         $start=date("H",strtotime($e->jam_pesan_awal));
                         $duration=$start+$e->durasi_sewa;
-
-                        if(date("Y-m-d",strtotime("now +4
-                        days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
+                        $strtime="now +4 days";
+                        if(date("Y-m-d",strtotime($strtime))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
                         false;
                         return $start<=$i&&$duration>$i; })->first()
                             @endphp
@@ -123,9 +120,8 @@ $page=request()->segment(1);
                         $senin= $transaksi->filter(function($e)use($i){
                         $start=date("H",strtotime($e->jam_pesan_awal));
                         $duration=$start+$e->durasi_sewa;
-
-                        if(date("Y-m-d",strtotime("now +5
-                        days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
+                        $strtime="now +5 days";
+                        if(date("Y-m-d",strtotime($strtime))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
                         false;
                         return $start<=$i&&$duration>$i; })->first()
                             @endphp
@@ -137,9 +133,8 @@ $page=request()->segment(1);
                         $senin= $transaksi->filter(function($e)use($i){
                         $start=date("H",strtotime($e->jam_pesan_awal));
                         $duration=$start+$e->durasi_sewa;
-
-                        if(date("Y-m-d",strtotime("now +6
-                        days"))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
+                        $strtime="now +4 days";
+                        if(date("Y-m-d",strtotime($strtime))!=date("Y-m-d",strtotime($e->jam_pesan_awal))) return
                         false;
                         return $start<=$i&&$duration>$i; })->first()
                             @endphp
