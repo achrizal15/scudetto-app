@@ -57,8 +57,8 @@
 			/* Create two columns/boxes that floats next to each other */
 			nav {
 				float: left;
-				width: 60%;
-				height: 200px;
+				width: 95%;
+				height: 1600px;
 				/* only for demonstration, should be removed */
 				background: white;
 				padding: 20px;
@@ -87,12 +87,6 @@
 			}
 
 			/* Style the footer */
-			footer {
-				background-color: white;
-				padding: 10px;
-				text-align: center;
-				color: black;
-			}
 
 			#customers {
 				font-family: Arial, Helvetica, sans-serif;
@@ -122,13 +116,6 @@
 				color: white;
 			}
 
-			footer {
-				background-color: white;
-				padding: 10px;
-				text-align: center;
-				color: black;
-			}
-
 			/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
 			@media (max-width: 600px) {
 
@@ -142,15 +129,12 @@
 	</head>
 	<body>
 		<div class="kop">
-			<div class="logo">
-				<img src="#" alt="Flowers in Chania" width="70" height="70">
-			</div>
-			<div class="instansi"> Sewa Lapangan Futsal <p>Scudetto - Banyuwangi</p>
+			<div class="instansi"> <h2>Scudetto - Banyuwangi</h2>
 			</div>
 		</div>
 		<div class="garis"></div>
 		<header>
-			<h2>Data Rekap Laporan</h2>
+			<h4>Data Rekap Laporan</h4>
 		</header>
 		<section>
 			<nav>
@@ -161,14 +145,7 @@
 						<td style="width:40%">{{auth()->user()->name}}</td>
 					</tr>
 				</table>
-			</nav>
-			<article>
-				<img src="#" alt="Foto diri" width="150" height="150">
-			</article>
-		</section>
-		<footer>
-			<h3>Data Rekap Laporan</h3>
-			<table id="customers">
+                <table id="customers">
 				<tr>
                 <th>date</th>
                     <th width="150px">No. Bukti</th>
@@ -203,7 +180,7 @@
                     <th>Rp. {{$total_bayar}},-</th>
                 </tr>
 			</table>
-		</footer>
-		<div class="section"></div>
+			</nav>
+		</section>
 	</body>
 </html>

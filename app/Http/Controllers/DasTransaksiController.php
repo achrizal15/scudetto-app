@@ -90,8 +90,7 @@ class DasTransaksiController extends Controller
     public function cetakPDF($id)
     {
 
-        $data['riwayat'] = DasTransaksi::find($id);
-
+        $data['riwayat'] = DasTransaksi::with(['user.alamatLengkap'])->find($id);
         // cetak pdf
         $pdf =  Pdf::loadView('das.riwayat.cetak', $data);
         // dd($data);
