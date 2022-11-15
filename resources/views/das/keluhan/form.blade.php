@@ -41,10 +41,38 @@ $action=request()->segment(2);
             </div>
         </form>
     </div>
-
-
-
 </div>
+
+@foreach ($respon as $item)
+<div class="col-md-12 col-lg-12 mb-3 mt-3">
+                  <div class="card">
+                    <h5 class="card-header">Respon</h5>
+                    <div class="card-body">
+                      <blockquote class="blockquote mb-0">
+                          <?php
+                            $balasan = $item->respon;
+                          ?>
+                          @if($balasan == null)
+                        <p>
+                          - Respon Tidak Tersedia -
+                        </p>
+                        @else
+                        <p>
+
+                          {{$item->respon}}
+                        </p>
+                        @endif
+                        <footer class="blockquote-footer">
+                          keluhan : {{$item->title}}
+                          <cite title="Source Title">, {{$item->deskripsi}}</cite>
+                        </footer>
+                      </blockquote>
+                    </div>
+                  </div>
+                </div>
+@endforeach
 </div>
+
+
 @endsection
 

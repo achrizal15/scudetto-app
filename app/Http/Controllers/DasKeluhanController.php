@@ -9,7 +9,7 @@ class DasKeluhanController extends Controller
 {
     public function index()
     {
-        $keluhan = DasKeluhan::where('respon',null);
+        $keluhan = DasKeluhan::where('respon',null)->get();
         return view("das.keluhan.index", ["keluhan" => $keluhan]);
     }
     public function destroy(DasKeluhan $keluhan)
@@ -19,7 +19,9 @@ class DasKeluhanController extends Controller
     }
     public function add()
     {
-        return view("das.keluhan.form");
+        $respon = DasKeluhan::where('user_id',auth()->user()->id)->get();
+        // dd($respon);
+        return view("das.keluhan.form", ["respon" => $respon]);
 
     }
     public function store(Request $request)
