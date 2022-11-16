@@ -44,7 +44,7 @@
     <header id="header" class="fixed-top ">
         <div class="container d-flex align-items-center">
 
-            <h1 class="logo me-auto"><a href="index.html">Scudetto Futsal</a></h1>
+            <img src="{{asset('arsha/assets')}}/img/logo.png " class="img-fluid animated logo me-auto" width="150" height="150">
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -100,73 +100,23 @@
                     <h2>Information</h2>
                 </div>
 
-                <div class="row">
+                <div class="row ">
 
                     <div
                         class="col-lg-7 d-flex flex-column justify-content-center align-items-stretch  order-2 order-lg-1">
 
                         <div class="content">
-                            <h3>Eum ipsam laborum deleniti <strong>velit pariatur architecto aut nihil</strong></h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
-                            </p>
+                            <h3>tentang <br><strong>Scudetto Futsal Banyuwangi</strong></h3>
+                            <h5>
+                            Scudetto Futsal Banyuwangi merupakan tempat futsal pertama di Banyuwangi yang memiliki lapangan futsal bertaraf internasional. Perlombaan besar seperti Porseni Provinsi, Liga Futsal Banyuwangi, serta Scudetto Competition diadakan di tempat ini. Terletak di Jalan Letjen Sutoyo, Tukang Kayu, Banyuwangi, Jawa Timur Indonesia tepatnya di sebelah timur SDN 4 Penganjuran, Banyuwangi. Scudetto Futsal Banyuwangi memiliki 4 lapangan yang terdiri dari 3 lapangan matras berukuran kecil dan 1 lapangan matras bertaraf internasional.
+</h5>
                         </div>
 
-                        <div class="accordion-list">
-                            <ul>
-                                <li>
-                                    <a data-bs-toggle="collapse" class="collapse"
-                                        data-bs-target="#accordion-list-1"><span>01</span> Non consectetur a erat nam at
-                                        lectus urna duis? <i class="bx bx-chevron-down icon-show"></i><i
-                                            class="bx bx-chevron-up icon-close"></i></a>
-                                    <div id="accordion-list-1" class="collapse show" data-bs-parent=".accordion-list">
-                                        <p>
-                                            Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus
-                                            laoreet non curabitur gravida. Venenatis lectus magna fringilla urna
-                                            porttitor rhoncus dolor purus non.
-                                        </p>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <a data-bs-toggle="collapse" data-bs-target="#accordion-list-2"
-                                        class="collapsed"><span>02</span> Feugiat scelerisque varius morbi enim nunc? <i
-                                            class="bx bx-chevron-down icon-show"></i><i
-                                            class="bx bx-chevron-up icon-close"></i></a>
-                                    <div id="accordion-list-2" class="collapse" data-bs-parent=".accordion-list">
-                                        <p>
-                                            Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id
-                                            interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus
-                                            scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper
-                                            dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
-                                        </p>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <a data-bs-toggle="collapse" data-bs-target="#accordion-list-3"
-                                        class="collapsed"><span>03</span> Dolor sit amet consectetur adipiscing elit? <i
-                                            class="bx bx-chevron-down icon-show"></i><i
-                                            class="bx bx-chevron-up icon-close"></i></a>
-                                    <div id="accordion-list-3" class="collapse" data-bs-parent=".accordion-list">
-                                        <p>
-                                            Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci.
-                                            Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet
-                                            nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis
-                                            convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio
-                                            morbi quis
-                                        </p>
-                                    </div>
-                                </li>
-
-                            </ul>
-                        </div>
 
                     </div>
 
-                    <div class="col-lg-5 align-items-stretch order-1 order-lg-2 img"
-                        style='background-image: url("{{asset(' arsha/assets')}}//img/why-us.png");' data-aos="zoom-in"
+                    <div class="col-lg-5 align-items-stretch order-1 order-lg-2 img "
+                        style='background-image: url("{{asset('arsha/assets')}}/img/scudetto.jpeg");' data-aos="zoom-in"
                         data-aos-delay="150">&nbsp;</div>
                 </div>
 
@@ -231,14 +181,14 @@
                     </tr>
                 </thead>
                 <tbody>
-    
+
                     @for ($i = 8 ; $i <= 24; $i++) <tr>
                         <td>{{"$i:00"}} </td>
                         <td>@php
                             $senin= $transaksi->filter(function($e)use($i){
                             $start=date("H",strtotime($e->jam_pesan_awal));
                             $duration=$start+$e->durasi_sewa;
-    
+
                             if(date("Y-m-d",strtotime("now"))!=date("Y-m-d",strtotime($e->jam_pesan_awal)))
                             return false;
                             return $start<=$i&&$duration>$i; })->first()
@@ -376,7 +326,7 @@
 
 
     <!-- Modal -->
- 
+
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
 
