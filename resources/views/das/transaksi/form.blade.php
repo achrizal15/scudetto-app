@@ -13,7 +13,26 @@ $action=request()->segment(2);
             @csrf
             @method($action=="add"?'POST':'PUT')
 
+            @if(auth()->user()->role_id!=1)
             <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+            @else
+            <div class="row mb-3">
+                <label for="user_id" class="col-sm-2 col-form-label">Pengguna</label>
+                <div class="col-sm-10">
+                    <select class="select2 form-control @error('user_id') is-invalid @enderror" id="user_id"
+                        style="width: 100%" name="user_id">
+                        <option value="" selected>Pilih Pengguna</option>
+                        @foreach($pengguna as $item)
+                        <option value="{{$item->id}}" @isset($param) {{$param->user_id==$item->id?'selected':''}}
+                            @endisset>{{$item->name}}</option>
+                        @endforeach
+                    </select>
+                    <div id="user_idFeedback" class="invalid-feedback">
+                        @error('user_id') {{$message}} @enderror
+                    </div>
+                </div>
+            </div>
+            @endif
             <div class="row mb-3">
                 <label for="lapangan_id" class="col-sm-2 col-form-label">Lapangan</label>
                 <div class="col-sm-10">

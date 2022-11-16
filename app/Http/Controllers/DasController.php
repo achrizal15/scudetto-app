@@ -13,14 +13,14 @@ class DasController extends Controller
     public function index()
     {
         $pelanggan = User::all()
-        ->where('role_id',"1")
+        ->where('role_id',"2")
         ->count();
 
         $lapangan = Lapangan::count();
 
-        $pesanan = DasTransaksi::count();
+        $pesanan = DasTransaksi::where('status',"SELESAI")->count();
 
-        $saldo = DasTransaksi::sum('total_bayar');
+        $saldo = DasTransaksi::where('status',"SELESAI")->sum('total_bayar');
 
         return view ('welcome', compact('pelanggan','lapangan','pesanan','saldo'));
     }

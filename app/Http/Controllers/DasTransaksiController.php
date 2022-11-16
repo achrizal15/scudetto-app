@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\DasTransaksi;
 use App\Models\Lapangan;
+use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class DasTransaksiController extends Controller
@@ -42,7 +43,13 @@ class DasTransaksiController extends Controller
             fn ($a, $b) => intval($a["name"]) <=> intval($b["name"]),
             fn ($a, $b) => $a["id"] <=> $b["id"],
         ]);
-        return view("das.transaksi.form", ["lapangan" => $lapangan]);
+
+        $pengguna=User::get()->sortBy([
+            fn ($a, $b) => intval($a["name"]) <=> intval($b["name"]),
+            fn ($a, $b) => $a["id"] <=> $b["id"],
+        ]);
+
+        return view("das.transaksi.form", ["lapangan" => $lapangan,"pengguna" => $pengguna]);
     }
 
     public function store(Request $request)
@@ -53,13 +60,15 @@ class DasTransaksiController extends Controller
             "waktu_awal" => "required",
             "waktu_akhir" => "required",
         ]);
+        $harga = Lapangan::select('harga')->where('id',$validate["lapangan_id"])->get();
         $waktu_awal = explode(":", $request->waktu_awal);
         $waktu_akhir = explode(":", $request->waktu_akhir);
         $validate["durasi_sewa"] = $waktu_akhir[0] - $waktu_awal[0];
         $validate["jam_pesan_awal"] = date("Y-m-d H", strtotime($request->tanggal . "" . $request->waktu_awal));
         $validate["jam_pesan_akhir"] = date("Y-m-d H", strtotime($request->tanggal . "" . $request->waktu_akhir));
         $validate["user_id"] = auth()->user()->id;
-        $validate["total_bayar"] = $validate["durasi_sewa"] * 100000;
+        $validate["total_bayar"] = $validate["durasi_sewa"] *$harga[0]->harga;
+
         $transaksi = DasTransaksi::create($validate);
 
         return redirect("upload_bukti/$transaksi->id");
