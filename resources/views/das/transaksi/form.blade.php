@@ -13,7 +13,7 @@ $action=request()->segment(2);
             @csrf
             @method($action=="add"?'POST':'PUT')
 
-            @if(auth()->user()->role_id!=1)
+            @if(auth()->user()->role_id!=3)
             <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
             @else
             <div class="row mb-3">
