@@ -30,7 +30,7 @@ $page=request()->segment(1);
                     <td>{{$item->alamatLengkap->no_hp}}</td>
                     <td>{{$item->email}}</td>
                     <td>{{$item->alamatLengkap->alamat}}</td>
-                    
+
                     <td>
                         <div class="dropdown">
                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -39,6 +39,15 @@ $page=request()->segment(1);
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="{{url($page)}}/{{$item->id}}/edit"><i class="bx bx-edit-alt me-1"></i>
                                     Edit</a>
+    @php
+   $trans= $item->transaksi->filter(function ($item) {
+                                        return $item->status=="PENDING";
+                                    });
+    @endphp
+                                    @if($trans->count()>0)
+                                <a class="dropdown-item" href="/upload_bukti/{{$trans->first()->id}}"><i class="bx bx-save me-1"></i>
+                                Upload Bukti</a>
+                                @endif
                                     <form action="{{url($page)}}/{{$item->id}}" method="post">
                                     @csrf
                                     @method("DELETE")
