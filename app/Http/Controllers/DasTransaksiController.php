@@ -44,7 +44,7 @@ class DasTransaksiController extends Controller
             fn ($a, $b) => $a["id"] <=> $b["id"],
         ]);
 
-        $pengguna=User::get()->sortBy([
+        $pengguna=User::where('role_id','2')->get()->sortBy([
             fn ($a, $b) => intval($a["name"]) <=> intval($b["name"]),
             fn ($a, $b) => $a["id"] <=> $b["id"],
         ]);

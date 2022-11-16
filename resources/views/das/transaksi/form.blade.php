@@ -17,11 +17,11 @@ $action=request()->segment(2);
             <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
             @else
             <div class="row mb-3">
-                <label for="user_id" class="col-sm-2 col-form-label">Pengguna</label>
+                <label for="user_id" class="col-sm-2 col-form-label">Pelanggan</label>
                 <div class="col-sm-10">
                     <select class="select2 form-control @error('user_id') is-invalid @enderror" id="user_id"
                         style="width: 100%" name="user_id">
-                        <option value="" selected>Pilih Pengguna</option>
+                        <option value="" selected>Pilih Pelanggan</option>
                         @foreach($pengguna as $item)
                         <option value="{{$item->id}}" @isset($param) {{$param->user_id==$item->id?'selected':''}}
                             @endisset>{{$item->name}}</option>
