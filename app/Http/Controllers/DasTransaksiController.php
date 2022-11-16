@@ -66,10 +66,8 @@ class DasTransaksiController extends Controller
         $validate["durasi_sewa"] = $waktu_akhir[0] - $waktu_awal[0];
         $validate["jam_pesan_awal"] = date("Y-m-d H", strtotime($request->tanggal . "" . $request->waktu_awal));
         $validate["jam_pesan_akhir"] = date("Y-m-d H", strtotime($request->tanggal . "" . $request->waktu_akhir));
-        $validate["user_id"] = auth()->user()->id;
-        if(auth()->user()->role_id=='2'){
-            $validate["user_id"]=$request->user_id;
-        }
+        
+        $validate["user_id"]=$request->user_id;
         $validate["total_bayar"] = $validate["durasi_sewa"] *$harga[0]->harga;
 
         $transaksi = DasTransaksi::create($validate);
