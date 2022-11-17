@@ -27,7 +27,7 @@ class CreateDasTransaksisTable extends Migration
             $table->datetime("jam_pesan_akhir");
             $table->integer("total_bayar");
             $table->string("bukti_bayar")->nullable();
-            $table->enum("status",["PENDING","PROSES","SELESAI","BATAL"])->default("PENDING");
+            $table->enum("status",["PENDING","PROSES","SELESAI","BATAL","BOOKED"])->default("PENDING");
             $table->timestamps();
         });
     }

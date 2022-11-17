@@ -10,6 +10,7 @@ use App\Http\Controllers\DasLaporanController;
 use App\Http\Controllers\DasPelangganController;
 use App\Http\Controllers\DasKeluhanController;
 use App\Http\Controllers\DasMassageController;
+use App\Http\Controllers\DasMailController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DasRoleController;
 use App\Http\Controllers\DasUser;
@@ -100,4 +101,7 @@ Route::group(["middleware" => "auth"], function () {
     Route::post("/massage", [DasMassageController::class, "store"]);
     Route::get("/massage/{massage}/edit", [DasMassageController::class, "edit"]);
     Route::put("/massage/{massage}", [DasMassageController::class, "update"]);
+
+
 });
+Route::get('/kirim', [DasMailController::class, 'index']);

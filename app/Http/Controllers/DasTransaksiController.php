@@ -13,6 +13,7 @@ class DasTransaksiController extends Controller
     public function __construct()
     {
         expiredOrder();
+        notificationManager();
     }
     public function index()
     {

@@ -28,7 +28,7 @@
             <a href="{{$item->link}}" class="menu-link">
                 <i class="menu-icon tf-icons bx {{$item->icon}}"></i>
                 <div data-i18n="{{$item->key}}" class="d-flex">{{$item->name}}
-                    @if($item->key=="data_pesan"||$item->key=="data_keluhan")
+                    @if($item->key=="data_pesan"||$item->key=="data_keluhan"||$item->key=="massage")
                     @if($notif[$item->key])
                      <div style="width: 8px;height:8px;border-radius:100%;background-color:red"></div>
                      @endif

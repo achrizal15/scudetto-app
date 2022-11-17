@@ -10,6 +10,7 @@ class DasMassageController extends Controller
 {
     public function index()
     {
+        notificationManager();
         $massage = DasMassage::all();
         return view("das.massage.index", ["massage" => $massage]);
     }

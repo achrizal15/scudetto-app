@@ -11,14 +11,16 @@ class Message extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $mailData;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($mailData)
     {
-        //
+        $this->mailData = $mailData;
     }
 
     /**
@@ -28,6 +30,6 @@ class Message extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->subject('halo rakyat jelata')->view('das.email.index');
     }
 }

@@ -11,8 +11,10 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+
     public function index()
     {
+        notificationManager();
         return view("login");
     }
     public function register()
@@ -55,6 +57,7 @@ class AuthController extends Controller
     }
     public function destroy()
     {
+        notificationManager();
         Auth::logout();
         return redirect("/login");
     }

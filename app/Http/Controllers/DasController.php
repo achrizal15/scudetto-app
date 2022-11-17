@@ -10,6 +10,10 @@ Use App\Models\Lapangan;
 
 class DasController extends Controller
 {
+    public function __construct()
+    {
+        notificationManager();
+    }
     public function index()
     {
         $pelanggan = User::all()

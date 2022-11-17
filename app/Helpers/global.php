@@ -2,6 +2,7 @@
 
 use App\Models\DasKeluhan;
 use App\Models\DasTransaksi;
+use App\Models\DasMassage;
 
 if(!function_exists("getAccessType")){
     function getAccessTypeMenu(){
@@ -32,7 +33,21 @@ if(!function_exists("expiredOrder")){
 }
 
 function getNotifKeluhan(){
+    $massage=DasMassage::whereDate('created_at',date("Y-m-d"))->where('user_id',auth()->user()->id)->get()->count();
     $keluhan=DasKeluhan::where("respon",null)->get()->count();
     $transaksi=DasTransaksi::where("status","PROSES")->get()->count();
-    return ["data_keluhan"=>$keluhan,"data_pesan"=>$transaksi];
+    return ["data_keluhan"=>$keluhan,"data_pesan"=>$transaksi,"massage"=>$massage];
+}
+
+function notificationManager(){
+    $transaksi=DasTransaksi::whereDate('jam_pesan_awal',date("Y-m-d"))->where('status','selesai')->get();
+    foreach ($transaksi as $item) {
+        DasMassage::create([
+            "user_id" => $item->user_id,
+            "pesan" => "Hari ini adalah permainan anda, Don't Miss I",
+        ]);
+        $item->update([
+            "status"=>"BOOKED",
+        ]);
+    }
 }
