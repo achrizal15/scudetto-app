@@ -12,6 +12,12 @@ class DasMassageController extends Controller
     {
         notificationManager();
         $massage = DasMassage::all();
+        foreach ($massage as $item) {
+            $item->update([
+                "user_id" => 0,
+            ]);
+        }
+
         return view("das.massage.index", ["massage" => $massage]);
     }
     public function destroy(DasMassage $massage)
