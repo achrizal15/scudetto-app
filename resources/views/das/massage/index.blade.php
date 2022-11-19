@@ -14,7 +14,6 @@ $page=request()->segment(1);
                     <div class="card-body">
                       <blockquote class="blockquote mb-0">
                         <p>
-
                           {{$item->pesan}}
                         </p>
                         <footer class="blockquote-footer">
