@@ -3,7 +3,7 @@
 @php
 $page=request()->segment(1);
 @endphp
-<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Dashboard /</span> {{ucwords($page)}}
+<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Dashboard /</span> {{ucwords("Message")}}
 </h4>
 
 
