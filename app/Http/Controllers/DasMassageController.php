@@ -11,7 +11,7 @@ class DasMassageController extends Controller
     public function index()
     {
         notificationManager();
-        $massage = DasMassage::latest()->where("user_id",auth()->user()->id)->all();
+        $massage = DasMassage::latest()->where("user_id",auth()->user()->id)->get();
         foreach ($massage as $item) {
             $item->update([
                 "user_id" => 0,
