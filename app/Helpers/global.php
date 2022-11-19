@@ -49,7 +49,7 @@ function notificationManager()
     foreach ($transaksi as $item) {
         DasMassage::create([
             "user_id" => $item->user_id,
-            "pesan" => "Hari ini adalah permainan anda, Don't Miss I",
+            "pesan" => "Jangan lupa hari ini jadwal anda bermain",
         ]);
         $item->update([
             "status" => "BOOKED",
