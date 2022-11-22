@@ -12,7 +12,7 @@ class DasLaporanController extends Controller
     {
         $laporan = DasTransaksi::
        where('created_at',">=",date("Y-m-d H:i", strtotime(request()->from)))
-        ->where('created_at',"<=",date("Y-m-d H:i", strtotime(request()->to)))
+        ->where('created_at',"<=",date("Y-m-d H:i", strtotime(request()->to ."23:59:59")))
         ->where(function($query){
             $query->orWhere("status","SELESAI")->orWhere("status","BOOKED");
         })
@@ -22,8 +22,8 @@ class DasLaporanController extends Controller
         $total_bayar =  DasTransaksi::where(function($query){
             $query->orWhere("status","SELESAI")->orWhere("status","BOOKED");
         })
-        ->where('created_at',">=",date("Y-m-d H:i", strtotime(request()->from)))
-        ->where('created_at',"<=",date("Y-m-d H:i", strtotime(request()->to)))->sum('total_bayar');
+        ->where('created_at',">=",date("Y-m-d H:i", strtotime(request()->from )))
+        ->where('created_at',"<=",date("Y-m-d H:i", strtotime(request()->to ."23:59:59")))->sum('total_bayar');
         $from=request("from");
         $to=request("to");
         return view("das.laporan.index", ["laporan" => $laporan, "total_bayar"=>$total_bayar,"from"=>$from,"to"=>$to]);

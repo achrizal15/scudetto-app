@@ -67,6 +67,9 @@ $action=request()->segment(2);
                         <option value="" selected>Waktu Awal</option>
                         @for ($i =8; $i <= 23; $i++)
                         <?php
+                        if($i<date("H",strtotime("now"))){
+                            continue;
+                        }
                         $jam=date("H:i",strtotime($i.".00"));
                         ?>
                      <option value="{{$jam}}" @isset($param) {{$param->waktu_awal}}
