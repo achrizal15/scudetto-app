@@ -24,7 +24,7 @@
         @endphp
         @foreach (session("role_menus")->menus->sortBy("id") as $item)
         @if ($item->group_key==null)
-        <li class="menu-item {{$linkActive==$item->link?'active':''}}">
+        <li class="menu-item {{request()->is(ltrim($item->link,"/"))?'active':''}}">
             <a href="{{$item->link}}" class="menu-link">
                 <i class="menu-icon tf-icons bx {{$item->icon}}"></i>
                 <div data-i18n="{{$item->key}}" class="d-flex">{{$item->name}}

@@ -89,7 +89,7 @@ Route::group(["middleware" => "auth"], function () {
     // MANAGE DATA KELUHAN
     Route::get("/keluhan", [DasKeluhanController::class, "index"]);
     Route::delete("/keluhan/{keluhan}", [DasKeluhanController::class, "destroy"]);
-    Route::get("/keluhan/add", [DasKeluhanController::class, "add"]);
+    Route::get("/keluhan/add", [DasKeluhanController::class, "add"])->name('keluhan.add');
     Route::post("/keluhan", [DasKeluhanController::class, "store"]);
     Route::get("/keluhan/{keluhan}/edit", [DasKeluhanController::class, "edit"]);
     Route::put("/keluhan/{keluhan}", [DasKeluhanController::class, "update"]);

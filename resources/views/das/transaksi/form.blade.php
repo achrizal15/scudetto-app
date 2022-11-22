@@ -67,7 +67,7 @@ $action=request()->segment(2);
                         <option value="" selected>Waktu Awal</option>
                         @for ($i =8; $i <= 23; $i++)
                         <?php
-                        if($i<date("H",strtotime("now"))){
+                        if($i<=date("H",strtotime("now"))){
                             continue;
                         }
                         $jam=date("H:i",strtotime($i.".00"));
@@ -89,6 +89,10 @@ $action=request()->segment(2);
                         <option value="" selected>Waktu Akhir</option>
                         @for ($i =9; $i <= 24; $i++)
                         <?php
+                        if($i <=date("H",strtotime("now +1 hour"))){
+                            echo $i;
+                            continue;
+                        }
                         $jam=date("H:i",strtotime($i.".00"));
                         ?>
                      <option value="{{$jam}}" @isset($param) {{$param->waktu_akhir}}

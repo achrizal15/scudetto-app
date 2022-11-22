@@ -51,7 +51,7 @@ $page=request()->segment(1);
                 @foreach ($laporan as $item)
                 <tr>
                     <td>
-                        {{date("d/m/Y",strtotime($item->jam_pesan_awal))}}
+                        {{date("d/m/Y",strtotime($item->created_at))}}
                     </td>
                     <td>
                         {{$item->kode}}
