@@ -96,11 +96,11 @@ const AccessControl = () => {
 }
 const InitialDateTimePicker = () => {
     // if( $(".datetimepicker").length==0)
- $(".datetimepicker").each(function(i){
-    new DateTime($(this), {
-        format: 'D MMM YYYY HH:mm'
+    $(".datetimepicker").each(function (i) {
+        new DateTime($(this), {
+            format: 'D MMM YYYY HH:mm'
+        })
     })
- })
 }
 const countDownTimer = () => {
     const countdown = $("#countdown");
@@ -117,6 +117,29 @@ $(document).ready(function () {
     AccessControl()
     DatatableHandler()
     Select2Handler()
+    $(document).on("change", "#tanggal_pesan_lapangan", function () {
+        const value = new Date($(this).val())
+        const dateValue = `${value.getDate()}/${value.getMonth()}/${value.getFullYear()}`
+        const date = new Date()
+        const dateNow = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
+        $("#waktu_awal").html("<option  selected>Waktu Awal</option>")
+        $("#waktu_akhir").html("<option  selected>Waktu Akhir</option>")
+        if (dateValue == dateNow) {
+            for (let index = date.getHours()+1; index <= 23; index++) {
+                $("#waktu_awal").append(`<option value="${index}:00">${index}:00</option>`)
+            }
+            for (let index = date.getHours()+2; index <= 23; index++) {
+                $("#waktu_akhir").append(`<option value="${index}:00">${index}:00</option>`)
+            }
+         }else if(dateValue >= dateNow){
+            for (let index = 8; index <= 23; index++) {
+                        $("#waktu_awal").append(`<option value="${index}:00">${index}:00</option>`)
+                    }
+                    for (let index = 9; index <= 23; index++) {
+                        $("#waktu_akhir").append(`<option value="${index}:00">${index}:00</option>`)
+                    }
+         }
+    })
 })
 
 

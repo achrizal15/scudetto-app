@@ -52,7 +52,7 @@ $action=request()->segment(2);
             <div class="row mb-3">
                     <label for="tanggal" class="col-sm-2 col-form-label">tanggal</label>
                     <div class="col-sm-10">
-                        <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" name="tanggal"
+                        <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal_pesan_lapangan" name="tanggal"
                         value="@isset($param){{$param->tanggal}}@endisset" />
                         <div id="tanggalFeedback" class="invalid-feedback">
                             @error('tanggal') {{$message}} @enderror
@@ -65,16 +65,7 @@ $action=request()->segment(2);
                     <select class="select2 form-control @error('waktu_awal') is-invalid @enderror" id="waktu_awal"
                         style="width: 100%" name="waktu_awal">
                         <option value="" selected>Waktu Awal</option>
-                        @for ($i =8; $i <= 23; $i++)
-                        <?php
-                        if($i<=date("H",strtotime("now"))){
-                            continue;
-                        }
-                        $jam=date("H:i",strtotime($i.".00"));
-                        ?>
-                     <option value="{{$jam}}" @isset($param) {{$param->waktu_awal}}
-                            @endisset>{{$jam}}</option>
-                        @endfor
+                       
                     </select>
                     <div id="waktu_awalFeedback" class="invalid-feedback">
                         @error('waktu_awal') {{$message}} @enderror
@@ -87,17 +78,7 @@ $action=request()->segment(2);
                     <select class="select2 form-control @error('waktu_akhir') is-invalid @enderror" id="waktu_akhir"
                         style="width: 100%" name="waktu_akhir">
                         <option value="" selected>Waktu Akhir</option>
-                        @for ($i =9; $i <= 24; $i++)
-                        <?php
-                        if($i <=date("H",strtotime("now +1 hour"))){
-                            echo $i;
-                            continue;
-                        }
-                        $jam=date("H:i",strtotime($i.".00"));
-                        ?>
-                     <option value="{{$jam}}" @isset($param) {{$param->waktu_akhir}}
-                            @endisset>{{$jam}}</option>
-                        @endfor
+                      
                     </select>
                     <div id="waktu_akhirFeedback" class="invalid-feedback">
                         @error('waktu_akhir') {{$message}} @enderror
