@@ -54,7 +54,7 @@ $action=request()->segment(2);
                           ?>
                           @if($balasan == null)
                         <p>
-                          - Respon Tidak Tersedia -
+                          - Belum dibalas oleh admin -
                         </p>
                         @else
                         <p>
