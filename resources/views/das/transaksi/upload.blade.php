@@ -14,7 +14,7 @@ $action=request()->segment(2);
             <div class="card-subtitle text-muted mb-3">Jumlah yang harus Dibayar</div>
             <h3>Rp.{{$transaksi->total_bayar}},-</h3>
             <div class="alert alert-secondary" role="alert"> 
-           <h5 id="countdown" data-time="{{date("Y-m-d H:i:s",strtotime($transaksi->created_at ." +5 minutes"))}}">  00:05:00 </h5>
+           <h5 id="countdown" data-time="{{date("Y-m-d H:i:s",strtotime($transaksi->created_at ." +5 minute"))}}">  00:05:00 </h5>
           Harap lakukan pembayaran sebelum waktu habis!</div>
             <div class="row mb-5">
                 <div class="col-md">

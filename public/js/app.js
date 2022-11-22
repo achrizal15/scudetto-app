@@ -107,7 +107,8 @@ const countDownTimer = () => {
     if ($("#countdown").length <= 0) return false;
     const time = countdown.data("time");
     countdown.countdown(time, function (param) {
-        $(this).html(param.strftime("%H jam %M menit %S detik"));
+        $(this).html(param.strftime("%H jam %M menit %S detik"));    
+        if(param.offset.seconds==0)location.href="/transaksi/add";
     });
 };
 $(document).ready(function () {
