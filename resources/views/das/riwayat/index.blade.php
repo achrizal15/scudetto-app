@@ -44,15 +44,13 @@ $page=request()->segment(1);
 
                     @elseif($item->status=="PROSES")
                     <td><a class="badge bg-info">PROSES</a></td>
-                    @elseif($item->status=="SELESAI")
-                    <td><a class="badge bg-success">SELESAI</a></td>
-                    @elseif($item->status=="BOOKED")
-                    <td><a class="badge bg-success">BOOKED</a></td>
-                    @else
+                    @elseif($item->status=="SELESAI"|| $item->status=="BOOKED")
+                    <td><a class="badge bg-success ">SELESAI</a></td>
+                @else
                     <td><a class="badge bg-warning">BATAL</a></td>
                     @endif
                     <td>
-                        @if ($item->status=="SELESAI")
+                        @if ($item->status=="SELESAI"||$item->status=="BOOKED")
                         <a href="{{route('cetakPDF',[$item->id])}}" class="text-dark"> <i class="bx bx-save"></i>Invoice</a>
 
                             @else
