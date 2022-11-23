@@ -47,6 +47,9 @@ $page=request()->segment(1);
                     @elseif($item->status=="SELESAI")
                     <td><a class="badge bg-success">SELESAI</a></td>
                     @else
+                    @elseif($item->status=="BOOKED")
+                    <td><a class="badge bg-success">BOOKED</a></td>
+                    @else
                     <td><a class="badge bg-warning">BATAL</a></td>
                     @endif
                     <td>
