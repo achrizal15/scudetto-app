@@ -51,9 +51,9 @@ $action=request()->segment(2);
             </div>
             <div class="row mb-3">
                     <label for="tanggal" class="col-sm-2 col-form-label">tanggal</label>
+                    
                     <div class="col-sm-10">
-                        <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal_pesan_lapangan" name="tanggal"
-                        value="@isset($param){{$param->tanggal}}@endisset" />
+                        <input type="date" data-date="{{date('d-m-Y',strtotime('now'))}}" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal_pesan_lapangan" name="tanggal" value="@isset($param){{date("Y-m-d",strtotime($param->jam_pesan_awal))}}@endisset" />
                         <div id="tanggalFeedback" class="invalid-feedback">
                             @error('tanggal') {{$message}} @enderror
                         </div>
@@ -63,8 +63,11 @@ $action=request()->segment(2);
                 <label for="waktu_awal" class="col-sm-2 col-form-label">Waktu Awal</label>
                 <div class="col-sm-10">
                     <select class="select2 form-control @error('waktu_awal') is-invalid @enderror" id="waktu_awal"
-                        style="width: 100%" name="waktu_awal">
+                        style="width: 100%" name="waktu_awal" >
                         <option value="" selected>Waktu Awal</option>
+                        @isset($param)
+                        <option selected value="{{date("H:i",strtotime($param->jam_pesan_awal))}}">{{date("H:i",strtotime($param->jam_pesan_awal))}}</option>
+                        @endisset
                        
                     </select>
                     <div id="waktu_awalFeedback" class="invalid-feedback">
@@ -78,7 +81,9 @@ $action=request()->segment(2);
                     <select class="select2 form-control @error('waktu_akhir') is-invalid @enderror" id="waktu_akhir"
                         style="width: 100%" name="waktu_akhir">
                         <option value="" selected>Waktu Akhir</option>
-                      
+                        @isset($param)
+                        <option selected value="{{date("H:i",strtotime($param->jam_pesan_akhir))}}">{{date("H:i",strtotime($param->jam_pesan_akhir))}}</option>
+                        @endisset
                     </select>
                     <div id="waktu_akhirFeedback" class="invalid-feedback">
                         @error('waktu_akhir') {{$message}} @enderror

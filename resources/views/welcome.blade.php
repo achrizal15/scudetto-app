@@ -8,8 +8,9 @@
                     <div class="card-body">
                         <h5 class="card-title text-primary">Hallo {{auth()->user()->name}}! 🎉</h5>
                         <p class="mb-4">
-                           Selamat Datang di Dashboard Penyewaan Lapangan Futsal <span class="fw-bold">Scudetto Banyuwangi.</span>
-                           <a href="/">Pergi ke halaman depan</a>
+                            Selamat Datang di Dashboard Penyewaan Lapangan Futsal <span class="fw-bold">Scudetto
+                                Banyuwangi.</span>
+                            <a href="/">Pergi ke halaman depan</a>
                         </p>
                     </div>
                 </div>
@@ -25,13 +26,13 @@
     </div>
     <div class="col-lg-4 col-md-4 order-1">
         <div class="row">
-        <div class="col-lg-6 col-md-12 col-6 mb-4">
+            <div class="col-lg-6 col-md-12 col-6 mb-4">
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
-                                <img src="{{asset('sneat/assets')}}/img/icons/unicons/chart-success.png" alt="Credit Card"
-                                    class="rounded" />
+                                <img src="{{asset('sneat/assets')}}/img/icons/unicons/chart-success.png"
+                                    alt="Credit Card" class="rounded" />
                             </div>
                         </div>
                         <span>Jumlah Pelanggan</span>
@@ -44,8 +45,8 @@
                     <div class="card-body">
                         <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
-                                <img src="{{asset('sneat/assets')}}/img/icons/unicons/chart-success.png" alt="Credit Card"
-                                    class="rounded" />
+                                <img src="{{asset('sneat/assets')}}/img/icons/unicons/chart-success.png"
+                                    alt="Credit Card" class="rounded" />
                             </div>
                         </div>
                         <span>Jumlah Lapangan</span>
@@ -59,13 +60,13 @@
 
     <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2">
         <div class="row">
-        <div class="col-lg-6 col-md-12 col-6 mb-4">
+            <div class="col-lg-6 col-md-12 col-6 mb-4">
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
-                                <img src="{{asset('sneat/assets')}}/img/icons/unicons/chart-success.png" alt="Credit Card"
-                                    class="rounded" />
+                                <img src="{{asset('sneat/assets')}}/img/icons/unicons/chart-success.png"
+                                    alt="Credit Card" class="rounded" />
                             </div>
                         </div>
                         <span>Jumlah Pemesanan</span>
@@ -82,10 +83,32 @@
                                     class="rounded" />
                             </div>
                         </div>
-                        <span>Total Saldo</span>
+                        <span>Total <br> Saldo</span>
                         <h5 class="card-title text-nowrap mb-1">Rp. {{intval($saldo)}},-</h5>
                     </div>
                 </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="col-8 order-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title d-flex align-items-start justify-content-between">
+                    <h3>Pemesan Terbanyak</h3>
+                </div>
+                <ol class="list-group list-group-numbered">
+                   @foreach ($pemesanTerbanyak as $item)
+                   <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">{{$item->name}}</div>
+                        {{$item->email}}
+                    </div>
+                    <span class="badge bg-primary rounded-pill">{{$item->transaksi->count()}}</span>
+                </li>
+                   @endforeach
+                </ol>
             </div>
         </div>
     </div>

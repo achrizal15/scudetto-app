@@ -39,6 +39,12 @@ $page=request()->segment(1);
         <table class="table mt-2" data-url="{{ url($page)}}/add" data-access="{{getAccessTypeMenu()}}">
             <thead>
                 <tr>
+                    <th colspan="5">Total</th>
+                    <th style="font-size: 20px">Rp. {{$total_bayar}},-</th>
+                </tr>
+            </thead>
+            <thead>
+                <tr>
                     <th>date</th>
                     <th width="150px">No. Bukti</th>
                     <th>Pemesan</th>
@@ -47,6 +53,7 @@ $page=request()->segment(1);
                     <th >Total Bayar</th>
                 </tr>
             </thead>
+         
             <tbody>
                 @foreach ($laporan as $item)
                 <tr>
@@ -71,12 +78,7 @@ $page=request()->segment(1);
                 </tr>
                 @endforeach
             </tbody>
-            <tfoot>
-                <tr>
-                    <th colspan="5">Total</th>
-                    <th>Rp. {{$total_bayar}},-</th>
-                </tr>
-            </tfoot>
+            
         </table>
     </div>
 </div>

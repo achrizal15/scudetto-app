@@ -15,11 +15,23 @@ class DasTransaksiController extends Controller
         expiredOrder();
         notificationManager();
     }
-    public function index()
+    public function index(Request $request)
     {
-        $transaksi = DasTransaksi::with('user')->where("lapangan_id",request("lapangan")??1)->where("status", "!=", "BATAL")->where("jam_pesan_awal", ">=", date("Y-m-d", strtotime("now")))->where("jam_pesan_akhir", "<=", date("Y-m-d H:i", strtotime("now +7 days")))->get();
-        $lapangan=Lapangan::get();
-        return view("das.jadwal.index", ["transaksi" => $transaksi,"lapangan"=>$lapangan]);
+        
+        $lapangan = Lapangan::get();
+        $start_date = !$request->has("start_date") ? date("d-m-Y", strtotime("now")) : date("d-m-Y", strtotime($request->start_date));
+        $transaksi = DasTransaksi::with('user')->where("lapangan_id", request("lapangan") ?? 1)->where("status", "!=", "BATAL")->where("jam_pesan_awal", ">=", date("Y-m-d", strtotime("now")))->where("jam_pesan_akhir", "<=", date("Y-m-d H:i", strtotime("$start_date +7 days")))->get();
+        $filterLapangan = $request->lapangan;
+        $back = "?lapangan=$filterLapangan&start_date=" . date("d-m-Y", strtotime($start_date . " -6 days"));
+        $next = "?lapangan=$filterLapangan&start_date=" . date("d-m-Y", strtotime($start_date . " +6 days"));
+        return view("das.jadwal.index", [
+            "transaksi" => $transaksi,
+            "lapangan" => $lapangan,
+            "start_date" => $start_date,
+            "back" => $back,
+            "next" => $next,
+            'filterLapangan' => $filterLapangan
+        ]);
     }
 
     public function destroy(DasTransaksi $transaksi)
@@ -45,14 +57,33 @@ class DasTransaksiController extends Controller
             fn ($a, $b) => $a["id"] <=> $b["id"],
         ]);
 
-        $pengguna=User::where('role_id','2')->get()->sortBy([
+        $pengguna = User::where('role_id', '2')->get()->sortBy([
             fn ($a, $b) => intval($a["name"]) <=> intval($b["name"]),
             fn ($a, $b) => $a["id"] <=> $b["id"],
         ]);
 
-        return view("das.transaksi.form", ["lapangan" => $lapangan,"pengguna" => $pengguna]);
+        return view("das.transaksi.form", ["lapangan" => $lapangan, "pengguna" => $pengguna]);
     }
+public function change(Request $request,DasTransaksi $transaksi){
+    $validate = $request->validate([
+        "lapangan_id" => "required",
+        "tanggal" => "required",
+        "waktu_awal" => "required",
+        "waktu_akhir" => "required",
+    ]);
+    $harga = Lapangan::select('harga')->where('id', $validate["lapangan_id"])->get();
+    $waktu_awal = explode(":", $request->waktu_awal);
+    $waktu_akhir = explode(":", $request->waktu_akhir);
+    $validate["durasi_sewa"] = $waktu_akhir[0] - $waktu_awal[0];
+    $validate["jam_pesan_awal"] = date("Y-m-d H", strtotime($request->tanggal . "" . $request->waktu_awal));
+    $validate["jam_pesan_akhir"] = date("Y-m-d H", strtotime($request->tanggal . "" . $request->waktu_akhir));
 
+    $validate["user_id"] = $request->user_id;
+    $validate["total_bayar"] = $validate["durasi_sewa"] * $harga[0]->harga;
+
+    $transaksi->update($validate);
+  return  redirect("/jadwal");
+}
     public function store(Request $request)
     {
         $validate = $request->validate([
@@ -61,15 +92,15 @@ class DasTransaksiController extends Controller
             "waktu_awal" => "required",
             "waktu_akhir" => "required",
         ]);
-        $harga = Lapangan::select('harga')->where('id',$validate["lapangan_id"])->get();
+        $harga = Lapangan::select('harga')->where('id', $validate["lapangan_id"])->get();
         $waktu_awal = explode(":", $request->waktu_awal);
         $waktu_akhir = explode(":", $request->waktu_akhir);
         $validate["durasi_sewa"] = $waktu_akhir[0] - $waktu_awal[0];
         $validate["jam_pesan_awal"] = date("Y-m-d H", strtotime($request->tanggal . "" . $request->waktu_awal));
         $validate["jam_pesan_akhir"] = date("Y-m-d H", strtotime($request->tanggal . "" . $request->waktu_akhir));
 
-        $validate["user_id"]=$request->user_id;
-        $validate["total_bayar"] = $validate["durasi_sewa"] *$harga[0]->harga;
+        $validate["user_id"] = $request->user_id;
+        $validate["total_bayar"] = $validate["durasi_sewa"] * $harga[0]->harga;
 
         $transaksi = DasTransaksi::create($validate);
 
@@ -78,15 +109,25 @@ class DasTransaksiController extends Controller
 
     public function upload_bukti(DasTransaksi $transaksi)
     {
-        if(date("Y-m-d H:i:s",strtotime($transaksi->created_at." +5 minutes"))<date("Y-m-d H:i:s",strtotime("now"))){
-           return redirect("/jadwal");
+        if (date("Y-m-d H:i:s", strtotime($transaksi->created_at . " +5 minutes")) < date("Y-m-d H:i:s", strtotime("now"))) {
+            return redirect("/jadwal");
         }
         return view("das.transaksi.upload", ["transaksi" => $transaksi]);
     }
 
     public function edit(DasTransaksi $transaksi)
     {
-        return view("das.transaksi.form", ["param" => $transaksi]);
+        $lapangan = Lapangan::get()->sortBy([
+            fn ($a, $b) => intval($a["name"]) <=> intval($b["name"]),
+            fn ($a, $b) => $a["id"] <=> $b["id"],
+        ]);
+
+        $pengguna = User::where('role_id', '2')->get()->sortBy([
+            fn ($a, $b) => intval($a["name"]) <=> intval($b["name"]),
+            fn ($a, $b) => $a["id"] <=> $b["id"],
+        ]);
+
+        return view("das.transaksi.form", ["param" => $transaksi,"lapangan" => $lapangan, "pengguna" => $pengguna]);
     }
 
     public function update(Request $request, DasTransaksi $transaksi)
@@ -104,7 +145,7 @@ class DasTransaksiController extends Controller
 
     public function riwayat()
     {
-        $riwayat = DasTransaksi::where("user_id", auth()->user()->id)->latest()->paginate(10)->withQueryString();
+        $riwayat = DasTransaksi::where("user_id", auth()->user()->id)->orderBy("id","DESC")->paginate(10)->withQueryString();
         return view("das.riwayat.index", ["riwayat" => $riwayat]);
     }
 

@@ -107,8 +107,8 @@ const countDownTimer = () => {
     if ($("#countdown").length <= 0) return false;
     const time = countdown.data("time");
     countdown.countdown(time, function (param) {
-        $(this).html(param.strftime("%H jam %M menit %S detik"));    
-        if(param.offset.seconds==0)location.href="/transaksi/add";
+        $(this).html(param.strftime("%H jam %M menit %S detik"));
+        if (param.offset.seconds == 0) location.href = "/transaksi/add";
     });
 };
 $(document).ready(function () {
@@ -120,26 +120,27 @@ $(document).ready(function () {
     Select2Handler()
     $(document).on("change", "#tanggal_pesan_lapangan", function () {
         const value = new Date($(this).val())
-        const dateValue = `${value.getDate()}/${value.getMonth()}/${value.getFullYear()}`
+        const dateValue = `${value.getFullYear()}/${value.getMonth()+1}/${value.getDate()}`
         const date = new Date()
-        const dateNow = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
+        const dateNow = `${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()}`
         $("#waktu_awal").html("<option  selected>Waktu Awal</option>")
         $("#waktu_akhir").html("<option  selected>Waktu Akhir</option>")
         if (dateValue == dateNow) {
-            for (let index = date.getHours()+1; index <= 23; index++) {
+            for (let index = date.getHours() + 1; index <= 23; index++) {
                 $("#waktu_awal").append(`<option value="${index}:00">${index}:00</option>`)
             }
-            for (let index = date.getHours()+2; index <= 23; index++) {
+            for (let index = date.getHours() + 2; index <= 23; index++) {
                 $("#waktu_akhir").append(`<option value="${index}:00">${index}:00</option>`)
             }
-         }else if(dateValue >= dateNow){
+        } else if (dateValue >= dateNow) {
+
             for (let index = 8; index <= 23; index++) {
-                        $("#waktu_awal").append(`<option value="${index}:00">${index}:00</option>`)
-                    }
-                    for (let index = 9; index <= 23; index++) {
-                        $("#waktu_akhir").append(`<option value="${index}:00">${index}:00</option>`)
-                    }
-         }
+                $("#waktu_awal").append(`<option value="${index}:00">${index}:00</option>`)
+            }
+            for (let index = 9; index <= 23; index++) {
+                $("#waktu_akhir").append(`<option value="${index}:00">${index}:00</option>`)
+            }
+        }
     })
 })
 

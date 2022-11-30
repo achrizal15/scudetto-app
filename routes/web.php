@@ -72,15 +72,14 @@ Route::group(["middleware" => "auth"], function () {
     Route::delete("/transaksi/{transaksi}", [DasTransaksiController::class, "destroy"]);
     Route::get("/transaksi/add", [DasTransaksiController::class, "add"]);
     Route::post("/transaksi", [DasTransaksiController::class, "store"]);
-    Route::get("/transaksi/{transaksi}/edit", [DasTransaksiController::class, "edit"]);
-    // Route::put("/transaksi/{transaksi}", [DasTransaksiController::class, "update"]);
+    Route::get("/transaksi/edit/{transaksi}", [DasTransaksiController::class, "edit"]);
+    Route::put("/transaksi/{transaksi}", [DasTransaksiController::class, "change"])->name("update");
     Route::post("/transaksi/{transaksi}", [DasTransaksiController::class, "update"])->name('updatebukti');
     Route::get("/upload_bukti/{transaksi}", [DasTransaksiController::class, "upload_bukti"]);
     Route::get("/riwayat", [DasTransaksiController::class, "riwayat"]);
     Route::get("/riwayat/cetak/{riwayat}", [DasTransaksiController::class, "cetakPDF"])->name('cetakPDF');
     Route::get("/data_pesan", [DasTransaksiController::class, "data_pesan"]);
     Route::get("/data_pesan/{transaksi}", [DasTransaksiController::class, "change_condition"])->name('terima');
-
 
     // MANAGE DATA LAPORAN
     Route::get("/laporan", [DasLaporanController::class, "index"]);
