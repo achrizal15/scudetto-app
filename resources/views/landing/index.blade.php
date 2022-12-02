@@ -50,10 +50,10 @@
 
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a class="nav-link " href="#hero">Home</a></li>
-                    <li><a class="nav-link " href="#Information">Information</a></li>
-                    <li><a class="nav-link " href="#pricing">Pricing</a></li>
-                    <li><a class="nav-link " href="#jadwal">Schedule</a></li>
+                    <li><a class="nav-link " href="#hero">Beranda</a></li>
+                    <li><a class="nav-link " href="#Information">Informasi</a></li>
+                    <li><a class="nav-link " href="#pricing">Harga</a></li>
+                    <li><a class="nav-link " href="#jadwal">Jadwal</a></li>
                     @if(!auth()->user())
                     <li><a class="getstarted scrollto" href="{{asset('login')}}">Login</a></li>
                     @endif
@@ -75,7 +75,7 @@
                     <h1>Bergabung Bersama Kami dan Dapatkan layanan Maksimal</h1>
                     <div class="d-flex justify-content-center justify-content-lg-start">
                         @if(!auth()->user())
-                        <a href="{{route('register')}}" class="btn-get-started scrollto">Register</a>
+                        <a href="{{route('register')}}" class="btn-get-started scrollto">Registrasi</a>
                         @else
                         <a href="/home" class="btn-get-started scrollto">Dashboard</a>
                         @endif
@@ -97,7 +97,7 @@
             <div class="container-fluid" data-aos="fade-up">
 
                 <div class="section-title">
-                    <h2>Information</h2>
+                    <h2>Informasi</h2>
                 </div>
 
                 <div class="row ">
@@ -128,7 +128,7 @@
             <div class="container" data-aos="fade-up">
 
                 <div class="section-title">
-                    <h2>Pricing</h2>
+                    <h2>Harga</h2>
                     <p>Berikut merupakan harga sewa lapangan di Scudetto Futsal</p>
                 </div>
 
@@ -154,7 +154,7 @@
         </section><!-- End Pricing Section -->
         <section class="container" id="jadwal">
             <div class="section-title">
-                <h2 >Schedule</h2>
+                <h2 >Jadwal</h2>
             </div>
             <form action="" class="d-flex gap-2 mb-3">
                 <div class="col-3">

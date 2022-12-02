@@ -5,7 +5,7 @@ $page=request()->segment(1);
 $action=request()->segment(2);
 @endphp
 <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Dashboard / {{ucwords($page)}} / </span>
-    {{ucwords($action)}}
+    Tambah
 </h4>
 <div class="card">
     <div class="card-body">
@@ -51,7 +51,7 @@ $action=request()->segment(2);
             </div>
             <div class="row mb-3">
                     <label for="tanggal" class="col-sm-2 col-form-label">tanggal</label>
-                    
+
                     <div class="col-sm-10">
                         <input type="date" data-date="{{date('d-m-Y',strtotime('now'))}}" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal_pesan_lapangan" name="tanggal" value="@isset($param){{date("Y-m-d",strtotime($param->jam_pesan_awal))}}@endisset" />
                         <div id="tanggalFeedback" class="invalid-feedback">
@@ -68,7 +68,7 @@ $action=request()->segment(2);
                         @isset($param)
                         <option selected value="{{date("H:i",strtotime($param->jam_pesan_awal))}}">{{date("H:i",strtotime($param->jam_pesan_awal))}}</option>
                         @endisset
-                       
+
                     </select>
                     <div id="waktu_awalFeedback" class="invalid-feedback">
                         @error('waktu_awal') {{$message}} @enderror
@@ -92,7 +92,7 @@ $action=request()->segment(2);
             </div>
             <div class="row justify-content-end">
                 <div class="col-sm-10">
-                    <button type="submit" class="btn btn-primary">Send</button>
+                    <button type="submit" class="btn btn-primary">Kirim</button>
                 </div>
             </div>
         </form>

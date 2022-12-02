@@ -14,7 +14,7 @@ $action=request()->segment(2);
             @method($action=="add"?'POST':'PUT')
 
             <div class="row mb-3">
-                <label for="name" class="col-sm-2 col-form-label">Name</label>
+                <label for="name" class="col-sm-2 col-form-label">Nama</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
                         placeholder="John Doe" value="@isset($param){{$param->name}}@endisset" />
@@ -54,10 +54,10 @@ $action=request()->segment(2);
                 </div>
                 </div>
             </div>
-           
+
             <div class="row mb-3 form-password-toggle">
                 <label class="col-sm-2 col-form-label">Password  @if($action!="add")
-                    <small>(Tidak perlu diisi jika tidak ingin merubah password)</small> 
+                    <small>(Tidak perlu diisi jika tidak ingin merubah password)</small>
                     @endif</label>
                 <div class="col-sm-10">
                     <div class="input-group input-group-merge">
@@ -74,7 +74,7 @@ $action=request()->segment(2);
             </div>
             <div class="row justify-content-end">
                 <div class="col-sm-10">
-                    <button type="submit" class="btn btn-primary">Send</button>
+                    <button type="submit" class="btn btn-primary">kirim</button>
                 </div>
             </div>
         </form>

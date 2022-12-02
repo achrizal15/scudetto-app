@@ -15,7 +15,7 @@ const DatatableHandler = () => {
             "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
         buttons: [
             {
-                text: "<i class='bx bx-plus'></i> Add New Record",
+                text: "<i class='bx bx-plus'></i> Tambah Data Baru",
                 className: "btn btn-primary",
                 action: function (e, dt, node, config) {
                     window.location.href = addUrl

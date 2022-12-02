@@ -5,7 +5,7 @@ $page=request()->segment(1);
 $action=request()->segment(2);
 @endphp
 <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Dashboard / {{ucwords($page)}} / </span>
-    {{ucwords($action)}}
+   Tambah
 </h4>
 <div class="card">
     <div class="card-body">
@@ -36,7 +36,7 @@ $action=request()->segment(2);
                 </div>
             <div class="row justify-content-end">
                 <div class="col-sm-10">
-                    <button type="submit" class="btn btn-primary">Send</button>
+                    <button type="submit" class="btn btn-primary">Kirim</button>
                 </div>
             </div>
         </form>
