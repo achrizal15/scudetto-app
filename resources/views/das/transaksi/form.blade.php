@@ -53,7 +53,7 @@ $action=request()->segment(2);
                     <label for="tanggal" class="col-sm-2 col-form-label">tanggal</label>
 
                     <div class="col-sm-10">
-                        <input type="date" data-date="{{date('d-m-Y',strtotime('now'))}}" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal_pesan_lapangan" name="tanggal" value="@isset($param){{date("Y-m-d",strtotime($param->jam_pesan_awal))}}@endisset" />
+                        <input type="date" placeholder="hari/bulan/tahun" data-date="{{date('d-m-Y',strtotime('now'))}}" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal_pesan_lapangan" name="tanggal" value="@isset($param){{date("Y-m-d",strtotime($param->jam_pesan_awal))}}@endisset" />
                         <div id="tanggalFeedback" class="invalid-feedback">
                             @error('tanggal') {{$message}} @enderror
                         </div>

@@ -78,9 +78,9 @@
                 Login error!
                </div>
               @endif
-             
+
               <!-- /Logo -->
-              <h4 class="mb-2">Welcome! 👋</h4>
+              <h4 class="mb-2">Selamat Datang! 👋</h4>
               {{-- <p class="mb-4">Please sign-in to your account and start the adventure</p> --}}
 
               <form id="formAuthentication" class="mb-3" action="{{route('createAuth')}}" method="POST">
@@ -93,7 +93,7 @@
                     class="form-control"
                     id="Nama"
                     name="name"
-                    placeholder="Enter your Nama"
+                    placeholder="Masukan Nama Anda"
                     autofocus
                   />
                 </div>
@@ -104,7 +104,7 @@
                     class="form-control"
                     id="no_hp"
                     name="no_hp"
-                    placeholder="Enter your no_hp"
+                    placeholder="Masukan Nomor HP Anda"
                     autofocus
                   />
                 </div>
@@ -116,7 +116,7 @@
                     class="form-control"
                     id="alamat"
                     name="alamat"
-                    placeholder="Enter your alamat"
+                    placeholder="Masukan Alamat Anda"
                     autofocus
                   />
                 </div>
@@ -128,7 +128,7 @@
                     class="form-control"
                     id="email"
                     name="email"
-                    placeholder="Enter your email"
+                    placeholder="Masukan Email Anda"
                     value=""
                     autofocus
                   />
@@ -136,7 +136,7 @@
                 <div class="mb-3 form-password-toggle">
                   <div class="d-flex justify-content-between">
                     <label class="form-label" for="password">Password</label>
-                   
+
                   </div>
                   <div class="input-group input-group-merge">
                     <input
@@ -151,13 +151,13 @@
                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                   </div>
                 </div>
-               
+
                 <div class="mb-3">
-                  <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
+                  <button class="btn btn-primary d-grid w-100" type="submit">Registrasi</button>
                 </div>
               </form>
 
-              
+
             </div>
           </div>
           <!-- /Register -->
