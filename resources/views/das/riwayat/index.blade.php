@@ -50,7 +50,7 @@ $page=request()->segment(1);
                         <td><a class="badge bg-warning">BATAL</a></td>
                         @endif
                         <td>
-                            @if($item->status=="SELESAI" && date("Y-m-d H:i", strtotime($item->jam_pesan_awal))<date("Y-m-d H:i",strtotime("now")))
+                            @if($item->status=="SELESAI")
                             <a href="transaksi/edit/{{$item->id}}" class="text-dark"> <i
                                 class="bx bx-repost"></i>Reschedule</a>
                             @endif
