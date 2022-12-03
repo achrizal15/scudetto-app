@@ -50,11 +50,11 @@ $page=request()->segment(1);
                         <td><a class="badge bg-warning">BATAL</a></td>
                         @endif
                         <td>
-                            @if ($item->status=="SELESAI"||$item->status=="BOOKED")
                             @if($item->status=="SELESAI")
                             <a href="transaksi/edit/{{$item->id}}" class="text-dark"> <i
                                 class="bx bx-repost"></i>Reschedule</a>
                             @endif
+                            @if ($item->status=="SELESAI"||$item->status=="BOOKED")
                             <a href="{{route('cetakPDF',[$item->id])}}" class="text-dark"> <i
                                     class="bx bx-save"></i>Invoice</a>
                             @else
