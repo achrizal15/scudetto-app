@@ -136,6 +136,7 @@
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <script src="{{asset("js/countdown/jquery.countdown.js")}}"></script>
+  <script src="{{asset("js/moment.js")}}"></script>
   <script src="{{asset('js/app.js')}}"></script>
 </body>
 

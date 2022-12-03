@@ -1,3 +1,5 @@
+
+
 const Select2Handler = () => {
     if ($(".select2").length == 0) return false;
     $(".select2").select2({
@@ -120,9 +122,9 @@ $(document).ready(function () {
     Select2Handler()
     $(document).on("change", "#tanggal_pesan_lapangan", function () {
         const value = new Date($(this).val())
-        const dateValue = `${value.getFullYear()}/${value.getMonth()+1}/${value.getDate()}`
+        const dateValue = moment($(this).val()).format("YYYY-MM-DD")
         const date = new Date()
-        const dateNow = `${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()}`
+        const dateNow = moment().format("YYYY-MM-DD")
         $("#waktu_awal").html("<option  selected>Waktu Awal</option>")
         $("#waktu_akhir").html("<option  selected>Waktu Akhir</option>")
         if (dateValue == dateNow) {
