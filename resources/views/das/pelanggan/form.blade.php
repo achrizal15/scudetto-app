@@ -17,7 +17,7 @@ $action=request()->segment(2);
                 <label for="name" class="col-sm-2 col-form-label">Nama</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
-                        placeholder="John Doe" value="@isset($param){{$param->name}}@endisset" />
+                        placeholder="Denny Indra" value="@isset($param){{$param->name}}@endisset" />
                     <div id="nameFeedback" class="invalid-feedback">
                         @error('name') {{$message}} @enderror
                     </div>
@@ -27,7 +27,7 @@ $action=request()->segment(2);
                 <label for="email" class="col-sm-2 col-form-label">email</label>
                 <div class="col-sm-10">
                     <input type="email" class="form-control @error('email') is-invalid @enderror" id="email"
-                        name="email" placeholder="jon@mvb.co.id" value="@isset($param){{$param->email}}@endisset" />
+                        name="email" placeholder="dennyindra@gmail.com" value="@isset($param){{$param->email}}@endisset" />
                     <div id="emailFeedback" class="invalid-feedback">
                         @error('email') {{$message}} @enderror
                     </div>
@@ -48,7 +48,7 @@ $action=request()->segment(2);
                 <label for="alamat" class="col-sm-2 col-form-label">alamat</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control @error('alamat') is-invalid @enderror" id="alamat"
-                    name="alamat" placeholder="Your address" value="@isset($param){{$param->alamatLengkap->alamat}}@endisset" />
+                    name="alamat" placeholder="Alamat Anda" value="@isset($param){{$param->alamatLengkap->alamat}}@endisset" />
                 <div id="alamatFeedback" class="invalid-feedback">
                     @error('alamat') {{$message}} @enderror
                 </div>

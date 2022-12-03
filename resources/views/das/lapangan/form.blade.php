@@ -29,7 +29,7 @@ $action=request()->segment(2);
                 <div class="col-sm-10">
                     <select class="select2 form-control @error('jenis') is-invalid @enderror" id="jenis"
                         style="width: 100%" name="jenis">
-                        <option value="" selected>Select one</option>
+                        <option value="" selected>Pilih Jenis Lapangan</option>
                         <option value="Rumput" @isset($param) {{$param->jenis =="Rumput"?'selected':''}}
                             @endisset>Rumput</option>
                         <option value="Matras" @isset($param) {{$param->jenis =="Matras"?"selected":""}}

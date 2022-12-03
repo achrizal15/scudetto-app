@@ -26,7 +26,7 @@ class MenuSeeder extends Seeder
             ["name"=>"Riwayat Pesan","key"=>"riwayat_pesan","icon"=>"bx-archive","link"=>"/riwayat"],
             ["name"=>"Keluhan","key"=>"keluhan","icon"=>"bx-chat","link"=>"/keluhan/add"],
             ["name"=>"Data Keluhan","key"=>"data_keluhan","icon"=>"bx-chat","link"=>"/keluhan"],
-            ["name"=>"Massage","key"=>"massage","icon"=>"bx-mail-send","link"=>"/massage"],
+            ["name"=>"Message","key"=>"massage","icon"=>"bx-mail-send","link"=>"/massage"],
             ["name"=>"Access Control","key"=>"access_control","icon"=>"bx-cog","link"=>"/access-control","group_name"=>"Settings"],
             ["name"=>"User","key"=>"user","icon"=>"bx-cog","link"=>"/user","group_name"=>"Settings"],
         ];
