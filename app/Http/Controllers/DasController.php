@@ -24,12 +24,14 @@ class DasController extends Controller
 
         $pesanan = DasTransaksi::where('status', "SELESAI")->count();
         $pemesanTerbanyak = User::with('transaksi')
-        ->where("role_id",2)
+            ->where("role_id", 2)
             ->limit(5)
             ->get();
         $pemesanTerbanyak = $pemesanTerbanyak->sortBy([fn ($a, $b) =>  count($b['transaksi']) <=> count($a['transaksi'])]);
-        $saldo = DasTransaksi::where('status', "SELESAI")->sum('total_bayar');
+        $saldo = DasTransaksi::where(function ($query) {
+            $query->orWhere("status", "SELESAI")->orWhere("status", "BOOKED");
+        })->sum('total_bayar');
 
-        return view('welcome', compact('pelanggan', 'lapangan', 'pesanan', 'saldo','pemesanTerbanyak'));
+        return view('welcome', compact('pelanggan', 'lapangan', 'pesanan', 'saldo', 'pemesanTerbanyak'));
     }
 }
